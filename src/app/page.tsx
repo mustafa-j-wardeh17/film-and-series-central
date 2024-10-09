@@ -8,7 +8,8 @@ import { FaClapperboard } from "react-icons/fa6";
 
 
 export default function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
-  let active = 1
+
+
   return (
     <div className="max-w-screen overflow-hidden">
       <Header />
@@ -18,7 +19,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/all'}
-              className={`${active === 1 ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${true ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
             >
               <i><FaAngleDoubleUp size={14} /></i>
               <p>Latest</p>
@@ -28,7 +29,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/movies'}
-              className={`${active === 2 ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
             >
               <i><FaFilm size={14} /></i>
               <p>Movies</p>
@@ -38,7 +39,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/series'}
-              className={`${active === 3 ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
             >
               <i><FaStar size={14} /></i>
               <p>Series</p>
@@ -49,7 +50,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/recently'}
-              className={`${active === 4 ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
             >
               <i><FaPlus size={14} /></i>
               <p>Recently Added</p>
@@ -67,7 +68,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/all'}
-              className={`${active === 1 ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${true ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
             >
               <i><FaPhotoVideo size={14} /></i>
               <p>Movies</p>
@@ -77,7 +78,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/series'}
-              className={`${active === 2 ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
             >
               <i><FaFilm size={14} /></i>
               <p>Series</p>
@@ -87,7 +88,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/series'}
-              className={`${active === 3 ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
             >
               <i><FaCheck size={14} /></i>
               <p>Original Series</p>
@@ -98,7 +99,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/genre'}
-              className={`${active === 4 ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
             >
               <i><FaClapperboard size={14} /></i>
               <p>Genre</p>

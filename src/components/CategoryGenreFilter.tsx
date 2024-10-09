@@ -46,7 +46,10 @@ const CategoryGenreFilter = ({ searchParams }: { searchParams: { [key: string]: 
                     Movies.length > 0
                         ?
                         Movies.map(movie => (
-                            <Card movie={movie} />
+                            <Card
+                                key={movie}
+                                movie={movie}
+                            />
                         ))
 
                         : (

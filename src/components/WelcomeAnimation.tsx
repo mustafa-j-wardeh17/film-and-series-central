@@ -1,21 +1,24 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
-
 
 const WelcomeAnimation = () => {
     const [fadeOut, setFadeOut] = useState(false);
 
     useEffect(() => {
-        const video = document.getElementById('video'); // Get the video element
-        const animationDuration = 3000; // Duration of the animation in milliseconds
+        const video = document.getElementById('video');
+        const animationDuration = 3000;
 
         video?.addEventListener('ended', () => {
-            setFadeOut(true); // Trigger fade-out animation when video ends
+            setFadeOut(true); // Trigger fade-out when the video ends
             setTimeout(() => {
-                // Wait for the fade-out animation to complete
-                setFadeOut(false);
+                setFadeOut(false); // Reset fadeOut after animationDuration
             }, animationDuration);
         });
+
+        // Cleanup event listener
+        return () => {
+            video?.removeEventListener('ended', () => setFadeOut(true));
+        };
     }, []);
 
     return (
@@ -25,14 +28,15 @@ const WelcomeAnimation = () => {
                 muted
                 loop
                 id='video'
-                className='absolute top-0 left-0 w-full h-full object-cover '
+                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
             >
                 <source src="/vedio/welcomevedio.mp4" type="video/mp4" />
-                {/* You can also add other video formats here */}
                 Your browser does not support the video tag.
             </video>
-            <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center self-center z-[1] bg-[rgba(0, 0, 0, 0.5)] '>
-                <div className='text-[40px] font-bold text-white border-b-[2px]'>Welcome to <span className='text-red-500'>Makmovies</span></div>
+            <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center z-[1] bg-[rgba(0, 0, 0, 0.5)]'>
+                <div className='text-[40px] font-bold text-white border-b-[2px]'>
+                    Welcome to <span className='text-red-500'>Makmovies</span>
+                </div>
             </div>
         </div>
     );
