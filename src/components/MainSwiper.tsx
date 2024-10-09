@@ -79,7 +79,7 @@ const HomeSwiper = () => {
                                             </h3>
                                             <div className='flex items-center mt-[8px] '>
                                                 <Link href={`/movies/${item}`}>
-                                                    <button id='btn_download' className='flex items-center w-[180px] gap-[5px] shadow-red-500 hover:bg-black hover:shadow-white shadow-md bg-red-500 btn_download py-2 rounded-lg px-3 '>
+                                                    <button id='btn_download' className='flex items-center w-[180px] gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download py-2 rounded-lg px-3 '>
                                                         <FaDownload size={14} />
                                                         <p className='font-bold'>DOWNLOAD</p>
                                                         <span className='bg-white font-extrabold text-xs text-black py-1 px-1 rounded-md'>FREE</span>
