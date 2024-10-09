@@ -7,7 +7,7 @@ import { FaAngleDoubleUp, FaCheck, FaFilm, FaPhotoVideo, FaPlus, FaStar } from "
 import { FaClapperboard } from "react-icons/fa6";
 
 
-export default function Home() {
+export default function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   let active = 1
   return (
     <div className="max-w-screen overflow-hidden">
@@ -107,7 +107,9 @@ export default function Home() {
           </li>
         </ul>
       </div>
-      <CategoryGenreFilter />
+      <CategoryGenreFilter
+        searchParams={searchParams}
+      />
     </div>
   );
 }
