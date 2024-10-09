@@ -4,7 +4,7 @@ export default function Header() {
 
 
     return <>
-        <nav className="flex w-full relative z-[50] border-b-[0.5px] border-neutral-500/40 py-2 justify-between items-center px-8">
+        <nav className="flex w-full relative z-[50] border-b-[0.5px] border-neutral-500/40  justify-between items-center px-8">
             <h1
                 className="logo "
                 data-text="&nbsp;Makmovies&nbsp;"

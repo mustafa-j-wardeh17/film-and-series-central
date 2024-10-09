@@ -15,7 +15,7 @@ const MainSwiper = () => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 5500)
+        }, 1000)
     }, [])
     return (
         <div className="w-full">
