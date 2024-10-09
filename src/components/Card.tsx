@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { FaEye, FaHeart, FaStar } from 'react-icons/fa'
 
-const Card = ({ movie }: { movie: any }) => {
+const Card = ({ movie }: { movie: number }) => {
     return (
         <div className='max-w-[200px] min-w-[200px] h-[300px]'>
             <Link
