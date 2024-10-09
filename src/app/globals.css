@@ -2,3 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background-color: #000;
+}
+
+@layer base {
+    .logo::before {
+        content: attr(data-text);
+        position: absolute;
+        color: white;
+        width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        animation: animate 4s linear infinite;
+    }
+
+    @keyframes animate {
+        0% {
+            width: 0;
+        }
+
+        100% {
+            width: 100%;
+        }
+    }
+}
