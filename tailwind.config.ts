@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        "red": '0 0 10px red',
+        "red2": '0 0 30px red',
+        "white": '0 0 10px white',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
