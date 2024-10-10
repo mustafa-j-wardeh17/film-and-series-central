@@ -12,7 +12,8 @@ const config: Config = {
         "red": '0 0 10px red',
         "red2": '0 0 30px red',
         "white": '0 0 10px white',
-        "pagination":"0.1em 0.1em 0.6em 0.2em #de080874"
+        "pagination": "0.1em 0.1em 0.6em 0.2em #de080874",
+        "footerLogo": "0 3px 5px rgba(255, 255, 255, 0.186)",
       },
       colors: {
         background: "var(--background)",

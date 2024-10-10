@@ -1,5 +1,6 @@
 import CatSwiper from "@/components/CatSwiper";
 import CategoryGenreFilter from "@/components/CategoryGenreFilter";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import MainSwiper from "@/components/MainSwiper";
 import Pagination from "@/components/Pagination";
@@ -115,6 +116,8 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
       <Pagination
         searchParams={searchParams}
       />
+      <Footer />
+
     </div>
   );
 }
