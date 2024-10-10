@@ -16,7 +16,7 @@ const CategoryGenreFilter = ({ searchParams }: { searchParams: { [key: string]: 
     }
 
     return (
-        <div className='flex flex-col items-center my-[20px]'>
+        <div className='flex flex-col   items-center my-[20px]'>
             <div className='w-[80%] relative flex items-center justify-center gap-[1rem] flex-wrap'>
                 {
                     genres.map((genre) => (
@@ -41,7 +41,7 @@ const CategoryGenreFilter = ({ searchParams }: { searchParams: { [key: string]: 
                     ))
                 }
             </div>
-            <div className='my-[30px] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
+            <div className='my-[30px] w-[80%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
                 {
                     Movies.length > 0
                         ?

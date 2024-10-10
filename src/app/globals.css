@@ -148,3 +148,7 @@ body {
 .myswiper .swiper-pagination .swiper-pagination-bullet{
     display: none;
 }
+
+.cssbuttons_io_button:hover .icon {
+    width: calc(100% - 0.6em);
+}

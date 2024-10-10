@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "start": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "movie-app": "file:",
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",

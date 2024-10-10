@@ -12,6 +12,7 @@ const config: Config = {
         "red": '0 0 10px red',
         "red2": '0 0 30px red',
         "white": '0 0 10px white',
+        "pagination":"0.1em 0.1em 0.6em 0.2em #de080874"
       },
       colors: {
         background: "var(--background)",
