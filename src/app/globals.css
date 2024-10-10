@@ -145,10 +145,17 @@ body {
     height: 5px !important;
 }
 
-.myswiper .swiper-pagination .swiper-pagination-bullet{
+.myswiper .swiper-pagination .swiper-pagination-bullet {
     display: none;
 }
 
 .cssbuttons_io_button:hover .icon {
     width: calc(100% - 0.6em);
 }
+
+.flogo h1 {
+    font-size: 36px;
+    padding: 25px;
+    text-shadow: 0 3px 5px rgba(255, 255, 255, 0.186);
+}
+
