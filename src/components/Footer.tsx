@@ -89,7 +89,7 @@ const Footer = () => {
                     </div>
                     <div className="mt-[20px] bg-[#0f0d0dd2] p-[20px] text-center">
                         <p className="text-[#555]">
-                            Disclaimer :- We Does not host any files on it's servers. All files or contents hosted on third party websites | we does not accept responsibility for contents hosted on third party websites. we just index those links which are already available in internet.
+                            Disclaimer: We do not host any files on it&apos;s servers. All files or contents hosted on third party websites. We do not accept responsibility for contents hosted on third party websites. We just index those links which are already available on the internet.
                         </p>
                     </div>
                 </section>
