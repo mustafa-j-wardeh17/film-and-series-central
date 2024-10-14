@@ -2,7 +2,7 @@ import Card from '@/components/Card'
 import React from 'react'
 
 
-const Series = () => {
+const Hollywood = () => {
     const Movies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     return (
@@ -39,4 +39,4 @@ const Series = () => {
     )
 }
 
-export default Series
+export default Hollywood
