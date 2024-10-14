@@ -1,6 +1,10 @@
+'use client'
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const Footer = () => {
+    const pathname = usePathname()
+    console.log('pathname is ===>', pathname)
     return (
         <>
             <footer className='w-full bg-[#0f0d0dd2] h-auto mt-[50px]'>
@@ -20,57 +24,57 @@ const Footer = () => {
                         <ul className="list-none flex items-center justify-center gap-[25px] flex-wrap mt-[20px]">
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/'}
-                                    className="text-white hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300"
+                                    className={`${pathname === '/' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
                                 >
                                     Home
                                 </Link>
                             </li>
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/movies'}
-                                    className="text-white hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300"
-                                >
+                                    className={`${pathname === '/movies' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
+                                    >
                                     Movies
                                 </Link>
                             </li>
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/series'}
-                                    className="text-white hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300"
-                                >
+                                    className={`${pathname === '/series' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
+                                    >
                                     Series
                                 </Link>
                             </li>
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/gere'}
-                                    className="text-white hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300"
-                                >
+                                    className={`${pathname === '/gere' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
+                                    >
                                     Genre
                                 </Link>
                             </li>
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/all'}
-                                    className="text-white hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300"
-                                >
+                                    className={`${pathname === '/all' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
+                                    >
                                     All Movies
                                 </Link>
                             </li>
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/category'}
-                                    className="text-white hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300"
-                                >
+                                    className={`${pathname === '/category' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
+                                    >
                                     Category
                                 </Link>
                             </li>
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/bollywood'}
-                                    className="text-white hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300"
-                                >
+                                    className={`${pathname === '/bollywood' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
+                                    >
                                     Bollywood
                                 </Link>
                             </li>
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/hollywood'}
-                                    className="text-white hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300"
-                                >
+                                    className={`${pathname === '/hollywood' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
+                                    >
                                     Hollywood
                                 </Link>
                             </li>
