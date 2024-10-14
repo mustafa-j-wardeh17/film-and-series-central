@@ -3,9 +3,9 @@ import Link from 'next/link'
 import React from 'react'
 import { FaEye, FaHeart, FaStar } from 'react-icons/fa'
 
-const Card = ({ movie }: { movie: number }) => {
+const Card = ({ movie, large = false }: { movie: number, large?: boolean }) => {
     return (
-        <div className='max-w-[200px] min-w-[200px] h-[300px]'>
+        <div className={`${large ? 'max-w-[280px] min-w-[280px] h-[520px]' : 'max-w-[200px] min-w-[200px] h-[300px]'}`}>
             <Link
                 href={`/movies/${movie}`}
             >
