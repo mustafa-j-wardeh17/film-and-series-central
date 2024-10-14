@@ -1,7 +1,6 @@
 import CatSwiper from "@/components/CatSwiper";
 import CategoryGenreFilter from "@/components/CategoryGenreFilter";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+
 import MainSwiper from "@/components/MainSwiper";
 import Pagination from "@/components/Pagination";
 import Link from "next/link";
