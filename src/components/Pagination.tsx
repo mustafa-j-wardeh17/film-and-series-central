@@ -14,7 +14,7 @@ const Pagination = ({ searchParams }: { searchParams: { [key: string]: string | 
         if (type === 'next') {
             currentPage = page + 1
         } else if (type === 'previous' && page > 1) {
-            currentPage = page - 1
+            currentPage = page - 198
         }
 
         urlParam.set('page', String(currentPage))
