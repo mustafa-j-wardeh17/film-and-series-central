@@ -72,7 +72,7 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
 
                 <div className='relative w-[65%] h-auto rounded-tl-[20px] rounded-bl-[20px] p-[30px]'>
                     <div className='w-full flex items-center  justify-between'>
-                        <h1 className='w-[90%] text-white font-semibold text-[25px]'>Beacky Blinders</h1>
+                        <h1 className='w-[90%] text-white font-semibold text-[25px]'>Peaky Blinders</h1>
                         <button className='absolute top-[30px] right-[20px] text-[25px] w-[32px] border-none bg-transparent text-[#78a6b8] cursor-pointer hover:text-[#6a7c8f]'>
                             <FaShareFromSquare />
                         </button>
@@ -87,7 +87,7 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
                                         <td className='uppercase inline-block mr-[10px] '>
                                             &#9642; Name :
                                         </td>
-                                        <td className='font-bold'>Beacky Blinder</td>
+                                        <td className='font-bold'>Peaky Blinders</td>
                                     </tr>
                                     <tr className='block my-[15px] '>
                                         <td className='uppercase inline-block mr-[10px]'>
