@@ -31,7 +31,7 @@ const Hollywood = () => {
                             ))
 
                             : (
-                                <h1 className='text-red-500 text-[35px]'>No series Found</h1>
+                                <h1 className='text-red-500 text-[35px]'>No Movie Found</h1>
                             )
                     }
                 </div>
