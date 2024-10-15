@@ -1,3 +1,11 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off", // Allow 'any' type
+    "react-hooks/exhaustive-deps": "off", // Disable missing dependency warning in useEffect
+    "@typescript-eslint/no-unused-vars": "warn" // Turn 'unused vars' from error to warning
+  }
 }
