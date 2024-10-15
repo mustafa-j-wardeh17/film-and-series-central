@@ -44,7 +44,7 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li className="text-[18px] cursor-pointer">
-                                <Link href={'/gere'}
+                                <Link href={'/genre'}
                                     className={`${pathname === '/gere' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
                                     >
                                     Genre

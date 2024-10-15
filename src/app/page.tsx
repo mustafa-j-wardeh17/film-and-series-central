@@ -12,7 +12,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
 
 
   return (
-    <div className="max-w-screen overflow-hidden">
+    <div className="max-w-screen relative ">
       <MainSwiper />
       <div className="flex justify-center w-full">
         <ul className="list-none flex items-center justify-between w-[90%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
