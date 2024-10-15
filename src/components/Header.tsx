@@ -1,15 +1,28 @@
 'use client'
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { BiSearch } from "react-icons/bi"
+import { FaBars, FaStar } from "react-icons/fa"
 import { IoClose } from "react-icons/io5"
 
 export default function Header() {
-    const [searchQuery, setSearchQuery] = useState('')
     const router = useRouter()
     const pathname = usePathname()
-
+    const movies = [
+        "The Shawshank Redemption",
+        "The Dark Knight",
+        "Inception",
+        "Fight Club",
+        "Forrest Gump",
+        "The Matrix",
+        "The Godfather",
+        "Pulp Fiction",
+        "The Lord of the Rings: The Return of the King",
+        "Interstellar"
+    ];
     const [clicked, setClicked] = useState(false)
     const [navbar, setNavbar] = useState(false)
     const [searchBar, setSearchBar] = useState(false)
@@ -27,6 +40,38 @@ export default function Header() {
         }
     }, [])
 
+    // search function by title of the movie
+    const [movieShortname, setMovieShortname] = useState('')
+    const [searchResult, setSearchResult] = useState<any[]>([])
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+        if (!movieShortname.trim()) {
+            setSearchResult([])
+            return
+        }
+        const filteredMovies = movies.filter(movie => movie.trim().toLowerCase().includes(movieShortname.toLowerCase().trim()))
+        setSearchResult(filteredMovies)
+    }, [movieShortname])
+
+    const handleMovieClick = () => {
+        setMovieShortname('')
+    }
+    const searchRef = useRef(null)
+
+    // to close search nav when click outside of it
+    const handleClickOutside = (event) => {
+        if (searchRef.current && !searchRef.current.contains(event.target)) {
+            setMovieShortname('')
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
     const handleClick = () => {
         setClicked(!clicked)
     }
@@ -72,15 +117,65 @@ export default function Header() {
 
             <form
                 action=""
-                className="search_bar"
+                className={searchBar ? 'search_bar relative  active' : 'search_bar'}
             >
                 <input
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={movieShortname}
+                    onChange={(e) => setMovieShortname(e.target.value)}
                     type="text"
                     placeholder="Search Movies..."
                     className="bg-transparent   text-white min-w-[300px] focus:outline-none focus:ring-0  shadow-red  rounded-lg py-1 px-2"
                 />
+                <div
+                    className="searchclose"
+                    onClick={handleSearchbarClose}
+                >
+                    <IoClose />
+                </div>
+                {
+                    movieShortname && (
+                        <div ref={searchRef} className="search_results">
+                            <h2>---:Search Result:---</h2>
+                            <ul>
+                                {
+                                    searchResult.length > 0
+                                        ? (
+                                            searchResult.slice(0, 12).map((movie) => (
+                                                <Link
+                                                    key={movie}
+                                                    href={'/'}
+                                                    onClick={handleMovieClick}
+                                                >
+                                                    <div
+                                                        className="moviesearchlist"
+                                                    >
+                                                        <div>
+                                                            <Image
+                                                                src={'/img/img.jpg'}
+                                                                alt={`img ${movie}`}
+                                                                height={110}
+                                                                width={80}
+                                                            />
+                                                        </div>
+                                                        <div className="searchbarinfo">
+                                                            <h5>{movie}</h5>
+                                                            <h4>Rating: <FaStar /><span>7.8</span></h4>
+                                                            <h4>Release Year: 2024</h4>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            ))
+                                        )
+                                        : (
+                                            <p>
+                                                No Data Found
+                                            </p>
+                                        )
+                                }
+                            </ul>
+                        </div>
+                    )
+                }
             </form>
             {/* Mobile */}
             <div id={navbar ? 'navbaractive' : 'navbar'}>
@@ -165,7 +260,15 @@ export default function Header() {
                 </ul>
             </div>
 
-
+            <div className="mobile">
+                <BiSearch
+                    className="opensearchsvg"
+                    onClick={handleSearchbarOpen}
+                />
+                <FaBars
+                    onClick={handleNavbarOpen}
+                />
+            </div>
         </nav>
     </>
 }
