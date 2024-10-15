@@ -17,7 +17,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    /* background: #444; */
+    background: #444;
     /* Set the background color of the track */
 }
 
@@ -25,6 +25,19 @@ body {
     background: red;
     border-radius: 10px;
     /* Set the color of the scrollbar thumb */
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, and Opera */
 }
 
 @layer base {
@@ -205,12 +218,15 @@ body {
 
 /* Hide scrollbar but keep scroll functionality */
 .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari, and Opera */
+    display: none;
+    /* Chrome, Safari, and Opera */
 }
 
 @media screen and (max-width:820px) {

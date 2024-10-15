@@ -1,3 +1,4 @@
+import ScrollButtons from '@/components/ScrollButtons'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -158,9 +159,9 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
             </div>
             <div className='relative mx-auto max-w-[1200px]'>
                 <h3 className='text-[#6a7c8f]'> LATEST MOVIES :</h3>
-                <div className='mt-[20px] flex overflow-x-scroll scroll-smooth gap-[20px] transition-all duration-500 ease-linear '>
+                <div className='related mt-[20px] flex overflow-x-auto scroll-smooth hide-scrollbar gap-[20px] transition-all duration-500 ease-linear '>
                     {
-                        [1, 2, 3,5,7,8,5,6,6,5,5,,].map((movie) => (
+                        [1, 2, 3, 5, 7, 8, 5, 6, 6, 5, 5, ,].map((movie) => (
                             <div key={movie} className={`max-w-[200px] min-w-[200px] h-[340px]`}>
 
                                 <Link
@@ -196,6 +197,13 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
                         ))
                     }
                 </div>
+                <ScrollButtons type={'related'} />
+            </div>
+            <div 
+            className='sharelinks'
+            
+            >
+
             </div>
         </div>
     )
