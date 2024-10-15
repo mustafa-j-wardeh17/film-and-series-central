@@ -5,8 +5,8 @@ import Link from "next/link";
 const Genrecard = ({ link, img, title, description }: { link: string, img: string, title: string, description: string }) => {
     return (
         <>
-            <Link href={'/'}>
-                <div className=" cardgenre relative w-[300px] h-[200px] hover:scale-105 hover:shadow-genreShadow transition-all duration-600 ease-custom-ease bg-[#f2f2f2] rounded-[10px] flex items-center justify-center overflow-hidden shadow-smallRed ">
+            <Link href={link}>
+                <div className=" cardgenre relative sm:w-[220px] md:w-[300px] w-[300px] h-[200px] hover:scale-105 hover:shadow-genreShadow transition-all duration-600 ease-custom-ease bg-[#f2f2f2] rounded-[10px] flex items-center justify-center overflow-hidden shadow-smallRed ">
                     <Image
                         src={img}
                         alt="image"
