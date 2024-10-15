@@ -1,9 +1,13 @@
+import { Metadata } from 'next';
 import React from 'react'
 
-const page = () => {
+export const metadata: Metadata = {
+    title: 'Genre'
+};
+const Genre = () => {
     return (
-        <div>page</div>
+        <div>Genre</div>
     )
 }
 
-export default page
+export default Genre

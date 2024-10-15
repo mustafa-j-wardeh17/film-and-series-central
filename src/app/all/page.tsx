@@ -1,6 +1,10 @@
 import Card from '@/components/Card'
+import { Metadata } from 'next';
 import React from 'react'
 
+export const metadata: Metadata = {
+    title: 'All Movies & Series'
+};
 
 const Movies = () => {
     const Movies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -9,7 +13,7 @@ const Movies = () => {
         <>
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
-                    <h1 className='text-[48px] capitalize'>Al, Movies & Series</h1>
+                    <h1 className='text-[48px] capitalize'>All Movies & Series</h1>
                     <p className='text-[18px] text-[#999] w-[60%]'>Explosive stunts, intense battles, and adrenaline-pumping thrills. Heros face danger head-on, showcasing their skills in action-packed spectacles that leave audiences on the edge.</p>
                 </div>
             </section>

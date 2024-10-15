@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -7,6 +8,9 @@ import { FaArrowDown, FaFacebook } from 'react-icons/fa'
 import { HiMiniBars3BottomLeft } from 'react-icons/hi2'
 import { IoLogoInstagram } from 'react-icons/io'
 import { RiTelegramLine } from 'react-icons/ri'
+export const metadata: Metadata = {
+    title: 'Contact'
+};
 
 const Contact = () => {
     return (
@@ -56,7 +60,7 @@ const Contact = () => {
                         </Link>
                         <div className='text-[1.2rem] text-[#777] font-semibold flex flex-col items-center gap-[20px]'>
                             <p>Learn More About My Profile</p>
-                            <FaArrowDown className='text-[1.2rem] mt-[1rem] text-[#e74444] animate-bounce'/>
+                            <FaArrowDown className='text-[1.2rem] mt-[1rem] text-[#e74444] animate-bounce' />
                         </div>
                     </div>
                 </div>

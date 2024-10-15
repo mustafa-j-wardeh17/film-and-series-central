@@ -1,7 +1,10 @@
 import Card from '@/components/Card'
+import { Metadata } from 'next';
 import React from 'react'
 
-
+export const metadata: Metadata = {
+    title: 'Series'
+};
 const Series = () => {
     const Movies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
