@@ -17,7 +17,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #444;
+    /* background: #444; */
     /* Set the background color of the track */
 }
 
@@ -203,7 +203,15 @@ body {
     box-shadow: 0 0 50px #b7a5a597;
 }
 
+/* Hide scrollbar but keep scroll functionality */
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
 
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, and Opera */
+}
 
 @media screen and (max-width:820px) {
 
