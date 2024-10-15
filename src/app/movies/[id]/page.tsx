@@ -1,9 +1,21 @@
 import ScrollButtons from '@/components/ScrollButtons'
 import SocialShare from '@/components/SocialShare'
+import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { FaBookmark, FaCheck, FaEye, FaHeart, FaImdb, FaStar, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
+
+export async function generateMetadata(
+    { params: { id } }: { params: { id: string } }
+): Promise<Metadata> {
+
+    return {
+        title: id
+
+    }
+
+}
 
 const page = ({ params: { id } }: { params: { id: string } }) => {
     return (
@@ -11,7 +23,7 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
             <div className='slideimagebx'>
                 <Image
                     src={'/img/img.jpg'}
-                    alt={`${{ id }}`}
+                    alt={`${{ id }} `}
                     fill
                     className='object-cover'
                 />
@@ -21,7 +33,7 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
                     <div className='rounded-[8px] lg:w-full xs:w-[250px] relative w-1/2 min-h-[400px] max-h-hidden overflow-hidden '>
                         <Image
                             src={'/img/img.jpg'}
-                            alt={`${{ id }}`}
+                            alt={`${{ id }} `}
                             height={400}
                             width={400}
                             className='object-cover min-h-[400px]'
@@ -163,10 +175,10 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
                 <div className='related mt-[20px] flex overflow-x-auto scroll-smooth hide-scrollbar gap-[20px] transition-all duration-500 ease-linear '>
                     {
                         [1, 2, 3, 5, 7, 8, 5, 6, 6, 5, 5, ,].map((movie) => (
-                            <div key={movie} className={`max-w-[200px] min-w-[200px] h-[340px]`}>
+                            <div key={movie} className={`max - w - [200px] min - w - [200px] h - [340px]`}>
 
                                 <Link
-                                    href={`/movies/${movie}`}
+                                    href={`/ movies / ${movie} `}
                                 >
                                     <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[80%] rounded-[8px] overflow-hidden'>
                                         <Image
