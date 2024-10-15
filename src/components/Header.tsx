@@ -70,9 +70,9 @@ export default function Header() {
             document.removeEventListener("mousedown", handleClickOutside)
         }
     }, [])
-    const handleClick = () => {
-        setClicked(!clicked)
-    }
+    // const handleClick = () => {
+    //     setClicked(!clicked)
+    // }
     const handleLinkClick = (link: string) => {
         setActiveLink(link)
         setClicked(false)
