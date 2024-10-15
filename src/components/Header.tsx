@@ -2,14 +2,13 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { BiSearch } from "react-icons/bi"
 import { FaBars, FaStar } from "react-icons/fa"
 import { IoClose } from "react-icons/io5"
 
 export default function Header() {
-    const router = useRouter()
     const pathname = usePathname()
     const movies = [
         "The Shawshank Redemption",
@@ -43,7 +42,6 @@ export default function Header() {
     // search function by title of the movie
     const [movieShortname, setMovieShortname] = useState('')
     const [searchResult, setSearchResult] = useState<any[]>([])
-    const [error, setError] = useState(null)
 
     useEffect(() => {
         if (!movieShortname.trim()) {
@@ -57,11 +55,11 @@ export default function Header() {
     const handleMovieClick = () => {
         setMovieShortname('')
     }
-    const searchRef = useRef(null)
+    const searchRef = useRef<HTMLDivElement | null>(null); // Set correct type here
 
     // to close search nav when click outside of it
-    const handleClickOutside = (event) => {
-        if (searchRef.current && !searchRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+        if (searchRef.current && !searchRef.current?.contains(event.target as Node)) {
             setMovieShortname('')
         }
     }
@@ -149,17 +147,18 @@ export default function Header() {
                                                     <div
                                                         className="moviesearchlist"
                                                     >
-                                                        <div>
+                                                        <div className="h-auto">
                                                             <Image
                                                                 src={'/img/img.jpg'}
                                                                 alt={`img ${movie}`}
                                                                 height={110}
                                                                 width={80}
+                                                                className="h-full object-cover"
                                                             />
                                                         </div>
                                                         <div className="searchbarinfo">
-                                                            <h5>{movie}</h5>
-                                                            <h4>Rating: <FaStar /><span>7.8</span></h4>
+                                                            <h5>{movie.slice(0, 21) + (movie.length > 21 && "...")}</h5>
+                                                            <h4 className="flex items-center">Rating: <FaStar size={13} /><span>7.8</span></h4>
                                                             <h4>Release Year: 2024</h4>
                                                         </div>
                                                     </div>
