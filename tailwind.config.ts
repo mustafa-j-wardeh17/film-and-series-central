@@ -9,12 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       boxShadow: {
+        "smallRed": '0 3px 10px red',
         "red": '0 0 10px red',
         "red2": '0 0 30px red',
         "white": '0 0 10px white',
         "pagination": "0.1em 0.1em 0.6em 0.2em #de080874",
         "footerLogo": "0 3px 5px rgba(255, 255, 255, 0.186)",
+        "genreShadow": "0 8px 16px rgba(255, 255, 255, 0.2)"
       },
+      transitionTimingFunction: {
+        'custom-ease': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      },
+
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
