@@ -128,7 +128,7 @@ body {
     position: relative;
     width: 100%;
     height: 600px;
-    /* margin-top: -58px; */
+    margin-top: -58px;
     z-index: 2;
 }
 
@@ -190,6 +190,7 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
+    margin-top: -54px;
     background: url('/img/contactbg.jpg') no-repeat center center/cover;
     overflow: hidden;
 }
