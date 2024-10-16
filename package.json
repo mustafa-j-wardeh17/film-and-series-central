@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "next dev",
+    "يثر": "next dev",
     "build": "next build",
     "lint": "next lint"
   },
