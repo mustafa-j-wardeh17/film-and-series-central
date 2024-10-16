@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        '2xs': '510px'
+      },
       boxShadow: {
         "smallRed": '0 3px 10px red',
         "red": '0 0 10px red',
