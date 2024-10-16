@@ -43,7 +43,7 @@ const CategoryGenreFilter = ({ searchParams }: { searchParams: { [key: string]: 
             <div className='my-[30px] md:w-[80%] w-[90%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
                 {Movies.length > 0
                     ? Movies.map(movie => (
-                        <Card key={movie} movie={movie} />
+                        <Card key={movie} movie={movie} large={true} />
                     ))
                     : (
                         <h1 className='text-red-500 text-[35px]'>No Movies Found</h1>

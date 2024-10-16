@@ -66,6 +66,10 @@ const CatSwiper = () => {
                 350: {
                     slidesPerView: 2,
                     spaceBetween: 10
+                },
+                300: {
+                    slidesPerView: 2,
+                    spaceBetween: 10
                 }
             }}
         >

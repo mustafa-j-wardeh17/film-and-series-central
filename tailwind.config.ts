@@ -12,7 +12,8 @@ const config: Config = {
         '2xs': '510px',
         '3xs': '450px',
         '4xs': '410px',
-        
+        '300': '300px',
+
       },
       boxShadow: {
         "smallRed": '0 3px 10px red',
