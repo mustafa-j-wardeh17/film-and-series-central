@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import 'swiper/css';
 import WelcomeAnimation from './WelcomeAnimation';
-import { Pagination, Navigation, Autoplay } from 'swiper/modules'
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa';
@@ -13,13 +13,26 @@ const MainSwiper = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
-    }, [])
+        const hasShownWelcome = localStorage.getItem('welcomeShown');
+
+        if (hasShownWelcome) {
+            setLoading(false);
+        } else {
+            // Set localStorage after the welcome animation has played
+            localStorage.setItem('welcomeShown', 'true');
+            document.body.style.overflow = 'hidden'; // Disable scrolling during animation
+        }
+    }, []);
+
+    // This will be passed to WelcomeAnimation to hide it when the video ends
+    const handleAnimationEnd = () => {
+        setLoading(false);
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    };
+
     return (
         <div className="w-full">
-            {loading ? <WelcomeAnimation /> : <HomeSwiper />}
+            {!loading ? <HomeSwiper /> : <WelcomeAnimation onAnimationEnd={handleAnimationEnd} />}
         </div>
     );
 };
