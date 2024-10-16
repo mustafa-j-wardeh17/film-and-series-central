@@ -50,7 +50,7 @@ const HomeSwiper = () => {
                         <SwiperSlide
                             key={item}
                         >
-                            <div className="flex relative justify-center items-center h-[600px] z-[2] slideimagebx">
+                            <div className="flex relative justify-center items-center z-[2] slideimagebx">
                                 <Image
                                     src={`/slider/${item}.webp`}
                                     alt={`movie-${item}`}
@@ -59,9 +59,9 @@ const HomeSwiper = () => {
                                     className='object-fill absolute left-0 top-0 z-[-1]'
                                 />
                                 {/* content */}
-                                <div className='absolute top-[60%] left-[3%] h-auto z-[2]'>
+                                <div className='absolute lg:top-[60%] sm:top-[55%] top-[50%]  left-[3%] h-auto z-[2]'>
                                     <div className='flex items-center gap-[20px]'>
-                                        <div className='w-[120px]  h-[170px] object-cover relative overflow-hidden rounded-[8px]'>
+                                        <div className='md:w-[120px]  md:h-[170px] w-[100px] h-[120px] object-cover relative overflow-hidden rounded-[8px]'>
                                             <Image
                                                 src={`/slider/${item}.webp`}
                                                 alt={`movie ${item} poster`}
@@ -70,19 +70,19 @@ const HomeSwiper = () => {
                                             />
                                         </div>
                                         <div className='p-2 text-white'>
-                                            <h1 className='text-[40px] mt-[-12px] mb-[10px] transition ease-linear duration-1000  '>Movie{" " + item}</h1>
-                                            <h6 className=' text-[13px] mb-[10px] transition-'>Duration: <span className='text-white/70'>1h 32m</span></h6>
+                                            <h1 className='md:text-[40px] text-[24px] md:mt-[-12px] md:mb-[10px] transition ease-linear duration-1000  '>Movie{" " + item}</h1>
+                                            <h6 className=' text-[13px] md:mb-[10px] transition-'>Duration: <span className='text-white/70'>1h 32m</span></h6>
                                             <h3 className='flex gap-2 items-center text-white'>
                                                 <span className='text-yellow-500'>&#9733;</span>
                                                 5.5
-                                                <span className='text-white/80 capitalize'>genres, genres, genres</span>
+                                                <span className='text-white/80 capitalize text-xs md:text-sm '>genres, genres, genres</span>
                                             </h3>
                                             <div className='flex items-center mt-[8px] '>
                                                 <Link href={`/movies/${item}`}>
-                                                    <button id='btn_download' className='flex items-center w-[180px] gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download py-2 rounded-lg px-3 '>
+                                                    <button id='btn_download' className='flex items-center justify-center w-[180px] gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download md:py-2 py-1 rounded-lg md:px-3 px-2'>
                                                         <FaDownload size={14} />
-                                                        <p className='font-bold'>DOWNLOAD</p>
-                                                        <span className='bg-white font-extrabold text-xs text-black py-1 px-1 rounded-md'>FREE</span>
+                                                        <p className='font-bold md:text-[16px] text-sm'>DOWNLOAD</p>
+                                                        <span className='bg-white font-extrabold text-xs text-black  py-1 px-1 rounded-md'>FREE</span>
                                                     </button>
                                                 </Link>
                                             </div>
