@@ -15,7 +15,7 @@ const MainSwiper = () => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 1000)
+        }, 3000)
     }, [])
     return (
         <div className="w-full">
@@ -70,19 +70,19 @@ const HomeSwiper = () => {
                                             />
                                         </div>
                                         <div className='p-2 text-white'>
-                                            <h1 className='md:text-[40px] text-[24px] md:mt-[-12px] md:mb-[10px] transition ease-linear duration-1000  '>Movie{" " + item}</h1>
-                                            <h6 className=' text-[13px] md:mb-[10px] transition-'>Duration: <span className='text-white/70'>1h 32m</span></h6>
-                                            <h3 className='flex gap-2 items-center text-white'>
+                                            <h1 className='md:text-[40px] text-[24px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>Movie{" " + item}</h1>
+                                            <h6 className=' text-[13px] md:mb-[10px]  transition-'>Duration: <span className='text-white/70'>1h 32m</span></h6>
+                                            <h3 className='flex md:gap-2 gap-1 items-center text-white sm:text-xs text-[12px] md:text-sm'>
                                                 <span className='text-yellow-500'>&#9733;</span>
                                                 5.5
-                                                <span className='text-white/80 capitalize text-xs md:text-sm '>genres, genres, genres</span>
+                                                <span className='text-white/80 capitalize sm:text-xs text-[12px] md:text-sm '>genres, genres, genres</span>
                                             </h3>
                                             <div className='flex items-center mt-[8px] '>
                                                 <Link href={`/movies/${item}`}>
-                                                    <button id='btn_download' className='flex items-center justify-center w-[180px] gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download md:py-2 py-1 rounded-lg md:px-3 px-2'>
+                                                    <button id='btn_download' className='flex items-center justify-center md:w-[180px] sm:w-[160px]  gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download md:py-2 py-1 rounded-lg md:px-3 px-2'>
                                                         <FaDownload size={14} />
-                                                        <p className='font-bold md:text-[16px] text-sm'>DOWNLOAD</p>
-                                                        <span className='bg-white font-extrabold text-xs text-black  py-1 px-1 rounded-md'>FREE</span>
+                                                        <p className='font-bold md:text-[16px] sm:text-sm text-[13px]'>DOWNLOAD</p>
+                                                        <span className='bg-white font-extrabold md:text-[14px] sm:text-xs md:block hidden text-[12px] text-black  py-1 px-1 rounded-md'>FREE</span>
                                                     </button>
                                                 </Link>
                                             </div>
