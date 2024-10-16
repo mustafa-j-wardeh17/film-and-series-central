@@ -655,7 +655,9 @@ nav.sticky .mobile svg {
 }
 
 @media screen and (max-width:820px) {
-
+    .swiper-pagination .swiper-pagination-bullet {
+        width: 40px !important;
+    }
     .slideimagebx {
         height: 450px;
     }
@@ -718,7 +720,9 @@ nav.sticky .mobile svg {
 }
 
 @media screen and (max-width:720px) {
-
+    .swiper-pagination .swiper-pagination-bullet {
+        width: 30px !important;
+    }
     .slideimagebx {
         height: 420px;
     }

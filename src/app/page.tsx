@@ -15,11 +15,11 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
     <div className="max-w-screen relative ">
       <MainSwiper />
       <div className="flex justify-center w-full">
-        <ul className="list-none flex items-center justify-between w-[90%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
+        <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
             <Link
               href={'/all'}
-              className={`${true ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${true ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaAngleDoubleUp size={14} /></i>
               <p>Latest</p>
@@ -29,7 +29,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/movies'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaFilm size={14} /></i>
               <p>Movies</p>
@@ -39,7 +39,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/series'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaStar size={14} /></i>
               <p>Series</p>
@@ -50,7 +50,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/recently'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaPlus size={14} /></i>
               <p>Recently Added</p>
@@ -64,11 +64,11 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
         <CatSwiper />
       </div>
       <div className="flex  justify-center w-full mt-[40px]">
-        <ul className="list-none flex items-center justify-between w-[90%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
+        <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
             <Link
               href={'/all'}
-              className={`${true ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${true ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaPhotoVideo size={14} /></i>
               <p>Movies</p>
@@ -78,7 +78,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/series'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaFilm size={14} /></i>
               <p>Series</p>
@@ -88,7 +88,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/series'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaCheck size={14} /></i>
               <p>Original Series</p>
@@ -99,7 +99,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
           <li>
             <Link
               href={'/genre'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-2 text-sm`}
+              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaClapperboard size={14} /></i>
               <p>Genre</p>
