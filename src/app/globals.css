@@ -658,6 +658,7 @@ nav.sticky .mobile svg {
     .swiper-pagination .swiper-pagination-bullet {
         width: 40px !important;
     }
+
     .slideimagebx {
         height: 450px;
     }
@@ -723,12 +724,16 @@ nav.sticky .mobile svg {
     .swiper-pagination .swiper-pagination-bullet {
         width: 30px !important;
     }
+
     .slideimagebx {
         height: 420px;
     }
 }
 
 @media screen and (max-width:680px) {
+    .contactcard {
+        width: 350px;
+    }
 
     .slideimagebx {
         height: 380px;
@@ -743,4 +748,5 @@ nav.sticky .mobile svg {
     .slideimagebx {
         height: 350px;
     }
+
 }
