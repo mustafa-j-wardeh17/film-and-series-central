@@ -34,7 +34,7 @@ const WelcomeAnimation = () => {
                 Your browser does not support the video tag.
             </video>
             <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center z-[1] bg-[rgba(0, 0, 0, 0.5)]'>
-                <div className='text-[40px] font-bold text-white border-b-[2px]'>
+                <div className='sm:text-[40px] 4xs:text-[30px] text-[25px] font-bold text-white border-b-[2px]'>
                     Welcome to <span className='text-red-500'>Makmovies</span>
                 </div>
             </div>
