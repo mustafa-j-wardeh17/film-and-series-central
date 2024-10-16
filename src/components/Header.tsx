@@ -101,7 +101,7 @@ export default function Header() {
         setSearchBar(false)
     }
     return <>
-        <nav className="header">
+        <nav className="header md:px-[30px] px-[2px]">
             <h1
                 className="logo "
                 data-text="&nbsp;Makmovies&nbsp;"
