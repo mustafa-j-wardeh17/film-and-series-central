@@ -18,10 +18,10 @@ const Contact = () => {
             <div className='contactcard'>
                 <div className='w-full h-full relative'>
                     <div className='w-full h-full p-[2rem] bg-gradient-to-br from-[#ff0000ad] to-[#00000097]'>
-                        <div className='flex items-center justify-between'>
+                        {/* <div className='flex items-center justify-between'>
                             <HiMiniBars3BottomLeft className='text-[2.5rem]' />
                             <AiFillSetting className='text-[2rem]' />
-                        </div>
+                        </div> */}
                         <div className='flex items-center justify-center w-full  mb-[20px]'>
                             <div className='relative w-[150px] h-[150px] overflow-hidden rounded-full border-[7px] border-solid border-[#fff]'>
                                 <Image
@@ -33,20 +33,28 @@ const Contact = () => {
                             </div>
                         </div>
                         <div className='w-full flex items-center flex-col text-[#fff]'>
-                            <h1 className='font-bold text-[1.65rem]'>Mustafa Abu Wardeh</h1>
-                            <h3 className='font-semibold text-[1.2rem] mb-[35px]'>Full Stack Developer</h3>
+                            <h1 className='font-bold sm:text-[1.65rem] text-[1.54rem]'>Mustafa Abu Wardeh</h1>
+                            <h3 className='font-semibold sm:text-[1.2rem] text-[1.1rem] mb-[35px]'>Full Stack Developer</h3>
                         </div>
                         <div className='flex justify-center gap-[1rem]'>
-                            <Link href={'www.fb.com'}>
+                            <Link 
+                            className='hover:scale-110 hover:text-white'
+                            href={'www.fb.com'}>
                                 <IoLogoInstagram className='text-[1.5rem] ' />
                             </Link>
-                            <Link href={'www.fb.com'}>
+                            <Link
+                            className='hover:scale-110 hover:text-white'
+                            href={'www.fb.com'}>
                                 <FaFacebook className='text-[1.5rem] ' />
                             </Link>
-                            <Link href={'www.fb.com'}>
+                            <Link 
+                            className='hover:scale-110 hover:text-white'
+                            href={'www.fb.com'}>
                                 <RiTelegramLine className='text-[1.5rem] ' />
                             </Link>
-                            <Link href={'www.fb.com'}>
+                            <Link 
+                            className='hover:scale-110 hover:text-white'
+                            href={'www.fb.com'}>
                                 <BsTwitter className='text-[1.5rem] ' />
                             </Link>
                         </div>
@@ -59,7 +67,7 @@ const Contact = () => {
                             Follow
                         </Link>
                         <div className='text-[1.2rem] text-[#777] font-semibold flex flex-col items-center gap-[20px]'>
-                            <p>Learn More About My Profile</p>
+                            <p className='text-[14px] sm:text-[16px]'>Learn More About My Profile</p>
                             <FaArrowDown className='text-[1.2rem] mt-[1rem] text-[#e74444] animate-bounce' />
                         </div>
                     </div>
