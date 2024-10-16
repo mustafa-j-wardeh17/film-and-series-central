@@ -5,7 +5,7 @@ import { FaEye, FaHeart, FaStar } from 'react-icons/fa'
 
 const Card = ({ movie, large = false }: { movie: number, large?: boolean }) => {
     return (
-        <div className={`${large ? 'max-w-[280px] min-w-[280px] h-[520px]' : 'lg:w-[200px] lg:h-[300px] md:w-[187px] md:h-[280px]  sm:h-[230px] sm:w-[150px] xs:h-[250px] xs:w-[170px] w-[150px] h-[230px]'}`}>
+        <div className={`${large ? 'lg:w-[260px]  min-w-[200px] lg:h-[400px] md:w-[200px] md:h-[300px] sm:w-[230px] sm:h-[340px] w-[180px] h-[300px]' : 'lg:w-[200px] lg:h-[300px] md:w-[187px] md:h-[280px]  sm:h-[230px] sm:w-[150px] xs:h-[250px] xs:w-[170px] w-[150px] h-[230px]'}`}>
             <Link
                 href={`/movies/${movie}`}
             >
