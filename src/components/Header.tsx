@@ -179,7 +179,7 @@ export default function Header() {
             {/* Mobile */}
             <div id={navbar ? 'navbaractive' : 'navbar'}>
                 <div className="navlogomovie">
-                    <div className="navlogomovie">
+                    <div className="flex justify-between relative items-center w-full">
                         <h1
                             className="logo"
                             data-text="&nbsp;Makmovies&nbsp;"
