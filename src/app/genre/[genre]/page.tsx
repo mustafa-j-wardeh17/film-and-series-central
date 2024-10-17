@@ -1,4 +1,3 @@
-import Card from '@/components/Card'
 import { Metadata } from 'next'
 import React from 'react'
 
@@ -13,7 +12,6 @@ export async function generateMetadata(
 
 
 const page = ({ params: { genre } }: { params: { genre: string } }) => {
-    const Movies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
     return (
@@ -26,7 +24,7 @@ const page = ({ params: { genre } }: { params: { genre: string } }) => {
             </section>
             <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] py-[60px]'>
                 <div className='flex flex-wrap items-center justify-center gap-[20px]'>
-                    {
+                    {/* {
                         Movies.length > 0
                             ?
                             Movies.map(movie => (
@@ -40,7 +38,7 @@ const page = ({ params: { genre } }: { params: { genre: string } }) => {
                             : (
                                 <h1 className='text-red-500 text-[35px]'>No series Found</h1>
                             )
-                    }
+                    } */}
                 </div>
             </section>
         </>
