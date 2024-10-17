@@ -5,10 +5,18 @@ import { useRouter } from 'next/navigation'
 
 import Card from './Card'
 
-const CategoryGenreFilter = ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+export interface CatSwiperProps {
+    id: number;
+    title: string;
+    bgposter: string;
+    slug: string;
+    year: number;
+    rating: number;
+}
+
+const CategoryGenreFilter = ({ searchParams, movies }: { movies: CatSwiperProps[], searchParams: { [key: string]: string | undefined } }) => {
     // we will pass search params from home page to access filter by genres
     const router = useRouter()
-    const Movies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const handleFilter = (item: string) => {
         const urlParam = new URLSearchParams(window.location.search)
         urlParam.set('filter', item)
@@ -41,9 +49,9 @@ const CategoryGenreFilter = ({ searchParams }: { searchParams: { [key: string]: 
 
             {/* Movies Section */}
             <div className='my-[30px] md:w-[80%] w-[90%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
-                {Movies.length > 0
-                    ? Movies.map(movie => (
-                        <Card key={movie} movie={movie} large={true} />
+                {movies.length > 0
+                    ? movies.map((movie: CatSwiperProps) => (
+                        <Card key={movie.id} movie={movie} large={true} />
                     ))
                     : (
                         <h1 className='text-red-500 text-[35px]'>No Movies Found</h1>

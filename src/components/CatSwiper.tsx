@@ -5,8 +5,15 @@ import 'swiper/swiper-bundle.css';
 import 'swiper/css';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules'
 import Card from './Card';
-
-const CatSwiper = () => {
+export interface CatSwiperProps {
+    id: number;
+    title: string;
+    bgposter: string;
+    slug: string;
+    year: number;
+    rating: number;
+}
+const CatSwiper = ({ movies }: { movies: CatSwiperProps[] }) => {
     return (
         <Swiper
             autoplay={{
@@ -76,9 +83,9 @@ const CatSwiper = () => {
 
             <div className='flex overflow-x-scroll scroll-smooth gap-[20px] duration-500'>
                 {
-                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 23, 32, 4, 12, 321, 3, 213, 12].map(movie => (
+                    movies.map((movie: CatSwiperProps) => (
                         <SwiperSlide
-                            key={movie}
+                            key={movie.id}
                         >
                             <Card movie={movie} />
                         </SwiperSlide>

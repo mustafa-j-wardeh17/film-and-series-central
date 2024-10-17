@@ -8,9 +8,20 @@ import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa';
-import { MediaContent } from '@prisma/client';
 
-const MainSwiper = ({ movies }: { movies: MediaContent[] }) => {
+interface MainSwiperProps {
+    id: number;
+    title: string;
+    bgposter: string;
+    duration: number;
+    slug: string;
+    year: number;
+    rating: number;
+    genre: {
+        name: string
+    };
+}
+const MainSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -40,7 +51,7 @@ const MainSwiper = ({ movies }: { movies: MediaContent[] }) => {
 
 export default MainSwiper;
 
-const HomeSwiper = ({ movies }: { movies: MediaContent[] }) => {
+const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
     return (
         <div className="mt-[-58px] z-[-1]">
             <Swiper
@@ -60,7 +71,7 @@ const HomeSwiper = ({ movies }: { movies: MediaContent[] }) => {
                 {/* 4 Slides, each containing a centered number */}
 
                 {
-                    movies.map((item: MediaContent) => (
+                    movies.map((item: MainSwiperProps) => (
                         <SwiperSlide
                             key={item.id}
                         >
@@ -84,15 +95,15 @@ const HomeSwiper = ({ movies }: { movies: MediaContent[] }) => {
                                             />
                                         </div>
                                         <div className='p-2 text-white'>
-                                            <h1 className='md:text-[40px] text-[24px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>Movie{" " + item}</h1>
-                                            <h6 className=' text-[13px] md:mb-[10px]  transition-'>Duration: <span className='text-white/70'>1h 32m</span></h6>
+                                            <h1 className='md:text-[40px] text-[24px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>{item.title}</h1>
+                                            <h6 className=' text-[13px] md:mb-[10px]  transition-'>Duration: <span className='text-white/70'>{(item.duration / 60).toFixed(2)} h</span></h6>
                                             <h3 className='flex md:gap-2 gap-1 items-center text-white sm:text-xs text-[12px] md:text-sm'>
                                                 <span className='text-yellow-500'>&#9733;</span>
-                                                5.5
-                                                <span className='text-white/80 capitalize sm:text-xs text-[12px] md:text-sm '>genres, genres, genres</span>
+                                                {item.rating}
+                                                <span className='text-white/80 capitalize sm:text-xs text-[12px] md:text-sm '>{item.genre.name}</span>
                                             </h3>
                                             <div className='flex items-center mt-[8px] '>
-                                                <Link href={`/movies/${item.id}`}>
+                                                <Link href={`/movies/${item.slug}`}>
                                                     <button id='btn_download' className='flex items-center justify-center md:w-[180px] sm:w-[160px]  gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download md:py-2 py-1 rounded-lg md:px-3 px-2'>
                                                         <FaDownload size={14} />
                                                         <p className='font-bold md:text-[16px] sm:text-sm text-[13px]'>DOWNLOAD</p>

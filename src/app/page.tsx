@@ -12,13 +12,22 @@ import prisma from "../../lib/prisma";
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
 
   const [movies] = await prisma.$transaction([
-    prisma.mediaContent.findMany({})
+    prisma.mediaContent.findMany({
+      include: {
+        genre: true,
+        category: true,
+        downloadLink: true,
+        language: true,
+        subtitle: true
+      },
+      skip: ((Number(searchParams.page) || 1) - 1) * 10,
+      take: 10
+    })
   ])
 
-  console.log(movies)
   return (
     <div className="max-w-screen relative ">
-      <MainSwiper movies={movies.slice(0, 3)} />
+      <MainSwiper movies={movies.slice(0, 4)} />
       <div className="flex justify-center w-full">
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
@@ -65,8 +74,9 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
         </ul>
       </div>
 
+      {/* Todo ==> Taking All Categories From db To make filtering by them */}
       <div className=" mt-[20px] w-full">
-        <CatSwiper />
+        <CatSwiper movies={movies.slice(0, 10)} />
       </div>
       <div className="flex  justify-center w-full mt-[40px]">
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
@@ -115,6 +125,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
       </div>
       <CategoryGenreFilter
         searchParams={searchParams}
+        movies={movies.slice(0, 10)}
       />
       <Pagination
         searchParams={searchParams}
