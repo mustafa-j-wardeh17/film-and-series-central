@@ -11,7 +11,27 @@ import prisma from "../../lib/prisma";
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
 
-  const [movies] = await prisma.$transaction([
+  const [MainSwiperMovies, categorySwiperMovies, pageMovies] = await prisma.$transaction([
+    prisma.mediaContent.findMany({
+      include: {
+        genre: true,
+        category: true,
+        downloadLink: true,
+        language: true,
+        subtitle: true
+      },
+      take: 4
+    }),
+    prisma.mediaContent.findMany({
+      include: {
+        genre: true,
+        category: true,
+        downloadLink: true,
+        language: true,
+        subtitle: true
+      },
+      take: 10
+    }),
     prisma.mediaContent.findMany({
       include: {
         genre: true,
@@ -27,7 +47,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
 
   return (
     <div className="max-w-screen relative ">
-      <MainSwiper movies={movies.slice(0, 4)} />
+      <MainSwiper movies={MainSwiperMovies} />
       <div className="flex justify-center w-full">
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
@@ -76,7 +96,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
 
       {/* Todo ==> Taking All Categories From db To make filtering by them */}
       <div className=" mt-[20px] w-full">
-        <CatSwiper movies={movies.slice(0, 10)} />
+        <CatSwiper movies={categorySwiperMovies} />
       </div>
       <div className="flex  justify-center w-full mt-[40px]">
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
@@ -125,7 +145,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
       </div>
       <CategoryGenreFilter
         searchParams={searchParams}
-        movies={movies.slice(0, 10)}
+        movies={pageMovies}
       />
       <Pagination
         searchParams={searchParams}
