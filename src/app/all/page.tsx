@@ -1,11 +1,29 @@
 import { Metadata } from 'next';
 import React from 'react'
+import prisma from '../../../lib/prisma';
+import Card from '@/components/Card';
+import Pagination from '@/components/Pagination';
 
 export const metadata: Metadata = {
     title: 'All Movies & Series'
 };
 
-const Movies = () => {
+const All = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+    const [allData, count] = await prisma.$transaction([
+        prisma.mediaContent.findMany({
+            include: {
+                genre: true,
+                category: true,
+                downloadLink: true,
+                language: true,
+                subtitle: true
+            },
+            skip: ((Number(searchParams.page) || 1) - 1) * 10,
+            take: 10
+        }),
+        prisma.mediaContent.count()
+
+    ])
 
     return (
         <>
@@ -18,12 +36,12 @@ const Movies = () => {
 
             <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] py-[60px]'>
                 <div className='flex flex-wrap items-center justify-center gap-[20px]'>
-                    {/* {
-                        Movies.length > 0
+                    {
+                        allData.length > 0
                             ?
-                            Movies.map(movie => (
+                            allData.map(movie => (
                                 <Card
-                                    key={movie}
+                                    key={movie.id}
                                     movie={movie}
                                     large={true}
                                 />
@@ -32,7 +50,11 @@ const Movies = () => {
                             : (
                                 <h1 className='text-red-500 text-[35px]'>Nothing Found</h1>
                             )
-                    } */}
+                    }
+                    <Pagination
+                        searchParams={searchParams}
+                        count={count}
+                    />
                 </div>
             </section>
 
@@ -41,4 +63,4 @@ const Movies = () => {
     )
 }
 
-export default Movies
+export default All

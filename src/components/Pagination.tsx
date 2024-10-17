@@ -1,12 +1,12 @@
 'use client'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 
-const Pagination = ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+const Pagination = ({ searchParams, count }: { searchParams: { [key: string]: string | undefined }, count?: number }) => {
     const page = parseInt(searchParams.page as string) || 1
     const router = useRouter()
-
+    const pathname = usePathname()
     const handlePagination = (type: "next" | "previous") => {
         const urlParam = new URLSearchParams(window.location.search)
         let currentPage = page
@@ -18,7 +18,7 @@ const Pagination = ({ searchParams }: { searchParams: { [key: string]: string | 
         }
 
         urlParam.set('page', String(currentPage))
-        router.push(`/?${urlParam}`)
+        router.push(`${pathname}?${urlParam}`)
     }
 
     return (
