@@ -8,20 +8,9 @@ import { BiSearch } from "react-icons/bi"
 import { FaBars, FaStar } from "react-icons/fa"
 import { IoClose } from "react-icons/io5"
 
-export default function Header() {
+export default function Header({ allData }: { allData: any[] }) {
     const pathname = usePathname()
-    const movies = [
-        "The Shawshank Redemption",
-        "The Dark Knight",
-        "Inception",
-        "Fight Club",
-        "Forrest Gump",
-        "The Matrix",
-        "The Godfather",
-        "Pulp Fiction",
-        "The Lord of the Rings: The Return of the King",
-        "Interstellar"
-    ];
+
     const [clicked, setClicked] = useState(false)
     const [navbar, setNavbar] = useState(false)
     const [searchBar, setSearchBar] = useState(false)
@@ -48,7 +37,7 @@ export default function Header() {
             setSearchResult([])
             return
         }
-        const filteredMovies = movies.filter(movie => movie.trim().toLowerCase().includes(movieShortname.toLowerCase().trim()))
+        const filteredMovies = allData.filter(movie => movie.title.trim().toLowerCase().includes(movieShortname.toLowerCase().trim()))
         setSearchResult(filteredMovies)
     }, [movieShortname])
 
@@ -149,7 +138,7 @@ export default function Header() {
                                                     >
                                                         <div className="h-auto">
                                                             <Image
-                                                                src={'/img/img.jpg'}
+                                                                src={movie.bgposter}
                                                                 alt={`img ${movie}`}
                                                                 height={110}
                                                                 width={80}
@@ -157,9 +146,9 @@ export default function Header() {
                                                             />
                                                         </div>
                                                         <div className="searchbarinfo">
-                                                            <h5>{movie.slice(0, 21) + (movie.length > 21 && "...")}</h5>
-                                                            <h4 className="flex items-center">Rating: <FaStar size={13} /><span>7.8</span></h4>
-                                                            <h4>Release Year: 2024</h4>
+                                                            <h5>{movie.title.slice(0, 21) + (movie.title.length > 21 && "...")}</h5>
+                                                            <h4 className="flex items-center">Rating: <FaStar size={13} /><span>{movie.rating}</span></h4>
+                                                            <h4>Release Year: {movie.year}</h4>
                                                         </div>
                                                     </div>
                                                 </Link>
