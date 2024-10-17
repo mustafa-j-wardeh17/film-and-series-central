@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// schema.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -11,4 +7,67 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model MediaContent {
+  id             Int             @id @default(autoincrement())
+  title          String
+  slug           String          @unique
+  languageId     Int
+  bgposter       String
+  description    String
+  rating         Float
+  duration       Int
+  subtitleId     Int
+  year           Int
+  size           String
+  quality        String
+  youtubelink    String
+  status         String
+  createdAt      DateTime        @default(now())
+  genreId        Int
+  downloadlinkId Int
+  categoryId     Int
+
+  // Relations
+  language       Language        @relation(fields: [languageId], references: [id])
+  subtitle       Subtitle        @relation(fields: [subtitleId], references: [id])
+  genre          Genre           @relation(fields: [genreId], references: [id])
+  downloadLink   DownloadLink    @relation(fields: [downloadlinkId], references: [id])
+  category       Category        @relation(fields: [categoryId], references: [id])
+}
+
+model Language {
+  id             Int             @id @default(autoincrement())
+  name           String          @unique
+  mediaContents  MediaContent[]
+}
+
+model Subtitle {
+  id             Int             @id @default(autoincrement())
+  name           String          @unique
+  mediaContents  MediaContent[]
+}
+
+model Category {
+  id             Int             @id @default(autoincrement())
+  name           String          @unique
+
+  // Relations
+  mediaContents  MediaContent[]  // Relation to MediaContent
+}
+
+model Genre {
+  id             Int             @id @default(autoincrement())
+  name           String          @unique
+  mediaContents  MediaContent[]
+}
+
+model DownloadLink {
+  id             Int             @id @default(autoincrement())
+  resolution_480p   String
+  resolution_720p   String
+  resolution_1080p  String
+  resolution_4k     String
+  mediaContents  MediaContent[]
 }
