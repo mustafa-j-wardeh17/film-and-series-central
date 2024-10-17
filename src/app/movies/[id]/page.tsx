@@ -239,7 +239,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                             <div key={movie.id} className={`max-w-[200px] min-w-[200px] h-[340px]`}>
 
                                 <Link
-                                    href={`/movies/${movie} `}
+                                    href={`/movies/${movie.slug} `}
                                 >
                                     <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[80%] rounded-[8px] overflow-hidden'>
                                         <Image
