@@ -57,7 +57,7 @@ const page = async ({ params: { genre }, searchParams }: { params: { genre: stri
                             ))
 
                             : (
-                                <h1 className='text-red-500 text-[35px]'>No Data For {genre} Found</h1>
+                                <h1 className='text-red-500 text-[35px]'>No Data Found</h1>
                             )
                     }
                     <Pagination

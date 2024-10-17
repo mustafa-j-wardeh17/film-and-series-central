@@ -43,6 +43,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
       skip: ((Number(searchParams.page) || 1) - 1) * 10,
       take: 10
     })
+
   ])
 
   return (
