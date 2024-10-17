@@ -33,6 +33,23 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
       take: 10
     }),
     prisma.mediaContent.findMany({
+      where: {
+        OR: [
+          {
+            category: {
+              name: searchParams?.filter?.toLocaleLowerCase()
+            }
+          },
+
+          {
+            genre: {
+              name: searchParams?.filter?.toLocaleLowerCase()
+            }
+          },
+
+        ]
+      },
+
       include: {
         genre: true,
         category: true,
