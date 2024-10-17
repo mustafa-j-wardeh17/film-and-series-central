@@ -8,8 +8,9 @@ import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa';
+import { MediaContent } from '@prisma/client';
 
-const MainSwiper = () => {
+const MainSwiper = ({ movies }: { movies: MediaContent[] }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -32,14 +33,14 @@ const MainSwiper = () => {
 
     return (
         <div className="w-full">
-            {!loading ? <HomeSwiper /> : <WelcomeAnimation onAnimationEnd={handleAnimationEnd} />}
+            {!loading ? <HomeSwiper movies={movies} /> : <WelcomeAnimation onAnimationEnd={handleAnimationEnd} />}
         </div>
     );
 };
 
 export default MainSwiper;
 
-const HomeSwiper = () => {
+const HomeSwiper = ({ movies }: { movies: MediaContent[] }) => {
     return (
         <div className="mt-[-58px] z-[-1]">
             <Swiper
@@ -59,14 +60,14 @@ const HomeSwiper = () => {
                 {/* 4 Slides, each containing a centered number */}
 
                 {
-                    [1, 2, 3, 4].map(item => (
+                    movies.map((item: MediaContent) => (
                         <SwiperSlide
-                            key={item}
+                            key={item.id}
                         >
                             <div className="flex relative justify-center items-center z-[2] slideimagebx ">
                                 <Image
-                                    src={`/slider/${item}.webp`}
-                                    alt={`movie-${item}`}
+                                    src={item.bgposter}
+                                    alt={`movie-${item.id}`}
                                     loading='lazy'
                                     fill
                                     className='object-fill absolute left-0 top-0 z-[-1]'
@@ -76,8 +77,8 @@ const HomeSwiper = () => {
                                     <div className='flex items-center sm:gap-[20px] gap-[10px'>
                                         <div className='md:w-[120px]  md:h-[170px] w-[100px] h-[120px] object-cover relative overflow-hidden rounded-[8px]'>
                                             <Image
-                                                src={`/slider/${item}.webp`}
-                                                alt={`movie ${item} poster`}
+                                                src={item.bgposter}
+                                                alt={`movie ${item.id} poster`}
                                                 fill
                                                 className='object-cover '
                                             />
@@ -91,7 +92,7 @@ const HomeSwiper = () => {
                                                 <span className='text-white/80 capitalize sm:text-xs text-[12px] md:text-sm '>genres, genres, genres</span>
                                             </h3>
                                             <div className='flex items-center mt-[8px] '>
-                                                <Link href={`/movies/${item}`}>
+                                                <Link href={`/movies/${item.id}`}>
                                                     <button id='btn_download' className='flex items-center justify-center md:w-[180px] sm:w-[160px]  gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download md:py-2 py-1 rounded-lg md:px-3 px-2'>
                                                         <FaDownload size={14} />
                                                         <p className='font-bold md:text-[16px] sm:text-sm text-[13px]'>DOWNLOAD</p>
