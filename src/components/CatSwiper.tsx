@@ -79,7 +79,6 @@ const CatSwiper = () => {
                     [1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 23, 32, 4, 12, 321, 3, 213, 12].map(movie => (
                         <SwiperSlide
                             key={movie}
-
                         >
                             <Card movie={movie} />
                         </SwiperSlide>

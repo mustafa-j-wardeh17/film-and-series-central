@@ -6,14 +6,19 @@ import Pagination from "@/components/Pagination";
 import Link from "next/link";
 import { FaAngleDoubleUp, FaCheck, FaFilm, FaPhotoVideo, FaPlus, FaStar } from "react-icons/fa";
 import { FaClapperboard } from "react-icons/fa6";
+import prisma from "../../lib/prisma";
 
 
-export default function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
+export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
 
+  const [movies] = await prisma.$transaction([
+    prisma.mediaContent.findMany({})
+  ])
 
+  console.log(movies)
   return (
     <div className="max-w-screen relative ">
-      <MainSwiper />
+      <MainSwiper movies={movies.slice(0, 3)} />
       <div className="flex justify-center w-full">
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
