@@ -1,4 +1,4 @@
-export const categories = ["Bollywood", "Hollywood", "South", "Gujarati", "Marvel_Studio", "Tv_Shows", "Web_Series"]
+export const categories = ["bollywood", "hollywood", "south", "gujarati", "marvel_studio", "tv_shows", "web_series"]
 export const genres = ['comedy','thriller','adventure','animation','drama','fantasy','horror','mystery','romantic','action','crime','science_fiction']
 export const movies = [
     {

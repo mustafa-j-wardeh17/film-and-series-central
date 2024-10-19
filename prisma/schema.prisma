@@ -1,73 +1,114 @@
-// schema.prisma
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model MediaContent {
-  id             Int             @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
   title          String
-  slug           String          @unique
+  slug           String   @unique
   languageId     Int
   bgposter       String
+  wideposter     String
   description    String
   rating         Float
   duration       Int
-  subtitleId     Int
   year           Int
-  size           String
-  quality        String
   youtubelink    String
   status         String
-  createdAt      DateTime        @default(now())
+  createdAt      DateTime @default(now())
   genreId        Int
   downloadlinkId Int
   categoryId     Int
 
   // Relations
-  language       Language        @relation(fields: [languageId], references: [id])
-  subtitle       Subtitle        @relation(fields: [subtitleId], references: [id])
-  genre          Genre           @relation(fields: [genreId], references: [id])
-  downloadLink   DownloadLink    @relation(fields: [downloadlinkId], references: [id])
-  category       Category        @relation(fields: [categoryId], references: [id])
+  language     Language     @relation(fields: [languageId], references: [id])
+  genre        Genre        @relation(fields: [genreId], references: [id])
+  downloadLink DownloadLink @relation(fields: [downloadlinkId], references: [id])
+  category     Category     @relation(fields: [categoryId], references: [id])
+}
+
+model Serie {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  languageId  Int
+  bgposter    String
+  wideposter  String
+  description String
+  rating      Float
+  year        Int
+  youtubelink String
+  status      String
+  createdAt   DateTime @default(now())
+  genreId     Int
+  categoryId  Int
+
+  // Relations
+  language Language @relation(fields: [languageId], references: [id])
+  genre    Genre    @relation(fields: [genreId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  // Add this field for relation to episodes
+  episodes Episode[] // Relation to Episode
+}
+
+model Episode {
+  id             Int      @id @default(autoincrement())
+  title          String
+  slug           String   @unique
+  duration       Int
+  status         String
+  createdAt      DateTime @default(now())
+  downloadlinkId Int
+  serieId        Int // Add this field for the relationship with Serie
+
+  downloadLink DownloadLink @relation(fields: [downloadlinkId], references: [id])
+  serie        Serie        @relation(fields: [serieId], references: [id]) // Define relation to Serie
 }
 
 model Language {
-  id             Int             @id @default(autoincrement())
-  name           String          @unique
-  mediaContents  MediaContent[]
-}
-
-model Subtitle {
-  id             Int             @id @default(autoincrement())
-  name           String          @unique
-  mediaContents  MediaContent[]
+  id            Int            @id @default(autoincrement())
+  name          String         @unique
+  mediaContents MediaContent[]
+  Serie         Serie[]
 }
 
 model Category {
-  id             Int             @id @default(autoincrement())
-  name           String          @unique
+  id   Int    @id @default(autoincrement())
+  name String @unique
 
   // Relations
-  mediaContents  MediaContent[]  // Relation to MediaContent
+  mediaContents MediaContent[]
+  Serie         Serie[]
 }
 
 model Genre {
-  id             Int             @id @default(autoincrement())
-  name           String          @unique
-  mediaContents  MediaContent[]
+  id            Int            @id @default(autoincrement())
+  name          String         @unique
+  mediaContents MediaContent[]
+  Serie         Serie[]
 }
 
 model DownloadLink {
-  id             Int             @id @default(autoincrement())
-  resolution_480p   String
-  resolution_720p   String
-  resolution_1080p  String
-  resolution_4k     String
-  mediaContents  MediaContent[]
+  id            Int            @id @default(autoincrement())
+  resolutions   Resolution[]
+  mediaContents MediaContent[]
+  Episode       Episode[]
+}
+
+model Resolution {
+  id             Int          @id @default(autoincrement())
+  size           Float
+  link           String
+  downloadLink   DownloadLink @relation(fields: [downloadLinkId], references: [id])
+  downloadLinkId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

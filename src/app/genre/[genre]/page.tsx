@@ -26,7 +26,6 @@ const page = async ({ params: { genre }, searchParams }: { params: { genre: stri
                 category: true,
                 downloadLink: true,
                 language: true,
-                subtitle: true
             },
             skip: ((Number(searchParams.page) || 1) - 1) * 10,
             take: 10
@@ -62,7 +61,7 @@ const page = async ({ params: { genre }, searchParams }: { params: { genre: stri
                     }
                     <Pagination
                         searchParams={searchParams}
-                        count={count}
+                        totalPages={count}
                     />
                 </div>
             </section>

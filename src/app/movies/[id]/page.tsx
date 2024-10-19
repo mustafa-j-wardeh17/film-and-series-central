@@ -26,7 +26,11 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
             },
             include: {
                 genre: true,
-                downloadLink: true,
+                downloadLink: {
+                    include: {
+                        resolutions: true
+                    }
+                },
                 language: true
             }
         }),
@@ -162,7 +166,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                         <td className='uppercase inline-block mr-[10px]'>
                                             &#9642; Size :
                                         </td>
-                                        <td className='inline-block mr-[10px]'>{movie.size}</td>
+                                        <td className='inline-block mr-[10px]'>{movie.downloadLink.resolutions.map(movie => movie.size)}</td>
                                     </tr>
                                     <tr className='block my-[15px] '>
                                         <td className='uppercase inline-block mr-[10px]'>
@@ -198,14 +202,14 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                         <section className='mt-[30px]'>
                             <h2 className='bg-[#6abf6059] block text-[#ffffffd2] text-center rounded-[10px] p-[10px]'>G-Drive [GDTot] Download Links</h2>
                             <div className='flex flex-col gap-[30px] mt-[30px]'>
-                                {
+                                {/* {
                                     Object.keys(movie.downloadLink)
                                         .map((key) => key.match(/\d+[pk]/i))
                                         .filter(Boolean)
                                         .map((key, idx) => (
                                             <a target='_blank' href={
                                                 idx == 0
-                                                    ? movie.downloadLink.resolution_480p
+                                                    ? movie.downloadLink.
                                                     : idx == 1
                                                         ? movie.downloadLink.resolution_720p
                                                         : idx == 2
@@ -213,7 +217,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                                             : movie.downloadLink.resolution_4k
                                             } className='bg-[#6a7c8f29] text-[#ffffffd2] p-[10px] text-center rounded-[10px] w-[80%] m-auto transition duration-200 hover:bg-[#6a7c8f] hover:shadow-red hover:text-white hover:font-semibold'>Download {key}</a>
                                         ))
-                                }
+                                } */}
 
                             </div>
                         </section>

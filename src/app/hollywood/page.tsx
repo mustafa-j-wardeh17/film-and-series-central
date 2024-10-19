@@ -20,7 +20,6 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                 category: true,
                 downloadLink: true,
                 language: true,
-                subtitle: true
             },
             skip: ((Number(searchParams.page) || 1) - 1) * 10,
             take: 10
@@ -56,7 +55,7 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                     }
                     <Pagination
                         searchParams={searchParams}
-                        count={count}
+                        totalPages={count}
                     />
                 </div>
             </section>

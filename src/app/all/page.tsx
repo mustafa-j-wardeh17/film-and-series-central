@@ -16,7 +16,6 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
                 category: true,
                 downloadLink: true,
                 language: true,
-                subtitle: true
             },
             skip: ((Number(searchParams.page) || 1) - 1) * 10,
             take: 10
@@ -53,7 +52,7 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
                     }
                     <Pagination
                         searchParams={searchParams}
-                        count={count}
+                        totalPages={count }
                     />
                 </div>
             </section>
