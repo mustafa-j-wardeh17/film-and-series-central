@@ -130,7 +130,7 @@ export default function Header({ allData }: { allData: any[] }) {
                                             searchResult.slice(0, 12).map((movie) => (
                                                 <Link
                                                     key={movie}
-                                                    href={'/'}
+                                                    href={`/movies/${movie.slug}`}
                                                     onClick={handleMovieClick}
                                                 >
                                                     <div

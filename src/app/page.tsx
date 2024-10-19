@@ -11,16 +11,18 @@ import prisma from "../../lib/prisma";
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
 
-  const [MainSwiperMovies, categorySwiperMovies, pageMovies] = await prisma.$transaction([
+  const filter = searchParams?.filter?.toLocaleLowerCase() || "";
+
+  const [MainSwiperMovies, categorySwiperMovies, pageMovies, totalMovies] = await prisma.$transaction([
     prisma.mediaContent.findMany({
       include: {
         genre: true,
         category: true,
         downloadLink: true,
         language: true,
-        subtitle: true
+        subtitle: true,
       },
-      take: 4
+      take: 4,
     }),
     prisma.mediaContent.findMany({
       include: {
@@ -28,41 +30,42 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
         category: true,
         downloadLink: true,
         language: true,
-        subtitle: true
+        subtitle: true,
       },
-      take: 10
+      take: 10,
     }),
     prisma.mediaContent.findMany({
-      where: {
-        OR: [
-          {
-            category: {
-              name: searchParams?.filter?.toLocaleLowerCase()
-            }
-          },
-
-          {
-            genre: {
-              name: searchParams?.filter?.toLocaleLowerCase()
-            }
-          },
-
-        ]
-      },
-
+      where: filter
+        ? {
+          OR: [
+            {
+              category: {
+                name: filter,
+              },
+            },
+            {
+              genre: {
+                name: filter,
+              },
+            },
+          ],
+        }
+        : {}, // Fetch all data if filter is empty
       include: {
         genre: true,
         category: true,
         downloadLink: true,
         language: true,
-        subtitle: true
+        subtitle: true,
       },
       skip: ((Number(searchParams.page) || 1) - 1) * 10,
-      take: 10
-    })
+      take: 10,
+    }),
+    prisma.mediaContent.count()
+  ]);
 
-  ])
 
+  console.log(totalMovies, Math.ceil(totalMovies/10))
   return (
     <div className="max-w-screen relative ">
       <MainSwiper movies={MainSwiperMovies} />
@@ -167,6 +170,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
       />
       <Pagination
         searchParams={searchParams}
+        totalPages={Math.ceil(totalMovies/10)}
       />
 
     </div>

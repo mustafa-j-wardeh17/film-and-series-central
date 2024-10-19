@@ -57,13 +57,13 @@ const Footer = () => {
                                     All Movies
                                 </Link>
                             </li>
-                            <li className="text-[18px] cursor-pointer">
+                            {/* <li className="text-[18px] cursor-pointer">
                                 <Link href={'/category'}
                                     className={`${pathname === '/category' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
                                     >
                                     Category
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="text-[18px] cursor-pointer">
                                 <Link href={'/bollywood'}
                                     className={`${pathname === '/bollywood' ? ' text-[#ff0000d9] border-b-[1px] border-red-500' : 'text-white'}  hover:text-[#ff0000d9] hover:border-b-[1px] hover:border-red-500 transition-all duration-300`}
