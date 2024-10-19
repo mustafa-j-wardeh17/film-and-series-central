@@ -13,6 +13,7 @@ interface MainSwiperProps {
     id: number;
     title: string;
     bgposter: string;
+    wideposter: string;
     duration: number;
     slug: string;
     year: number;
@@ -77,7 +78,7 @@ const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
                         >
                             <div className="flex relative justify-center items-center z-[2] slideimagebx ">
                                 <Image
-                                    src={item.bgposter}
+                                    src={item.wideposter}
                                     alt={`movie-${item.id}`}
                                     loading='lazy'
                                     fill

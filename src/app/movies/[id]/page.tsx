@@ -58,7 +58,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
         <div className=''>
             <div className='slideimagebx'>
                 <Image
-                    src={movie?.bgposter}
+                    src={movie?.wideposter}
                     alt={`${{ id }} `}
                     fill
                     className='object-cover'
