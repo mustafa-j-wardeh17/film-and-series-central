@@ -7,14 +7,13 @@ import React from 'react'
 import { FaBookmark, FaCheck, FaEye, FaHeart, FaImdb, FaStar, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
 import prisma from '../../../../lib/prisma'
 import { notFound } from 'next/navigation'
+import { capitalize } from '../../../../lib/util'
 
 export async function generateMetadata(
     { params: { id } }: { params: { id: string } }
 ): Promise<Metadata> {
-
     return {
-        title: id
-
+        title: capitalize(id)
     }
 
 }
