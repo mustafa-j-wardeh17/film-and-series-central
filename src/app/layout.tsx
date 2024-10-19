@@ -38,7 +38,6 @@ export default async function RootLayout({
         category: true,
         downloadLink: true,
         language: true,
-        subtitle: true
       },
     })
   ])
