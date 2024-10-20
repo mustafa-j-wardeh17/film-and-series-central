@@ -26,7 +26,7 @@ const CategoryGenreFilter = ({ searchParams, movies }: { movies: CatSwiperProps[
     return (
         <div className='flex flex-col items-center my-[20px]'>
             {/* Genres and Categories Section */}
-            <div className='md:w-[80%] w-[90%] relative flex items-center overflow-x-auto hide-scrollbar md:justify-center justify-start gap-[1rem] md:flex-wrap flex-nowrap flex-row scroll-snap-type-x-mandatory'>
+            <div className='md:w-[80%] w-[90%] relative flex items-center overflow-x-auto hide-scrollbar lg:justify-center justify-start gap-[1rem] lg:flex-wrap flex-nowrap flex-row scroll-snap-type-x-mandatory'>
                 {genres.map((genre) => (
                     <button
                         key={genre}
