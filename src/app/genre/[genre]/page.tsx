@@ -30,7 +30,13 @@ const page = async ({ params: { genre }, searchParams }: { params: { genre: stri
             skip: ((Number(searchParams.page) || 1) - 1) * 10,
             take: 10
         }),
-        prisma.mediaContent.count()
+        prisma.mediaContent.count({
+            where: {
+                genre: {
+                    name: genre
+                }
+            },
+        })
 
     ])
 
@@ -61,7 +67,7 @@ const page = async ({ params: { genre }, searchParams }: { params: { genre: stri
                     }
                     <Pagination
                         searchParams={searchParams}
-                        totalPages={count}
+                        totalPages={Math.ceil(count/10)}
                     />
                 </div>
             </section>
