@@ -66,41 +66,35 @@ export const CreateSeedData = async () => {
 
 
 const movieData = {
-    title: 'Mad Max: Fury Road',
-    slug: 'mad-max-fury-road',
+    title: 'The Lord of the Rings: The Fellowship of the Ring',
+    slug: 'the-lord-of-the-rings-the-fellowship-of-the-ring',
     languageId: 2, // English language id
-    bgposter: 'https://image.tmdb.org/t/p/w500/hA2ple9q4qnwxp3hKVNhroipsir.jpg',
-    wideposter: 'https://media.themoviedb.org/t/p/original/gqrnQA6Xppdl8vIb2eJc58VC1tW.jpg',
-    description: `In a post-apocalyptic wasteland, Max teams up with Furiosa to escape a tyrant and his army in a high-octane road battle across the desert.`,
-    rating: 8.1,
-    duration: 120, // Duration in minutes
-    year: 2015,
-    youtubelink: 'https://www.youtube.com/embed/hEJnMQG9ev8',
+    bgposter: 'https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg',
+    wideposter: 'https://image.tmdb.org/t/p/original/x2RS3uTcsJJ9IfjNPcgDmukoEcQ.jpg',
+    description: `In a small village in the Shire, a young hobbit named Frodo Baggins inherits a mysterious ring from his uncle Bilbo. With the help of his friends and the wizard Gandalf, Frodo embarks on a perilous journey to destroy the ring in the fires of Mount Doom, where it was forged, to prevent the dark lord Sauron from reclaiming it.`,
+    rating: 8.8,
+    duration: 178, // Duration in minutes
+    year: 2001,
+    youtubelink: 'https://www.youtube.com/embed/V75dMMIW2B4',
     status: 'available',
-    genreId: 6, // Action genre id
-    categoryId: 5, // TV Shows category id
-    watchlink: 'https://www.hbomax.com/series/urn:hbo:series:GXw70awAuMx2EwgEAAALF',
+    genreId: 12, // Fantasy genre id
+    categoryId: 3, // Bollywood category id (for this example, can be changed)
+    watchlink: 'https://www.hbo.com/the-lord-of-the-rings-the-fellowship-of-the-ring',
     resolutions: [
-      {
-        size: 1080,
-        link: 'https://example.com/download/mad-max-fury-road_1080p.mp4',
-        resType: 'HD',
-      },
-      {
-        size: 720,
-        link: 'https://example.com/download/mad-max-fury-road_720p.mp4',
-        resType: 'HD',
-      },
-      {
-        size: 480,
-        link: 'https://example.com/download/mad-max-fury-road_480p.mp4',
-        resType: 'SD',
-      },
+        {
+            size: 1080,
+            link: 'https://example.com/download/the_lord_of_the_rings_fellowship_1080p.mp4',
+            resType: 'HD',
+        },
+        {
+            size: 720,
+            link: 'https://example.com/download/the_lord_of_the_rings_fellowship_720p.mp4',
+            resType: 'HD',
+        },
     ],
-  };
-  
-  
-  
+};
+
+
 
 export const CreateMovie = async () => {
     try {
@@ -154,6 +148,91 @@ export const CreateMovie = async () => {
         return {
             success: true,
             movie: newMovie,
+        };
+    } catch (error: any) {
+        console.error('Error creating movie:', error);
+        return {
+            success: false,
+            error: error.message,
+        };
+    }
+};
+
+
+export const CreateSerieAndEpisodes = async () => {
+    // Create a DownloadLink with Resolutions
+    try {
+        // Create a DownloadLink with Resolutions
+        const downloadLink = await prisma.downloadLink.create({
+            data: {
+                resolutions: {
+                    create: [
+                        {
+                            size: 720, // Size in pixels
+                            link: 'https://example.com/download/the-wire-720p',
+                            resType: 'HD', // Resolution type
+                        },
+                        {
+                            size: 1080, // Size in pixels
+                            link: 'https://example.com/download/the-wire-1080p',
+                            resType: 'Full HD', // Resolution type
+                        },
+                    ],
+                },
+            },
+        });
+
+        // Create the Serie
+        const serie = await prisma.serie.create({
+            data: {
+                title: 'The Wire',
+                slug: 'the-wire',
+                languageId: 2, // English language id
+                bgposter: 'https://image.tmdb.org/t/p/w500/4lbclFySvugI51fwsyxBTOm4DqK.jpg', // Background poster
+                wideposter: 'https://image.tmdb.org/t/p/original/oggnxmvofLtGQvXsO9bAFyCj3p6.jpg', // Wide poster
+                description: 'Set in Baltimore, this show centers on the citys drug scene from the perspective of both law enforcement and drug dealers.',
+                rating: 9.3,
+                year: 2002,
+                youtubelink: 'https://www.youtube.com/embed/81OEmp1-PrA', // Trailer link
+                status: 'completed',
+                genreId: 11, // Crime genre id
+                categoryId: 5, // TV Shows category id
+                episodes: { // Create associated episodes
+                    create: [
+                        {
+                            title: 'The Target',
+                            slug: 'the-target',
+                            duration: 60,
+                            status: 'available',
+                            downloadlinkId: downloadLink.id, // Link to download
+                            watchlink: 'https://example.com/watch/the-target',
+                        },
+                        {
+                            title: 'The Detail',
+                            slug: 'the-detail',
+                            duration: 60,
+                            status: 'available',
+                            downloadlinkId: downloadLink.id, // Link to download
+                            watchlink: 'https://example.com/watch/the-detail',
+                        },
+                        {
+                            title: 'The Buys',
+                            slug: 'the-buys',
+                            duration: 60,
+                            status: 'available',
+                            downloadlinkId: downloadLink.id, // Link to download
+                            watchlink: 'https://example.com/watch/the-buys',
+                        },
+                    ],
+                },
+            },
+        });
+
+
+
+        return {
+            success: true,
+            serie: serie,
         };
     } catch (error: any) {
         console.error('Error creating movie:', error);
