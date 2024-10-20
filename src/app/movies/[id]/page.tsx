@@ -92,7 +92,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                             </div>
                         </div>
                         {/* <a target='_blank' href={movie.watchlink }> */}
-                        <a target='_blank' href={''}>
+                        <a target='_blank' href={movie.watchlink}>
                             <button className='w-full bg-[#1c252f] duration-200 hover:bg-[#6a7c8f] mt-[8px] text-white border-none p-[12px] cursor-pointer rounded-[8px]'>
                                 Click to watch online
                             </button>
