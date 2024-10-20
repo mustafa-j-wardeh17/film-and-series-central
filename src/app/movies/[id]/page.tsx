@@ -164,12 +164,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                         </td>
                                         <td className='inline-block mr-[10px]'>{movie.language.name}</td>
                                     </tr>
-                                    <tr className='block my-[15px] '>
-                                        <td className='uppercase inline-block mr-[10px]'>
-                                            &#9642; Size :
-                                        </td>
-                                        <td className='inline-block mr-[10px]'>{movie.downloadLink.resolutions.map(movie => movie.size)}</td>
-                                    </tr>
+
                                     <tr className='block my-[15px] '>
                                         <td className='uppercase inline-block mr-[10px]'>
                                             &#9642; Quality :
