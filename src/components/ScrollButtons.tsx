@@ -20,13 +20,13 @@ const ScrollButtons = ({ type }: { type: string }) => {
         <div className='flex relative'>
             <button
                 onClick={scrollLeft}
-                className='absolute left-0 top-0 py-[4px] px-[20px] border-[2px] border-solid border-[#ff0000b4] bg-transparent outline-none text-white w-[120px] rounded-[20px] font-sans font-semibold text-[20px] cursor-pointer transition-all duration-300 hover:bg-[#6a7c8f] hover:border-[2px] hover:border-[#ff000054]'
+                className='absolute left-0 top-0 py-[4px] px-[20px] border-[2px] border-solid border-[#ff0000b4] bg-transparent outline-none text-white w-[120px] rounded-[20px] font-sans font-semibold text-[20px] cursor-pointer transition-all duration-200 hover:bg-neutral-900 hover:border-[2px] hover:border-[#ff000054]'
             >
                 &#8592;
             </button>
             <button
                 onClick={scrollRight}
-                className='absolute right-0 top-0 py-[4px] px-[20px] border-[2px] border-solid border-[#ff0000b4] bg-transparent outline-none text-white w-[120px] rounded-[20px] font-sans font-semibold text-[20px] cursor-pointer transition-all duration-300 hover:bg-[#6a7c8f] hover:border-[2px] hover:border-[#ff000054]'
+                className='absolute right-0 top-0 py-[4px] px-[20px] border-[2px] border-solid border-[#ff0000b4] bg-transparent outline-none text-white w-[120px] rounded-[20px] font-sans font-semibold text-[20px] cursor-pointer transition-all duration-200 hover:bg-neutral-900 hover:border-[2px] hover:border-[#ff000054]'
             >
                 &#8594;
             </button>
