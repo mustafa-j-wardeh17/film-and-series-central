@@ -24,7 +24,13 @@ const Bollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
             skip: ((Number(searchParams.page) || 1) - 1) * 10,
             take: 10
         }),
-        prisma.mediaContent.count()
+        prisma.mediaContent.count({
+            where: {
+                category: {
+                    name: 'bollywood'
+                }
+            }
+        })
 
     ])
     return (
@@ -55,7 +61,7 @@ const Bollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                     }
                     <Pagination
                         searchParams={searchParams}
-                        totalPages={count}
+                        totalPages={Math.ceil(count/10)}
                     />
                 </div>
             </section>

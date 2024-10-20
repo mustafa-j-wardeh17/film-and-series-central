@@ -50,7 +50,7 @@ const Movies = async ({ searchParams }: { searchParams: { [key: string]: string 
                     }
                     <Pagination
                         searchParams={searchParams}
-                        totalPages={count}
+                        totalPages={Math.ceil(count/10)}
                     />
                 </div>
             </section>
