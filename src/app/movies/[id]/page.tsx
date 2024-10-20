@@ -160,6 +160,12 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                     </tr>
                                     <tr className='block my-[15px] '>
                                         <td className='uppercase inline-block mr-[10px]'>
+                                            &#9642; Duration :
+                                        </td>
+                                        <td className='inline-block mr-[10px] '>{Math.floor(movie.duration / 60)}h {movie.duration - (Math.floor(movie.duration / 60) * 60)}m</td>
+                                    </tr>
+                                    <tr className='block my-[15px] '>
+                                        <td className='uppercase inline-block mr-[10px]'>
                                             &#9642; Language :
                                         </td>
                                         <td className='inline-block mr-[10px]'>{movie.language.name}</td>
