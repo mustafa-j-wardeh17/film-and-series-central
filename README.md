@@ -58,4 +58,12 @@ To get started with Film & Series Central locally, follow these steps:
    npm run dev
    ```
 
+## Contributing
 
+Contributions are welcome! If you’d like to contribute, please fork the repository and create a pull request. Ensure that your code adheres to the project's coding standards and passes all tests.
+
+## Acknowledgments
+
+- **Prisma** for making database interactions easy and efficient.
+- **Supabase** for providing a powerful backend solution.
+- **Next.js** for enabling a smooth and performant frontend experience.
