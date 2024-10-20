@@ -20,7 +20,7 @@ Welcome to Film & Series Central – your ultimate destination for discovering, 
 - **Deployment**: Easily deployable on platforms like Vercel, ensuring quick and reliable access for users.
 
 
-### Database Schema
+## Database Schema
 
 The backend uses **Prisma ORM** to manage the database schema. This includes models for **movies**, **series**, and other key entities in the site.
 
@@ -29,5 +29,33 @@ The backend uses **Prisma ORM** to manage the database schema. This includes mod
 <img src="./public/schema.png" alt="Database Schema" style="width:100vw; height:125vh;">
 
 <p>This image gives an overview of the relationships between different models in the system.</p>
+
+
+
+## Installation
+
+To get started with Film & Series Central locally, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/film-and-series-central.git
+   ```
+
+2. **Navigate to the project directory**:
+   ```bash
+   cd film-and-series-central
+   ```
+
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+4. **Set up environment variables**: Create a .env file in the root directory and configure your database connection string and other necessary variables.
+
+5. **Run the development server**:
+    ```bash
+   npm run dev
+   ```
 
 
