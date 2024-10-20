@@ -38,7 +38,7 @@ To get started with Film & Series Central locally, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/film-and-series-central.git
+   git clone https://github.com/mustafa-j-wardeh17/film-and-series-central.git
    ```
 
 2. **Navigate to the project directory**:
