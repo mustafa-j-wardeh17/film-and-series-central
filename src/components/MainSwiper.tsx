@@ -96,8 +96,8 @@ const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
                                             />
                                         </div>
                                         <div className='p-2 text-white'>
-                                            <h1 className='md:text-[40px] text-[24px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>{item.title}</h1>
-                                            <h6 className=' text-[13px] md:mb-[10px]  transition-'>Duration: <span className='text-white/70'>{(item.duration / 60).toFixed(2)} h</span></h6>
+                                            <h1 className='md:text-[40px] 3xs:text-[24px] 4xs:text-[22px] text-[19px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>{item.title}</h1>
+                                            <h6 className=' text-[13px] md:mb-[10px]  '>Duration: <span className='text-white/70'>{(item.duration / 60).toFixed(2)} h</span></h6>
                                             <h3 className='flex md:gap-2 gap-1 items-center text-white sm:text-xs text-[12px] md:text-sm'>
                                                 <span className='text-yellow-500'>&#9733;</span>
                                                 {item.rating}
