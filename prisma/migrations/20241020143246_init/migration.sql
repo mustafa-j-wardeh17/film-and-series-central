@@ -16,6 +16,7 @@ CREATE TABLE "MediaContent" (
     "genreId" INTEGER NOT NULL,
     "downloadlinkId" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
+    "watchlink" TEXT NOT NULL,
 
     CONSTRAINT "MediaContent_pkey" PRIMARY KEY ("id")
 );
@@ -50,6 +51,7 @@ CREATE TABLE "Episode" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "downloadlinkId" INTEGER NOT NULL,
     "serieId" INTEGER NOT NULL,
+    "watchlink" TEXT NOT NULL,
 
     CONSTRAINT "Episode_pkey" PRIMARY KEY ("id")
 );
@@ -91,6 +93,7 @@ CREATE TABLE "Resolution" (
     "size" DOUBLE PRECISION NOT NULL,
     "link" TEXT NOT NULL,
     "downloadLinkId" INTEGER NOT NULL,
+    "resType" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

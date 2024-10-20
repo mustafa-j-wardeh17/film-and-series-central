@@ -9,9 +9,9 @@ datasource db {
 }
 
 model MediaContent {
-  id             Int      @id @default(autoincrement())
+  id             Int          @id @default(autoincrement())
   title          String
-  slug           String   @unique
+  slug           String       @unique
   languageId     Int
   bgposter       String
   wideposter     String
@@ -21,16 +21,16 @@ model MediaContent {
   year           Int
   youtubelink    String
   status         String
-  createdAt      DateTime @default(now())
+  createdAt      DateTime     @default(now())
   genreId        Int
   downloadlinkId Int
   categoryId     Int
-
+  watchlink      String
   // Relations
-  language     Language     @relation(fields: [languageId], references: [id])
-  genre        Genre        @relation(fields: [genreId], references: [id])
-  downloadLink DownloadLink @relation(fields: [downloadlinkId], references: [id])
-  category     Category     @relation(fields: [categoryId], references: [id])
+  language       Language     @relation(fields: [languageId], references: [id])
+  genre          Genre        @relation(fields: [genreId], references: [id])
+  downloadLink   DownloadLink @relation(fields: [downloadlinkId], references: [id])
+  category       Category     @relation(fields: [categoryId], references: [id])
 }
 
 model Serie {
@@ -67,6 +67,7 @@ model Episode {
   createdAt      DateTime @default(now())
   downloadlinkId Int
   serieId        Int // Add this field for the relationship with Serie
+  watchlink      String
 
   downloadLink DownloadLink @relation(fields: [downloadlinkId], references: [id])
   serie        Serie        @relation(fields: [serieId], references: [id]) // Define relation to Serie
@@ -108,7 +109,7 @@ model Resolution {
   link           String
   downloadLink   DownloadLink @relation(fields: [downloadLinkId], references: [id])
   downloadLinkId Int
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  resType        String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }

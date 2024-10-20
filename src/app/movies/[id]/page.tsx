@@ -53,7 +53,6 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
         })
     ])
     if (!movie) notFound()
-    console.log(movie)
     return (
         <div className=''>
             <div className='slideimagebx'>
@@ -92,7 +91,8 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                 </button>
                             </div>
                         </div>
-                        <a target='_blank' href={``}>
+                        {/* <a target='_blank' href={movie.watchlink }> */}
+                        <a target='_blank' href={''}>
                             <button className='w-full bg-[#1c252f] duration-200 hover:bg-[#6a7c8f] mt-[8px] text-white border-none p-[12px] cursor-pointer rounded-[8px]'>
                                 Click to watch online
                             </button>
@@ -116,10 +116,12 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                     <div className='flex flex-col border-t-[1px] border-[#333] py-[10px] gap-2'>
                         <h3 className='text-[#6a7c8f] font-semibold uppercase'>QUALITY</h3>
                         <h4 className='text-xs text-[#ffffff9a] uppercase'>
-                            {Object.keys(movie.downloadLink)
-                                .map((key) => key.match(/\d+[pk]/i))
-                                .filter(Boolean)
-                                .join(' || ')}
+                            {
+                                movie.downloadLink.resolutions.map(link => (
+                                    link.size + "p "
+                                )).join()
+                                    .replaceAll(',', ' || ')
+                            }
                         </h4>
                     </div>
                 </div>
@@ -174,10 +176,10 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                         </td>
                                         <td className='inline-block mr-[10px]'>
                                             {
-                                                Object.keys(movie.downloadLink)
-                                                    .map((key) => key.match(/\d+[pk]/i))
-                                                    .filter(Boolean)
-                                                    .join(' || ')
+                                                movie.downloadLink.resolutions.map(link => (
+                                                    link.size + "p "
+                                                )).join()
+                                                    .replaceAll(',', ' || ')
                                             }
                                         </td>
                                     </tr>
@@ -202,22 +204,14 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                         <section className='mt-[30px]'>
                             <h2 className='bg-[#6abf6059] block text-[#ffffffd2] text-center rounded-[10px] p-[10px]'>G-Drive [GDTot] Download Links</h2>
                             <div className='flex flex-col gap-[30px] mt-[30px]'>
-                                {/* {
-                                    Object.keys(movie.downloadLink)
-                                        .map((key) => key.match(/\d+[pk]/i))
-                                        .filter(Boolean)
-                                        .map((key, idx) => (
-                                            <a target='_blank' href={
-                                                idx == 0
-                                                    ? movie.downloadLink.
-                                                    : idx == 1
-                                                        ? movie.downloadLink.resolution_720p
-                                                        : idx == 2
-                                                            ? movie.downloadLink.resolution_1080p
-                                                            : movie.downloadLink.resolution_4k
-                                            } className='bg-[#6a7c8f29] text-[#ffffffd2] p-[10px] text-center rounded-[10px] w-[80%] m-auto transition duration-200 hover:bg-[#6a7c8f] hover:shadow-red hover:text-white hover:font-semibold'>Download {key}</a>
+                                {
+                                    movie.downloadLink.resolutions
+                                        .map((resolutions, idx) => (
+                                            <a target='_blank'
+                                                key={idx}
+                                                href={resolutions.link} className='bg-[#6a7c8f29] text-[#ffffffd2] p-[10px] text-center rounded-[10px] w-[80%] m-auto transition duration-200 hover:bg-[#6a7c8f] hover:shadow-red hover:text-white hover:font-semibold'>Download {resolutions.size}</a>
                                         ))
-                                } */}
+                                }
 
                             </div>
                         </section>

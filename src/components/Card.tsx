@@ -15,6 +15,7 @@ const Card = ({ movie, large = false }: { movie: CatSwiperProps, large?: boolean
                         src={movie.bgposter}
                         alt={`${movie.id} poster`}
                         fill
+                        className='object-cover'
                     />
                 </div>
                 <div className='w-full h-[15%] mt-[5px]'>
