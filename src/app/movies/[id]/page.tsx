@@ -228,48 +228,52 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                     </div>
                 </div>
             </div>
-            <div className='relative mx-auto md:max-w-[1200px] w-[95%]'>
-                <h3 className='text-[#6a7c8f]'> LATEST MOVIES :</h3>
-                <div className='related mt-[20px] flex overflow-x-auto scroll-smooth hide-scrollbar gap-[20px] transition-all duration-500 ease-linear '>
-                    {
-                        latestMovies.map((movie) => (
-                            <div key={movie.id} className={`max-w-[200px] min-w-[200px] h-[340px]`}>
+            {
+                latestMovies.length > 0 && (
+                    <div className='relative mx-auto md:max-w-[1200px] w-[95%]'>
+                        <h3 className='text-[#6a7c8f]'> LATEST MOVIES :</h3>
+                        <div className='related mt-[20px] flex overflow-x-auto scroll-smooth hide-scrollbar gap-[20px] transition-all duration-500 ease-linear '>
+                            {
+                                latestMovies.map((movie) => (
+                                    <div key={movie.id} className={`max-w-[200px] min-w-[200px] h-[340px]`}>
 
-                                <Link
-                                    href={`/movies/${movie.slug} `}
-                                >
-                                    <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[80%] rounded-[8px] overflow-hidden'>
-                                        <Image
-                                            src={movie.bgposter}
-                                            alt={`${movie} poster`}
-                                            fill
-                                        />
-                                    </div>
-                                    <div className='w-full h-[15%] mt-[5px]'>
-                                        <h5 className='overflow-ellipsis text-nowrap font-bold overflow-hidden text-[14px]'>{movie.title}</h5>
-                                        <h6 className='flex items-center justify-between text-[13px] py-[2px]'>
-                                            <span className='text-[12px] text-neutral-400'>{movie.year}</span>
-                                            <div className='flex items-center'>
-                                                <i className='mr-[7px] mt-[5px] w-[10px] text-[9px] text-[#ffffff80]'>
-                                                    <FaHeart />
-                                                </i>
-                                                <i className='mr-[7px] mt-[5px] w-[10px] text-[9px] text-[#ffffff80]'>
-                                                    <FaEye />
-                                                </i>
-                                                <i className='mr-[7px] mt-[5px] w-[10px] text-[9px] text-[#ffffff80]'>
-                                                    <FaStar />
-                                                </i>
-                                                <h6 className='text-[13px] text-yellow-500 mt-[3px] '>{movie.rating}</h6>
+                                        <Link
+                                            href={`/movies/${movie.slug} `}
+                                        >
+                                            <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[80%] rounded-[8px] overflow-hidden'>
+                                                <Image
+                                                    src={movie.bgposter}
+                                                    alt={`${movie} poster`}
+                                                    fill
+                                                />
                                             </div>
-                                        </h6>
+                                            <div className='w-full h-[15%] mt-[5px]'>
+                                                <h5 className='overflow-ellipsis text-nowrap font-bold overflow-hidden text-[14px]'>{movie.title}</h5>
+                                                <h6 className='flex items-center justify-between text-[13px] py-[2px]'>
+                                                    <span className='text-[12px] text-neutral-400'>{movie.year}</span>
+                                                    <div className='flex items-center'>
+                                                        <i className='mr-[7px] mt-[5px] w-[10px] text-[9px] text-[#ffffff80]'>
+                                                            <FaHeart />
+                                                        </i>
+                                                        <i className='mr-[7px] mt-[5px] w-[10px] text-[9px] text-[#ffffff80]'>
+                                                            <FaEye />
+                                                        </i>
+                                                        <i className='mr-[7px] mt-[5px] w-[10px] text-[9px] text-[#ffffff80]'>
+                                                            <FaStar />
+                                                        </i>
+                                                        <h6 className='text-[13px] text-yellow-500 mt-[3px] '>{movie.rating}</h6>
+                                                    </div>
+                                                </h6>
+                                            </div>
+                                        </Link>
                                     </div>
-                                </Link>
-                            </div>
-                        ))
-                    }
-                </div>
-                <ScrollButtons type={'related'} />
-            </div>
+                                ))
+                            }
+                        </div>
+                        <ScrollButtons type={'related'} />
+                    </div>
+                )
+            }
         </div>
     )
 }
