@@ -9,11 +9,10 @@ export const metadata: Metadata = {
 };
 const Series = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
     const [allData, count] = await prisma.$transaction([
-        prisma.mediaContent.findMany({
+        prisma.serie.findMany({
             include: {
                 genre: true,
                 category: true,
-                downloadLink: true,
                 language: true,
             },
             skip: ((Number(searchParams.page) || 1) - 1) * 10,
