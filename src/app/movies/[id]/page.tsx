@@ -60,23 +60,23 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                     src={movie?.wideposter}
                     alt={`${{ id }} `}
                     fill
-                    className='object-cover'
+                    className='object-fill'
                 />
             </div>
             <div className='relative lg:max-w-[1200px] mx-auto h-auto bg-[#111010] rounded-[20px] outline-none mt-[-100px] flex lg:flex-row flex-wrap z-[3] flex-col max-w-[720px]'>
                 <div className='lg:w-[35%] w-[100%] h-full rounded-tl-[20px] rounded-bl-[20px] p-[30px]'>
                     <div className='rounded-[8px] w-[100%]  xs:w-[250px] relative min-h-[400px] max-h-hidden overflow-hidden '>
-                        <div className='relative w-full h-[400px]'>
+                        <div className='relative lg:h-[400px] h-[400px]  w-full'>
                             <Image
                                 src={movie?.bgposter}
                                 alt={`${movie.id} movie`}
                                 fill
-                                className='min-h-[400px] aspect-[1/1.5]'
+                                className='lg:min-h-[400px]  object-fill'
                                 loading='lazy'
                             />
                         </div>
                         <div className='w-full mt-[-4px]  '>
-                            <div className='flex items-center justify-between w-full bg-[#1c252f] p-[16px] pt-[25px] rounded-br-[8px] rounded-bl-[8px]'>
+                            <div className='flex items-center justify-between w-full bg-[#14171b] p-[16px] pt-[25px] rounded-br-[8px] rounded-bl-[8px]'>
                                 <button className='flex duration-200 hover:text-white/80 items-center gap-[5px] bg-transparent border-none text-white cursor-pointer rounded-br-[8px] rounded-bl-[8px] flex-col '>
                                     <FaBookmark className='w-[15px]' />Watchlist
                                 </button>
@@ -93,7 +93,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                         </div>
                         {/* <a target='_blank' href={movie.watchlink }> */}
                         <a target='_blank' href={movie.watchlink}>
-                            <button className='w-full bg-[#1c252f] duration-200 hover:bg-[#6a7c8f] mt-[8px] text-white border-none p-[12px] cursor-pointer rounded-[8px]'>
+                            <button className='w-full bg-[#14171b] duration-200 hover:bg-[#6a7c8f] mt-[8px] text-white border-none p-[12px] cursor-pointer rounded-[8px]'>
                                 Click to watch online
                             </button>
                         </a>
