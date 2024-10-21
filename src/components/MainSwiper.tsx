@@ -82,7 +82,7 @@ const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
                                     alt={`movie-${item.id}`}
                                     loading='lazy'
                                     fill
-                                    className='object-fill absolute left-0 top-0 z-[-1]'
+                                    className='aspect-[1.5/1] absolute left-0 top-0 z-[-1]'
                                 />
                                 {/* content */}
                                 <div className='absolute lg:top-[60%]  sm:top-[55%] top-[50%]  left-[3%] h-auto z-[2]'>
@@ -92,12 +92,12 @@ const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
                                                 src={item.bgposter}
                                                 alt={`movie ${item.id} poster`}
                                                 fill
-                                                className='object-cover '
+                                                className='aspect-[1/1.5] '
                                             />
                                         </div>
                                         <div className='p-2 text-white'>
                                             <h1 className='md:text-[40px] 3xs:text-[24px] 4xs:text-[22px] text-[19px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>{item.title}</h1>
-                                            <h6 className=' text-[13px] md:mb-[10px]  '>Duration: <span className='text-white/70'>{(item.duration / 60).toFixed(2)} h</span></h6>
+                                            <h6 className=' text-[13px] md:mb-[10px]  '>Duration: <span className='text-white/70'>{Math.floor((item.duration / 60))}h {item.duration - (Math.floor(item.duration / 60) * 60)}m</span></h6>
                                             <h3 className='flex md:gap-2 gap-1 items-center text-white sm:text-xs text-[12px] md:text-sm'>
                                                 <span className='text-yellow-500'>&#9733;</span>
                                                 {item.rating}
