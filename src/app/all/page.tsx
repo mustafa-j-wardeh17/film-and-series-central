@@ -51,7 +51,7 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
                     <h1 className='text-[48px] capitalize'>All Movies & Series</h1>
-                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explosive stunts, intense battles, and adrenaline-pumping thrills. Heros face danger head-on, showcasing their skills in action-packed spectacles that leave audiences on the edge.</p>
+                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explore our extensive collection of movies and series, featuring diverse genres that cater to all tastes. From heart-pounding thrillers and laugh-out-loud comedies to thought-provoking dramas, find your next favorite watch and immerse yourself in captivating storytelling.</p>
                 </div>
             </section>
 

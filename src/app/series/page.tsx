@@ -26,7 +26,7 @@ const Series = async ({ searchParams }: { searchParams: { [key: string]: string 
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
                     <h1 className='text-[48px] capitalize'>Series</h1>
-                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explosive stunts, intense battles, and adrenaline-pumping thrills. Heros face danger head-on, showcasing their skills in action-packed spectacles that leave audiences on the edge.</p>
+                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Discover a wide range of TV series, from gripping dramas and thrilling mysteries to captivating comedies and epic adventures. Whether binge-worthy hits or classic favorites, our series collection offers something for every taste, genre, and mood.</p>
                 </div>
             </section>
 

@@ -27,7 +27,7 @@ const Movies = async ({ searchParams }: { searchParams: { [key: string]: string 
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
                     <h1 className='text-[48px] capitalize'>Movies</h1>
-                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explosive stunts, intense battles, and adrenaline-pumping thrills. Heros face danger head-on, showcasing their skills in action-packed spectacles that leave audiences on the edge.</p>
+                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explore a diverse collection of movies, spanning genres from action and drama to comedy and fantasy. Dive into captivating stories, breathtaking visuals, and unforgettable performances with the latest blockbusters, timeless classics, and critically acclaimed films from around the world.</p>
                 </div>
             </section>
 

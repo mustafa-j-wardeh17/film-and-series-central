@@ -72,7 +72,7 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
                     <h1 className='text-[48px] capitalize'>Hollywood</h1>
-                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explosive stunts, intense battles, and adrenaline-pumping thrills. Heros face danger head-on, showcasing their skills in action-packed spectacles that leave audiences on the edge.</p>
+                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Discover the best of Hollywood with an extensive collection of blockbuster movies and acclaimed series. From action-packed adventures to gripping dramas, explore the iconic storytelling, star-studded performances, and cinematic masterpieces that define Hollywood entertainment.</p>
                 </div>
             </section>
 
