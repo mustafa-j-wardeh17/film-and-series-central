@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   const skip = (currentPage - 1) * (type === 'all' ? 5 : 10);
 
   const { MainSwiperMovies, categorySwiperMovies, pageData,
-    totalData } = await HomeData(type, skip, filter)
+    totalData } = await HomeData(type, skip,swiper, filter)
 
 
   const newLinkBySearchParams = (target: string, type: 'swiper' | 'type' | 'filter') => {

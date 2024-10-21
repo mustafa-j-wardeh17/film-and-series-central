@@ -245,7 +245,7 @@ export const CreateSerieAndEpisodes = async () => {
 };
 
 
-export const HomeData = async (type: string, skip: number, filter: string) => {
+export const HomeData = async (type: string, skip: number, swiper: string, filter: string) => {
     // 1- <MainSwiperMovies>
     const MainSwiperMovies = await prisma.mediaContent.findMany({
         include: {
@@ -257,15 +257,70 @@ export const HomeData = async (type: string, skip: number, filter: string) => {
         take: 4,
     })
     // 2- <categorySwiperMovies>
-    const categorySwiperMovies = await prisma.mediaContent.findMany({
-        include: {
-            genre: true,
-            category: true,
-            downloadLink: true,
-            language: true,
-        },
-        take: 10,
-    })
+    const categorySwiperMovies =
+        swiper === 'movies'
+            ? (
+                await prisma.mediaContent.findMany({
+                    include: {
+                        genre: true,
+                        category: true,
+                        language: true,
+                    },
+                    take: 10,
+                })
+            )
+            : swiper === 'series'
+                ? (
+                    await prisma.serie.findMany({
+                        include: {
+                            genre: true,
+                            category: true,
+                            language: true,
+                        },
+                        take: 10,
+                    })
+                )
+                : await (async () => {
+                    const moviesAll = await prisma.mediaContent.findMany({
+                        include: {
+                            genre: true,
+                            category: true,
+                            language: true,
+                        },
+                        take: 5,
+
+                        orderBy:
+                            swiper === 'latest' ?
+                                {
+                                    year: 'desc',
+                                }
+                                : {
+                                    createdAt: 'desc'
+                                },
+                    });
+
+                    const seriesAll = await prisma.serie.findMany({
+                        include: {
+                            genre: true,
+                            category: true,
+                            language: true,
+                        },
+                        take: 5,
+                        orderBy:
+                            swiper === 'latest' ?
+                                {
+                                    year: 'desc',
+                                }
+                                : {
+                                    createdAt: 'desc'
+                                },
+                    });
+                    const data = [
+                        ...moviesAll.map(movie => ({ ...movie, type: 'movie' })),
+                        ...seriesAll.map((serie) => ({ ...serie, type: 'serie' }))]
+                    return RandomArray(data);
+                })();
+
 
     // 3- Movie conditional query <movieData>
     const moviesData = type === "movies" || type === 'all'
