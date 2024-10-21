@@ -242,3 +242,138 @@ export const CreateSerieAndEpisodes = async () => {
         };
     }
 };
+
+
+export const HomeData = async (type: string, skip: number, filter: string) => {
+    // 1- <MainSwiperMovies>
+    const MainSwiperMovies = await prisma.mediaContent.findMany({
+        include: {
+            genre: true,
+            category: true,
+            downloadLink: true,
+            language: true,
+        },
+        take: 4,
+    })
+    // 2- <categorySwiperMovies>
+    const categorySwiperMovies = await prisma.mediaContent.findMany({
+        include: {
+            genre: true,
+            category: true,
+            downloadLink: true,
+            language: true,
+        },
+        take: 10,
+    })
+
+    // 3- Movie conditional query <movieData>
+    const moviesData = type === "movies" || type === 'all'
+        ? await prisma.mediaContent.findMany({
+            where: filter
+                ? {
+                    OR: [
+                        { category: { name: { contains: filter, mode: "insensitive" } } },
+                        { genre: { name: { contains: filter, mode: "insensitive" } } },
+                    ],
+                }
+                : {}, // Fetch all data if filter is empty
+            select: {
+                id: true,
+                title: true,
+                bgposter: true,
+                slug: true,
+                year: true,
+                rating: true, // Assuming `rating` is stored as a number
+            },
+
+            skip,
+            take: type === 'all' ? 5 : 10, // Take 5 if 'all', otherwise 10
+        })
+        : []
+
+    // 4- Serie conditional query <serieData>
+    const seriesData = type === "series" || type === 'all'
+        ? await prisma.serie.findMany({
+            where: filter
+                ? {
+                    OR: [
+                        { category: { name: { contains: filter, mode: "insensitive" } } },
+                        { genre: { name: { contains: filter, mode: "insensitive" } } },
+                    ],
+                }
+                : {}, // Fetch all data if filter is empty
+
+            select: {
+                id: true,
+                title: true,
+                bgposter: true,
+                slug: true,
+                year: true,
+                rating: true, // Assuming `rating` is stored as a number
+            },
+
+            skip,
+            take: type === 'all' ? 5 : 10, // Take 5 if 'all', otherwise 10
+        })
+        : []
+
+    // 5- Count based on type <movieCount>
+    const movieCount = type === "movies" || type === 'all'
+        ? await prisma.mediaContent.count({
+            where: filter
+                ? {
+                    OR: [
+                        { category: { name: { contains: filter, mode: "insensitive" } } },
+                        { genre: { name: { contains: filter, mode: "insensitive" } } },
+                    ],
+                }
+                : {}, // Count all if no filter
+        })
+        : 0
+
+    // 6- Count based on type <serieCount>
+    const serieCount = type === "series" || type === 'all'
+        ? await prisma.serie.count({
+            where: filter
+                ? {
+                    OR: [
+                        { category: { name: { contains: filter, mode: "insensitive" } } },
+                        { genre: { name: { contains: filter, mode: "insensitive" } } },
+                    ],
+                }
+                : {}, // Count all if no filter
+        })
+        : 0
+
+
+    // Merge moviesData and seriesData if 'type' is 'all'
+    let pageData: {
+        id: number;
+        title: string;
+        slug: string;
+        bgposter: string;
+        rating: number;
+        year: number;
+    }[] = []; // Define the type for pageData
+
+    if (type === 'all') {
+        pageData = [...moviesData, ...seriesData]; // Ensure both are awaited
+    } else if (type === 'movies') {
+        pageData = moviesData;
+    } else if (type === 'series') {
+        pageData = seriesData;
+    }
+    // Sum the totals if type is 'all'
+    const totalData = type === 'all'
+        ? movieCount + serieCount // Sum of both movies and series counts
+        : type === 'movie'
+            ? movieCount // Only movie count
+            : serieCount; // Only series count
+
+    return {
+        MainSwiperMovies,
+        categorySwiperMovies,
+        pageData,
+        totalData
+    }
+}

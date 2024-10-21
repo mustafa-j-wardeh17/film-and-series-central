@@ -7,118 +7,19 @@ import Link from "next/link";
 import { FaAngleDoubleUp, FaCheck, FaFilm, FaPhotoVideo, FaPlus, FaStar } from "react-icons/fa";
 import { FaClapperboard } from "react-icons/fa6";
 import prisma from "../../lib/prisma";
+import { HomeData } from "../../lib/actions";
 
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const filter = searchParams?.filter?.toLocaleLowerCase() || "";
-  const type = searchParams?.type?.toLocaleLowerCase() || "movie";
+  const type = searchParams?.type?.toLocaleLowerCase() || "all";
 
   const currentPage = Number(searchParams.page) || 1;
-  const skip = (currentPage - 1) * 10;
+  const skip = (currentPage - 1) * (type === 'all' ? 5 : 10);
 
-  const [MainSwiperMovies, categorySwiperMovies, pageData, totalData] = await prisma.$transaction([
-    prisma.mediaContent.findMany({
-      include: {
-        genre: true,
-        category: true,
-        downloadLink: true,
-        language: true,
-      },
-      take: 4,
-    }),
-    prisma.mediaContent.findMany({
-      include: {
-        genre: true,
-        category: true,
-        downloadLink: true,
-        language: true,
-      },
-      take: 10,
-    }),
+  const { MainSwiperMovies, categorySwiperMovies, pageData,
+    totalData } = await HomeData(type, skip, filter)
 
-    // Movie or Serie conditional query
-    type === "movie"
-      ? prisma.mediaContent.findMany({
-        where: filter
-          ? {
-            OR: [
-              { category: { name: { contains: filter, mode: "insensitive" } } },
-              { genre: { name: { contains: filter, mode: "insensitive" } } },
-            ],
-          }
-          : {}, // Fetch all data if filter is empty
-        include: {
-          genre: true,
-          category: true,
-          downloadLink: true,
-          language: true,
-        },
-        skip,
-        take: 10,
-      })
-      : type === "serie"
-        ? prisma.serie.findMany({
-          where: filter
-            ? {
-              OR: [
-                { category: { name: { contains: filter, mode: "insensitive" } } },
-                { genre: { name: { contains: filter, mode: "insensitive" } } },
-              ],
-            }
-            : {}, // Fetch all data if filter is empty
-          include: {
-            genre: true,
-            category: true,
-            language: true,
-          },
-          skip,
-          take: 10,
-        })
-        :prisma.serie.findMany({
-          where: filter
-            ? {
-              OR: [
-                { category: { name: { contains: filter, mode: "insensitive" } } },
-                { genre: { name: { contains: filter, mode: "insensitive" } } },
-              ],
-            }
-            : {}, // Fetch all data if filter is empty
-          include: {
-            genre: true,
-            category: true,
-            language: true,
-          },
-          skip,
-          take: 10,
-        })
-        ,
-
-    // Count based on type
-    type === "movie"
-      ? prisma.mediaContent.count({
-        where: filter
-          ? {
-            OR: [
-              { category: { name: { contains: filter, mode: "insensitive" } } },
-              { genre: { name: { contains: filter, mode: "insensitive" } } },
-            ],
-          }
-          : {}, // Count all if no filter
-      })
-      : prisma.serie.count({
-        where: filter
-          ? {
-            OR: [
-              { category: { name: { contains: filter, mode: "insensitive" } } },
-              { genre: { name: { contains: filter, mode: "insensitive" } } },
-            ],
-          }
-          : {}, // Count all if no filter
-      }),
-  ]);
-
-
-  console.log(totalData, Math.ceil(totalData / 10))
   return (
     <div className="max-w-screen relative ">
       <MainSwiper movies={MainSwiperMovies} />
@@ -176,8 +77,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
             <Link
-              href={'/?type=movie'}
-              className={`${type === 'movie' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={'/?type=movies'}
+              className={`${type === 'movies' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaPhotoVideo size={14} /></i>
               <p>Movies</p>
@@ -220,6 +121,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
       <CategoryGenreFilter
         searchParams={searchParams}
         movies={pageData}
+        type={type}
       />
       <Pagination
         searchParams={searchParams}
