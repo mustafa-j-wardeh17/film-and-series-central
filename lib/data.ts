@@ -1,5 +1,19 @@
 export const categories = ["bollywood", "hollywood", "south", "gujarati", "marvel_studio", "tv_shows", "web_series"]
 export const genres = ['comedy','thriller','adventure','animation','drama','fantasy','horror','mystery','romantic','action','crime','science_fiction']
+export const genresWithDescriptions = [
+    { genre: 'comedy', description: 'Designed to entertain and amuse with lighthearted, humorous content.' },
+    { genre: 'thriller', description: 'Intense and suspenseful, often involving high-stakes and unexpected twists.' },
+    { genre: 'adventure', description: 'Focuses on exciting, action-filled journeys and explorations.' },
+    { genre: 'animation', description: 'Utilizes animated visuals to tell imaginative stories across various genres.' },
+    { genre: 'drama', description: 'Emphasizes emotional narratives, character development, and realistic situations.' },
+    { genre: 'fantasy', description: 'Features magical, mythical, or supernatural elements set in imaginative worlds.' },
+    { genre: 'horror', description: 'Aims to evoke fear and suspense, often involving supernatural or terrifying scenarios.' },
+    { genre: 'mystery', description: 'Centers on solving puzzles or uncovering secrets, often with a detective or investigator.' },
+    { genre: 'romantic', description: 'Focuses on love stories and emotional relationships between characters.' },
+    { genre: 'action', description: 'Characterized by dynamic sequences, physical feats, and high-energy scenes.' },
+    { genre: 'crime', description: 'Explores criminal activity, law enforcement, and moral dilemmas surrounding justice.' },
+    { genre: 'science_fiction', description: 'Speculative content based on futuristic technology, space exploration, and scientific advancements.' }
+];
 export const movies = [
     {
         id: 1,

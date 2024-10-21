@@ -1,6 +1,7 @@
 import Genrecard from '@/components/Genrecard';
 import { Metadata } from 'next';
 import React from 'react'
+import { genresWithDescriptions } from '../../../lib/data';
 
 export const metadata: Metadata = {
     title: 'Genre'
@@ -19,73 +20,73 @@ const Genre = () => {
                     link={'/genre/action'}
                     img='/img/action.jpg'
                     title='Action Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'action')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/adventure'}
                     img='/img/adventure.jpg'
                     title='Adventure Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'adventure')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/animation'}
                     img='/img/animation.jpg'
                     title='Animation Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'animation')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/comedy '}
                     img='/img/comedy.jpg'
                     title='Comedy  Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'comedy')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/crime '}
                     img='/img/crime.jpg'
                     title='Crime  Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'crime')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/drama '}
                     img='/img/drama.jpg'
                     title='Drama  Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'drama')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/fantasy '}
                     img='/img/fantasy.jpg'
                     title='Fantasy Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'fantasy')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/horror '}
                     img='/img/horror.jpg'
                     title='Horror Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'horror')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/mystery '}
                     img='/img/mystery.jpg'
                     title='Mystery Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'mystery')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/romance '}
                     img='/img/romantic.jpg'
                     title='Romantic Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'romantic')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/science_fiction '}
                     img='/img/scifi.jpg'
                     title='Sci-fi Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'science_fiction')?.description ||''}
                 />
                 <Genrecard
                     link={'/genre/thriller '}
                     img='/img/thriller.jpg'
                     title='Thriller Movies'
-                    description='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto, laborum!'
+                    description={genresWithDescriptions.find(g => g.genre === 'thriller')?.description ||''}
                 />
             </section>
         </>
