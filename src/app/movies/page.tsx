@@ -39,7 +39,7 @@ const Movies = async ({ searchParams }: { searchParams: { [key: string]: string 
                             allData.map(movie => (
                                 <Card
                                     key={movie.id}
-                                    movie={movie}
+                                    media={movie}
                                     large={true}
                                 />
                             ))
@@ -50,7 +50,7 @@ const Movies = async ({ searchParams }: { searchParams: { [key: string]: string 
                     }
                     <Pagination
                         searchParams={searchParams}
-                        totalPages={Math.ceil(count/10)}
+                        totalPages={Math.ceil(count / 10)}
                     />
                 </div>
             </section>
