@@ -13,7 +13,7 @@ const Genre = () => {
                 <div className='flex gap-[20px] flex-col'>
                     <h1 className='text-[48px] capitalize'>Explore by Genre</h1>
                     <p className='text-[18px] text-[#999] w-full md:w-[60%]'>
-                        Discover a diverse range of movies and series tailored to your favorite genres. Whether you're into action, comedy, drama, or fantasy, explore an extensive collection curated to match your entertainment preferences.
+                        Discover a diverse range of movies and series tailored to your favorite genres. Whether you&apos;re into action, comedy, drama, or fantasy, explore an extensive collection curated to match your entertainment preferences.
                     </p>
                 </div>
             </section>

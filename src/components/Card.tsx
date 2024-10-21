@@ -27,7 +27,7 @@ const Card = ({ media, large = false, serie }: { media: CatSwiperProps, large?: 
                         src={media?.bgposter}
                         alt={`${media?.id} poster`}
                         fill
-                        className='object-cover'
+                        className='aspect-[1/1.5]'
                     />
                     {media?.type === 'serie' && (
                         <div className='absolute z-[60] top-[20px] -left-[10px]  px-4 py-1 rounded-md  bg-black flex items-center justify-center '>

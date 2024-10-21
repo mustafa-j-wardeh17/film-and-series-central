@@ -71,7 +71,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                 src={movie?.bgposter}
                                 alt={`${movie.id} movie`}
                                 fill
-                                className='object-cover min-h-[400px]'
+                                className='min-h-[400px] aspect-[1/1.5]'
                                 loading='lazy'
                             />
                         </div>
