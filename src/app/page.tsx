@@ -6,13 +6,13 @@ import Pagination from "@/components/Pagination";
 import Link from "next/link";
 import { FaAngleDoubleUp, FaCheck, FaFilm, FaPhotoVideo, FaPlus, FaStar } from "react-icons/fa";
 import { FaClapperboard } from "react-icons/fa6";
-import prisma from "../../lib/prisma";
 import { HomeData } from "../../lib/actions";
 
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const filter = searchParams?.filter?.toLocaleLowerCase() || "";
-  const type = searchParams?.type?.toLocaleLowerCase() || "all";
+  const type = searchParams?.type?.toLocaleLowerCase() || "movies";
+  const swiper = searchParams?.swiper?.toLocaleLowerCase() || "latest";
 
   const currentPage = Number(searchParams.page) || 1;
   const skip = (currentPage - 1) * (type === 'all' ? 5 : 10);
@@ -20,6 +20,20 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   const { MainSwiperMovies, categorySwiperMovies, pageData,
     totalData } = await HomeData(type, skip, filter)
 
+
+  const newLinkBySearchParams = (target: string, type: 'swiper' | 'type' | 'filter') => {
+    let url = '/?'
+    if (type === 'swiper') {
+      if (searchParams.type) url += `type=${searchParams.type}&`
+      if (searchParams.filter) url += `filter=${searchParams.filter}&`
+    }
+    if (type === 'type') {
+      if (searchParams.swiper) url += `swiper=${searchParams.swiper}&`
+    }
+    url += `${target}`
+    return url
+
+  }
   return (
     <div className="max-w-screen relative ">
       <MainSwiper movies={MainSwiperMovies} />
@@ -27,8 +41,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
             <Link
-              href={'/all'}
-              className={`${true ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams('swiper=latest', 'swiper')}
+              className={`${swiper === 'latest' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaAngleDoubleUp size={14} /></i>
               <p>Latest</p>
@@ -37,8 +51,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           </li>
           <li>
             <Link
-              href={'/movies'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams('swiper=movies', 'swiper')}
+              className={`${swiper === 'movies' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaFilm size={14} /></i>
               <p>Movies</p>
@@ -47,8 +61,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           </li>
           <li>
             <Link
-              href={'/series'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams('swiper=series', 'swiper')}
+              className={`${swiper === 'series' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaStar size={14} /></i>
               <p>Series</p>
@@ -58,8 +72,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
 
           <li>
             <Link
-              href={'/recently'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams('swiper=recently', 'swiper')}
+              className={`${swiper === 'recently' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaPlus size={14} /></i>
               <p>Recently Added</p>
@@ -77,7 +91,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
             <Link
-              href={'/?type=movies'}
+              href={newLinkBySearchParams('type=movies', 'type')}
               className={`${type === 'movies' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaPhotoVideo size={14} /></i>
@@ -87,7 +101,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           </li>
           <li>
             <Link
-              href={'/?type=series'}
+              href={newLinkBySearchParams('type=series', 'type')}
               className={`${type === 'series' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaFilm size={14} /></i>
@@ -97,7 +111,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           </li>
           <li>
             <Link
-              href={'/?type=all'}
+              href={newLinkBySearchParams('type=all', 'type')}
               className={`${type === 'all' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
               <i><FaCheck size={14} /></i>
