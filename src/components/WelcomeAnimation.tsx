@@ -5,33 +5,33 @@ const WelcomeAnimation = ({ onAnimationEnd }: { onAnimationEnd: () => void }) =>
 
     useEffect(() => {
         const video = document.getElementById('video') as HTMLVideoElement;
-        const animationDuration = 1000; 
+        const animationDuration = 1000;
+
+        const handleVideoEnd = () => {
+            setFadeOut(true);
+            setTimeout(() => {
+                onAnimationEnd();
+            }, animationDuration);
+        };
 
         if (video) {
-            video.addEventListener('ended', () => {
-                setFadeOut(true); 
-                setTimeout(() => {
-                    onAnimationEnd(); 
-                }, animationDuration); 
-            });
+            video.addEventListener('ended', handleVideoEnd);
 
             return () => {
-                video.removeEventListener('ended', () => {
-                    setFadeOut(true);
-                });
+                video.removeEventListener('ended', handleVideoEnd);
             };
         }
     }, [onAnimationEnd]);
 
     return (
         <div
-            className={`relative flex items-center justify-center min-h-screen w-full z-[-1] mt-[-58px] transition-opacity duration-1000 ${
-                fadeOut ? 'opacity-0' : 'opacity-100'
-            }`}
+            className={`relative flex items-center justify-center min-h-screen w-full z-[-1] mt-[-58px] transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'
+                }`}
         >
             <video
                 autoPlay
                 muted
+                playsInline // autoplay on mobile
                 id='video'
                 className="absolute top-0 left-0 w-full h-full object-cover"
             >
