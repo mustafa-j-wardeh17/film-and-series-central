@@ -16,7 +16,7 @@ const Footer = () => {
                                     href={'/'}
                                     className=" hover:text-[#ff0000b4] text-red-500 "
                                 >
-                                    Makemovies
+                                    Cinema Center
                                 </Link>
                             </h1>
                         </div>
@@ -87,7 +87,7 @@ const Footer = () => {
                                 className="text-red-500 hover:border-b-[1px] hover:border-red-500"
                                 href={'/'}
                             >
-                                Makemovies
+                                Cinema-Center
                             </Link>
                         </p>
                     </div>

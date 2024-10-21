@@ -4,16 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import 'swiper/css';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules'
-import Card from './Card';
-export interface CatSwiperProps {
-    id: number;
-    title: string;
-    bgposter: string;
-    slug: string;
-    year: number;
-    rating: number;
-    type?: 'serie' | 'movie'
-}
+import Card, { CatSwiperProps } from './Card';
+
 const CatSwiper = ({ movies }: { movies: CatSwiperProps[] }) => {
     return (
         <Swiper
@@ -84,11 +76,11 @@ const CatSwiper = ({ movies }: { movies: CatSwiperProps[] }) => {
 
             <div className='flex overflow-x-scroll scroll-smooth gap-[20px] duration-500'>
                 {
-                    movies.map((movie: CatSwiperProps) => (
+                    movies.map((movie: CatSwiperProps,idx:number) => (
                         <SwiperSlide
-                            key={movie.id}
+                            key={idx}
                         >
-                            <Card movie={movie} />
+                            <Card media={movie} />
                         </SwiperSlide>
                     ))
                 }

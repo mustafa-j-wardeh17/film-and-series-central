@@ -3,28 +3,57 @@ import React from 'react'
 import prisma from '../../../lib/prisma';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
+import { RandomArray } from '../../../lib/util';
 export const metadata: Metadata = {
     title: 'Bollywood'
 };
 
 const Bollywood = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
-    const [allData, count] = await prisma.$transaction([
+
+    const skip = ((Number(searchParams.page) || 1) - 1) * 5
+    const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
         prisma.mediaContent.findMany({
+            select: {
+                id: true,
+                title: true,
+                bgposter: true,
+                slug: true,
+                year: true,
+                rating: true
+            },
+            skip,
+            take: 5,
             where: {
                 category: {
                     name: 'bollywood'
                 }
+            }
+        }),
+        prisma.serie.findMany({
+            select: {
+                id: true,
+                title: true,
+                bgposter: true,
+                slug: true,
+                year: true,
+                rating: true
             },
-            include: {
-                genre: true,
-                category: true,
-                downloadLink: true,
-                language: true,
-            },
-            skip: ((Number(searchParams.page) || 1) - 1) * 10,
-            take: 10
+            skip,
+            take: 5,
+            where: {
+                category: {
+                    name: 'bollywood'
+                }
+            }
         }),
         prisma.mediaContent.count({
+            where: {
+                category: {
+                    name: 'bollywood'
+                }
+            }
+        }),
+        prisma.serie.count({
             where: {
                 category: {
                     name: 'bollywood'
@@ -33,11 +62,16 @@ const Bollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
         })
 
     ])
+    const allData = RandomArray([
+        ...moviesData.map((serie) => ({ ...serie, type: 'movie' })),
+        ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))
+    ])
+    const count = movieCount + serieCount
     return (
         <>
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
-                    <h1 className='text-[48px] capitalize'>Series</h1>
+                    <h1 className='text-[48px] capitalize'>Bollywood</h1>
                     <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explosive stunts, intense battles, and adrenaline-pumping thrills. Heros face danger head-on, showcasing their skills in action-packed spectacles that leave audiences on the edge.</p>
                 </div>
             </section>
@@ -50,7 +84,7 @@ const Bollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                             allData.map((movie) => (
                                 <Card
                                     key={movie.id}
-                                    movie={movie}
+                                    media={movie}
                                     large={true}
                                 />
                             ))
@@ -61,7 +95,7 @@ const Bollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                     }
                     <Pagination
                         searchParams={searchParams}
-                        totalPages={Math.ceil(count/10)}
+                        totalPages={Math.ceil(count / 10)}
                     />
                 </div>
             </section>

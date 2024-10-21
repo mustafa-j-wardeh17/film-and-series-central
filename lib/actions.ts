@@ -255,6 +255,9 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
             language: true,
         },
         take: 4,
+        orderBy: {
+            rating: 'desc'
+        }
     })
     // 2- <categorySwiperMovies>
     const categorySwiperMovies =

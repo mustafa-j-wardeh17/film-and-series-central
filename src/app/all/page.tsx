@@ -3,27 +3,49 @@ import React from 'react'
 import prisma from '../../../lib/prisma';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
+import { RandomArray } from '../../../lib/util';
 
 export const metadata: Metadata = {
     title: 'All Movies & Series'
 };
 
 const All = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
-    const [allData, count] = await prisma.$transaction([
+
+    const skip = ((Number(searchParams.page) || 1) - 1) * 5
+    const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
         prisma.mediaContent.findMany({
-            include: {
-                genre: true,
-                category: true,
-                downloadLink: true,
-                language: true,
+            select: {
+                id: true,
+                title: true,
+                bgposter: true,
+                slug: true,
+                year: true,
+                rating: true
             },
-            skip: ((Number(searchParams.page) || 1) - 1) * 10,
-            take: 10
+            skip,
+            take: 5
         }),
-        prisma.mediaContent.count()
+        prisma.serie.findMany({
+            select: {
+                id: true,
+                title: true,
+                bgposter: true,
+                slug: true,
+                year: true,
+                rating: true
+            },
+            skip,
+            take: 5
+        }),
+        prisma.mediaContent.count(),
+        prisma.serie.count()
 
     ])
-
+    const allData = RandomArray([
+        ...moviesData.map((serie) => ({ ...serie, type: 'movie' })),
+        ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))
+    ])
+    const count = movieCount + serieCount
     return (
         <>
             <section className='my-[60px] mx-[45px] text-white'>
@@ -38,10 +60,10 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
                     {
                         allData.length > 0
                             ?
-                            allData.map(movie => (
+                            allData.map((media, idx) => (
                                 <Card
-                                    key={movie.id}
-                                    movie={movie}
+                                    key={idx}
+                                    media={media}
                                     large={true}
                                 />
                             ))
@@ -52,7 +74,7 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
                     }
                     <Pagination
                         searchParams={searchParams}
-                        totalPages={Math.ceil(count/10)}
+                        totalPages={Math.ceil(count / 10)}
                     />
                 </div>
             </section>

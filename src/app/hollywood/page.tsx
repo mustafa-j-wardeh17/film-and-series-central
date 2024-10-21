@@ -3,28 +3,57 @@ import React from 'react'
 import prisma from '../../../lib/prisma';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
+import { RandomArray } from '../../../lib/util';
 
 export const metadata: Metadata = {
     title: 'Hollywood'
 };
 const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
-    const [allData, count] = await prisma.$transaction([
+
+    const skip = ((Number(searchParams.page) || 1) - 1) * 5
+    const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
         prisma.mediaContent.findMany({
+            select: {
+                id: true,
+                title: true,
+                bgposter: true,
+                slug: true,
+                year: true,
+                rating: true
+            },
+            skip,
+            take: 5,
             where: {
                 category: {
                     name: 'hollywood'
                 }
+            }
+        }),
+        prisma.serie.findMany({
+            select: {
+                id: true,
+                title: true,
+                bgposter: true,
+                slug: true,
+                year: true,
+                rating: true
             },
-            include: {
-                genre: true,
-                category: true,
-                downloadLink: true,
-                language: true,
-            },
-            skip: ((Number(searchParams.page) || 1) - 1) * 10,
-            take: 10
+            skip,
+            take: 5,
+            where: {
+                category: {
+                    name: 'hollywood'
+                }
+            }
         }),
         prisma.mediaContent.count({
+            where: {
+                category: {
+                    name: 'hollywood'
+                }
+            }
+        }),
+        prisma.serie.count({
             where: {
                 category: {
                     name: 'hollywood'
@@ -33,6 +62,11 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
         })
 
     ])
+    const allData = RandomArray([
+        ...moviesData.map((serie) => ({ ...serie, type: 'movie' })),
+        ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))
+    ])
+    const count = movieCount + serieCount
     return (
         <>
             <section className='my-[60px] mx-[45px] text-white'>
@@ -50,7 +84,7 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                             allData.map(movie => (
                                 <Card
                                     key={movie.id}
-                                    movie={movie}
+                                    media={movie}
                                     large={true}
                                 />
                             ))

@@ -90,15 +90,15 @@ export default function Header({ allData }: { allData: any[] }) {
         setSearchBar(false)
     }
     return <>
-        <nav className="header md:px-[30px] px-[2px]">
+        <nav className="header pb-2 md:px-[30px] px-[2px]">
             <h1
                 className="logo "
-                data-text="&nbsp;Makmovies&nbsp;"
+                data-text="&nbsp;Cinema Center&nbsp;"
             >
                 <a
                     href="/"
                 >
-                    &nbsp;Makmovies&nbsp;
+                    &nbsp;Cinema Center&nbsp;
                 </a>
             </h1>
 
@@ -171,12 +171,12 @@ export default function Header({ allData }: { allData: any[] }) {
                     <div className="flex justify-between relative items-center w-full">
                         <h1
                             className="logo"
-                            data-text="&nbsp;Makmovies&nbsp;"
+                            data-text="&nbsp;Cinema Center&nbsp;"
                         >
                             <a
                                 href="/"
                             >
-                                &nbsp;Makmovies&nbsp;
+                                &nbsp;Cinema Center&nbsp;
                             </a>
                         </h1>
                         <div

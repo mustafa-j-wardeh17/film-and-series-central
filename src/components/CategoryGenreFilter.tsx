@@ -3,17 +3,9 @@ import React from 'react'
 import { categories, genres } from '../../lib/data'
 import { useRouter } from 'next/navigation'
 
-import Card from './Card'
+import Card, { CatSwiperProps } from './Card'
 
-export interface CatSwiperProps {
-    id: number;
-    title: string;
-    bgposter: string;
-    slug: string;
-    year: number;
-    rating: number;
-    type?: 'serie'|'movie'
-}
+
 
 const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data: CatSwiperProps[], searchParams: { [key: string]: string | undefined } }) => {
     // we will pass search params from home page to access filter by genres
@@ -51,8 +43,8 @@ const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data:
             {/* Movies Section */}
             <div className='my-[30px] md:w-[80%] w-[90%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
                 {data.length > 0
-                    ? data.map((movie: CatSwiperProps) => (
-                        <Card key={movie.id}  movie={movie} large={true} />
+                    ? data.map((movie: CatSwiperProps, idx: number) => (
+                        <Card key={idx} media={movie} large={true} />
                     ))
                     : (
                         <h1 className='text-red-500 text-[35px]'>{
