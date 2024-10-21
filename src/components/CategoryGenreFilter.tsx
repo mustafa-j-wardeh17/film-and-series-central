@@ -12,10 +12,10 @@ export interface CatSwiperProps {
     slug: string;
     year: number;
     rating: number;
-    duration?: number
+    type?: 'serie'|'movie'
 }
 
-const CategoryGenreFilter = ({ searchParams, type, movies }: { type: string, movies: CatSwiperProps[], searchParams: { [key: string]: string | undefined } }) => {
+const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data: CatSwiperProps[], searchParams: { [key: string]: string | undefined } }) => {
     // we will pass search params from home page to access filter by genres
     const router = useRouter()
     const handleFilter = (item: string) => {
@@ -50,9 +50,9 @@ const CategoryGenreFilter = ({ searchParams, type, movies }: { type: string, mov
 
             {/* Movies Section */}
             <div className='my-[30px] md:w-[80%] w-[90%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
-                {movies.length > 0
-                    ? movies.map((movie: CatSwiperProps) => (
-                        <Card key={movie.id} movie={movie} large={true} />
+                {data.length > 0
+                    ? data.map((movie: CatSwiperProps) => (
+                        <Card key={movie.id} type={movie.type} movie={movie} large={true} />
                     ))
                     : (
                         <h1 className='text-red-500 text-[35px]'>{

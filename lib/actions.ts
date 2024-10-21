@@ -357,7 +357,9 @@ export const HomeData = async (type: string, skip: number, filter: string) => {
     }[] = []; // Define the type for pageData
 
     if (type === 'all') {
-        pageData = [...moviesData, ...seriesData]; // Ensure both are awaited
+        pageData = [
+            ...moviesData.map(movie => ({ ...movie, type: 'movie' })),
+            ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))]; // Ensure both are awaited
     } else if (type === 'movies') {
         pageData = moviesData;
     } else if (type === 'series') {

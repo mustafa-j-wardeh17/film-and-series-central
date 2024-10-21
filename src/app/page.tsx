@@ -120,7 +120,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
       </div>
       <CategoryGenreFilter
         searchParams={searchParams}
-        movies={pageData}
+        data={pageData}
         type={type}
       />
       <Pagination
