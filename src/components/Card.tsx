@@ -4,7 +4,7 @@ import React from 'react'
 import { FaEye, FaHeart, FaStar } from 'react-icons/fa'
 import { CatSwiperProps } from './CatSwiper'
 
-const Card = ({ type, movie, large = false }: { type?: 'serie' | 'movie', movie: CatSwiperProps, large?: boolean }) => {
+const Card = ({ movie, large = false }: { movie: CatSwiperProps, large?: boolean }) => {
     return (
         <div className={`${large ? 'lg:w-[260px]  min-w-[200px] lg:h-[400px] md:w-[200px] md:h-[300px] sm:w-[230px] sm:h-[340px] 2xs:w-[180px] 2xs:h-[320px] w-[85%] h-[450px]' : 'lg:w-[200px] lg:h-[300px] md:w-[187px] md:h-[280px]  sm:h-[230px] sm:w-[160px] 3xs:w-[150px] 4xs:w-[200px] 4xs:h-[270px] 300:w-[150px] 300:h-[240px]'}`}>
             <Link
@@ -17,6 +17,11 @@ const Card = ({ type, movie, large = false }: { type?: 'serie' | 'movie', movie:
                         fill
                         className='object-cover'
                     />
+                    {movie.type === 'serie' && (
+                        <div className='absolute z-[60] top-[20px] -left-[10px]  px-4 py-1 rounded-md  bg-black flex items-center justify-center '>
+                            <h3 className='capitalize text-[14px]'>{movie.type}</h3>
+                        </div>
+                    )}
                 </div>
                 <div className='w-full h-[15%] mt-[5px]'>
                     <h5 className='overflow-ellipsis text-nowrap font-bold overflow-hidden text-[14px]'>{movie.title}</h5>
@@ -33,10 +38,10 @@ const Card = ({ type, movie, large = false }: { type?: 'serie' | 'movie', movie:
                                 <FaStar />
                             </i>
                             <h6 className='text-[13px] text-yellow-500 mt-[3px] '>{movie.rating}</h6>
-                            {/* <h3>{type==='serie'&&'serie'}</h3> */}
                         </div>
                     </h6>
                 </div>
+
             </Link>
         </div>
     )

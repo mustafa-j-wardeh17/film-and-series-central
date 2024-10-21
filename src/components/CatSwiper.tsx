@@ -12,6 +12,7 @@ export interface CatSwiperProps {
     slug: string;
     year: number;
     rating: number;
+    type?: 'serie' | 'movie'
 }
 const CatSwiper = ({ movies }: { movies: CatSwiperProps[] }) => {
     return (

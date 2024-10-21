@@ -1,6 +1,7 @@
 'use server';
 
 import prisma from "./prisma";
+import { RandomArray } from "./util";
 
 const Genres = [
     'comedy', 'thriller', 'adventure', 'animation', 'drama',
@@ -360,6 +361,8 @@ export const HomeData = async (type: string, skip: number, filter: string) => {
         pageData = [
             ...moviesData.map(movie => ({ ...movie, type: 'movie' })),
             ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))]; // Ensure both are awaited
+        pageData = RandomArray(pageData);
+
     } else if (type === 'movies') {
         pageData = moviesData;
     } else if (type === 'series') {
