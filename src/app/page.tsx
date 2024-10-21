@@ -74,7 +74,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           skip,
           take: 10,
         })
-        : prisma.serie.findMany({
+        :prisma.serie.findMany({
           where: filter
             ? {
               OR: [
@@ -90,25 +90,8 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           },
           skip,
           take: 10,
-        }),
-    prisma.mediaContent.findMany({
-      where: filter
-        ? {
-          OR: [
-            { category: { name: { contains: filter, mode: "insensitive" } } },
-            { genre: { name: { contains: filter, mode: "insensitive" } } },
-          ],
-        }
-        : {}, // Fetch all data if filter is empty
-      include: {
-        genre: true,
-        category: true,
-        language: true,
-      },
-      skip,
-      take: 10,
-    })
-    ,
+        })
+        ,
 
     // Count based on type
     type === "movie"
@@ -122,38 +105,16 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           }
           : {}, // Count all if no filter
       })
-      : type === 'serie'
-        ? prisma.serie.count({
-          where: filter
-            ? {
-              OR: [
-                { category: { name: { contains: filter, mode: "insensitive" } } },
-                { genre: { name: { contains: filter, mode: "insensitive" } } },
-              ],
-            }
-            : {}, // Count all if no filter
-        })
-        :
-        prisma.serie.count({
-          where: filter
-            ? {
-              OR: [
-                { category: { name: { contains: filter, mode: "insensitive" } } },
-                { genre: { name: { contains: filter, mode: "insensitive" } } },
-              ],
-            }
-            : {}, // Count all if no filter
-        }),
-    prisma.mediaContent.count({
-      where: filter
-        ? {
-          OR: [
-            { category: { name: { contains: filter, mode: "insensitive" } } },
-            { genre: { name: { contains: filter, mode: "insensitive" } } },
-          ],
-        }
-        : {}, // Count all if no filter
-    }),
+      : prisma.serie.count({
+        where: filter
+          ? {
+            OR: [
+              { category: { name: { contains: filter, mode: "insensitive" } } },
+              { genre: { name: { contains: filter, mode: "insensitive" } } },
+            ],
+          }
+          : {}, // Count all if no filter
+      }),
   ]);
 
 
