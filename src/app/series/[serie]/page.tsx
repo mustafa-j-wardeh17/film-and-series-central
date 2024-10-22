@@ -5,6 +5,14 @@ import { FaBookmark, FaCheck, FaImdb, FaThumbsDown, FaThumbsUp } from 'react-ico
 import Image from 'next/image'
 import SocialShare from '@/components/SocialShare'
 import SerieCard from '@/components/SerieCard'
+import { Metadata } from 'next'
+import { capitalize } from '../../../../lib/util'
+
+export async function generateMetadata({ params: { serie } }: { params: { serie: string } }): Promise<Metadata> {
+  return {
+    title: capitalize(serie)
+  }
+}
 
 const Serie = async ({ params: { serie }, searchParams }: { params: { serie: string }, searchParams: { [key: string]: string | undefined } }) => {
   const [serieData, latestSeries] = await prisma.$transaction([
