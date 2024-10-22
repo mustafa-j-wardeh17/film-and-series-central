@@ -187,7 +187,7 @@ const Serie = async ({ params: { serie }, searchParams }: { params: { serie: str
       </div>
       <section className='relative mx-auto md:max-w-[1200px] w-[95%]'>
         <h2 className='text-[#6a7c8f] uppercase'>{serieData?.title} <span className='font-bold'>Episeodes</span> :</h2>
-        <div className='flex flex-row flex-wrap gap-[30px] mt-[30px]'>
+        <div className='flex flex-row flex-wrap justify-center gap-[30px] mt-[30px]'>
           {
             serieData?.episodes.map
               ((episode, idx) => (
