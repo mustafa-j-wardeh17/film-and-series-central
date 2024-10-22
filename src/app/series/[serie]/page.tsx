@@ -81,12 +81,7 @@ const Serie = async ({ params: { serie }, searchParams }: { params: { serie: str
                 </button>
               </div>
             </div>
-            {/* <a target='_blank' href={serieData.watchlink }> */}
-            <a target='_blank' href={''}>
-              <button className='w-full bg-[#14171b] duration-200 hover:bg-[#6a7c8f] mt-[8px] text-white border-none p-[12px] cursor-pointer rounded-[8px]'>
-                Click to watch online
-              </button>
-            </a>
+
           </div>
           <div className='flex flex-col border-t-[1px] border-[#333] py-[10px] gap-2 mt-[30px]'>
             <h3 className='text-[#6a7c8f] font-semibold uppercase'>Rating</h3>

@@ -20,9 +20,9 @@ interface dataFromSerieProps {
     serieYear: number;
     serieSlug: string;
 }
-const SerieCard = ({ media, dataFromSerie, type }: { dataFromSerie?: dataFromSerieProps, type: 'episode' | 'series', media: CatSwiperProps }) => {
+const SerieCard = ({ media, dataFromSerie, type }: { dataFromSerie?: dataFromSerieProps, type: 'episode' | 'series' | 'episode-serie', media: CatSwiperProps }) => {
     return (
-        <div key={media.id} className={`max-w-[200px] min-w-[200px] h-[340px]`}>
+        <div key={media.id} className={`${type === 'series'?'max-w-[200px] min-w-[200px] h-[340px]':'3xs:w-[200px] w-full 3xs:h-[340px] h-[400px]'} `}>
 
             <Link
                 href={
@@ -33,7 +33,7 @@ const SerieCard = ({ media, dataFromSerie, type }: { dataFromSerie?: dataFromSer
             >
                 <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[80%] rounded-[8px] overflow-hidden'>
                     <Image
-                        src={(type === 'episode' ? dataFromSerie?.serieImg : media.bgposter) || '/img/img.jpg'}
+                        src={((type === 'episode' || type === 'episode-serie') ? dataFromSerie?.serieImg : media.bgposter) || '/img/img.jpg'}
                         alt={`${media} poster`}
                         fill
                     />
