@@ -112,7 +112,7 @@ const Serie = async ({ params: { serie }, searchParams }: { params: { serie: str
           <p className='text-[20px] font-bold mt-[20px] text-[#3a7c8fca]'> DOWNLOAD FREE NOW</p>
           <div className='text-[#ffffffad] mt-[40px] w-full'>
             <article className='movieinfo'>
-              <h3 className='text-[#008000] font-semibold text-[25px]'>{'Movie'} info : </h3>
+              <h3 className='text-[#008000] font-semibold text-[25px]'>{'Serie'} info : </h3>
               <table>
                 <tbody>
                   <tr className='block my-[15px] '>
@@ -180,6 +180,7 @@ const Serie = async ({ params: { serie }, searchParams }: { params: { serie: str
           </div>
         </div>
       </div>
+      
       <section className='relative mx-auto md:max-w-[1200px] w-[95%]'>
         <h2 className='text-[#6a7c8f] uppercase'>{serieData?.title} <span className='font-bold'>Episeodes</span> :</h2>
         <div className="flex flex-row flex-wrap md:justify-start justify-center gap-6 mt-8">

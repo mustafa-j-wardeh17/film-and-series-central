@@ -1,6 +1,6 @@
 import React from 'react'
 import ScrollButtons from '@/components/ScrollButtons'
-import { FaBookmark, FaCheck, FaImdb, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
+import { FaBookmark, FaCheck, FaImdb, FaPlay, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
 import Image from 'next/image'
 import SocialShare from '@/components/SocialShare'
 import SerieCard from '@/components/SerieCard'
@@ -30,7 +30,12 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                 slug: episode
             },
             include: {
-                downloadLink: true
+                downloadLink: {
+                    include: {
+                        resolutions: true
+                    }
+                },
+
             }
         }),
         prisma.episode.findMany({
@@ -73,8 +78,10 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                     fill
                     className='object-fill'
                 />
+
             </div>
             <div className='relative lg:max-w-[1200px] mx-auto h-auto bg-[#111010] rounded-[20px] outline-none mt-[-100px] flex lg:flex-row flex-wrap z-[3] flex-col max-w-[720px]'>
+                {/* Left Side Details */}
                 <div className='lg:w-[35%] w-[100%] h-full rounded-tl-[20px] rounded-bl-[20px] p-[30px]'>
                     <div className='rounded-[8px] w-[100%]  xs:w-[250px] relative min-h-[400px] max-h-hidden overflow-hidden '>
                         <div className='relative lg:h-[400px] h-[400px]  w-full'>
@@ -85,8 +92,15 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                                 className='lg:min-h-[400px]  object-fill'
                                 loading='lazy'
                             />
-                            <div className='absolute z-[60] top-[20px] -left-[10px]  px-5 py-1 rounded-md  bg-black flex items-center justify-center '>
+                            <div className='absolute z-[10] top-[20px] -left-[10px]  px-5 py-1 rounded-md  bg-black flex items-center justify-center '>
                                 <h3 className='capitalize text-[14px]'>{episodeData?.title}</h3>
+                            </div>
+                            <div className='absolute w-full h-full z-[100] bg-[#111010]/20 flex items-center justify-center'>
+                                <a target='_blank' href={episodeData?.watchlink}>
+                                    <button className=' bg-black/70 hover:bg-black/80 w-[50px] h-[50px] rounded-full flex items-center justify-center'>
+                                        <FaPlay size={24} />
+                                    </button>
+                                </a>
                             </div>
                         </div>
                         <div className='w-full mt-[-4px]  '>
@@ -129,15 +143,17 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                     </div>
                 </div>
 
+                {/* Right Side Details */}
                 <div className='relative lg:w-[65%] w-full h-auto rounded-tl-[20px] rounded-bl-[20px] p-[30px]'>
                     <div className='w-full flex items-center  justify-between'>
                         <h1 className='w-[90%] text-white font-semibold text-[25px]'>{serieData?.title}</h1>
                         <SocialShare />
                     </div>
-                    <p className='text-[20px] font-bold mt-[20px] text-[#3a7c8fca]'> DOWNLOAD FREE NOW</p>
+
+                    {/* Episode Details */}
                     <div className='text-[#ffffffad] mt-[40px] w-full'>
                         <article className='movieinfo'>
-                            <h3 className='text-[#008000] font-semibold text-[25px]'>{'Movie'} info : </h3>
+                            <h3 className='text-[#008000] font-semibold text-[25px]'>{'Episode'} info : </h3>
                             <table>
                                 <tbody>
                                     <tr className='block my-[15px] '>
@@ -166,13 +182,6 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                                         <td className='inline-block mr-[10px]'>{serieData?.language?.name}</td>
                                     </tr>
 
-
-                                    <tr className='block my-[15px] '>
-                                        <td className='uppercase inline-block mr-[10px]'>
-                                            &#9642; Number of episodes :
-                                        </td>
-                                        <td className='inline-block mr-[10px]'>{serieData?.episodes?.length}</td>
-                                    </tr>
                                     <tr className='block my-[15px] '>
                                         <td className='uppercase inline-block mr-[10px]'>
                                             &#9642; Format :
@@ -186,7 +195,25 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
 
 
                     </div>
-                    <section className='relative w-full'>
+
+                    {/* Episode Download Links */}
+                    <section className='mt-[30px]'>
+                        <h2 className='bg-[#6abf6059] block text-[#ffffffd2] text-center rounded-[10px] p-[10px]'>G-Drive [GDTot] Download Links</h2>
+                        <div className='flex flex-col gap-[30px] mt-[30px]'>
+                            {
+                                episodeData?.downloadLink.resolutions
+                                    .map((resolutions, idx) => (
+                                        <a target='_blank'
+                                            key={idx}
+                                            href={resolutions.link} className='bg-[#6a7c8f29] text-[#ffffffd2] p-[10px] text-center rounded-[10px] w-[80%] m-auto transition duration-200 hover:bg-[#6a7c8f] hover:shadow-red hover:text-white hover:font-semibold'>Download {resolutions.size}</a>
+                                    ))
+                            }
+
+                        </div>
+                    </section>
+
+                    {/* Serie Other Episodes */}
+                    <section className='relative mt-[70px] w-full'>
                         <h2 className='text-[#6a7c8f] uppercase'>{serieData?.title} <span className='font-bold'>Episeodes</span> :</h2>
                         <div className="flex flex-row flex-wrap md:justify-start justify-center gap-6 mt-8">
                             {
@@ -211,12 +238,11 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                         </div>
                     </section>
                 </div>
-
             </div>
-
+            {/* Latest Movies */}
             {
                 latestSeries.length > 0 && (
-                    <div className='relative mx-auto md:max-w-[1200px] my-[80px] w-[95%]'>
+                    <div className='relative mx-auto  md:max-w-[1200px] my-[80px] w-[95%]'>
                         <h3 className='text-[#6a7c8f]'> LATEST SERIES :</h3>
                         <div className='related mt-[20px] flex overflow-x-auto scroll-smooth hide-scrollbar gap-[20px] transition-all duration-500 ease-linear '>
                             {

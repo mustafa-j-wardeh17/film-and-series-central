@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { FaBookmark, FaCheck, FaEye, FaHeart, FaImdb, FaStar, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
+import { FaBookmark, FaCheck, FaEye, FaHeart, FaImdb, FaPlay, FaStar, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
 import prisma from '../../../../lib/prisma'
 import { notFound } from 'next/navigation'
 import { capitalize } from '../../../../lib/util'
@@ -74,6 +74,13 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                 className='lg:min-h-[400px]  object-fill'
                                 loading='lazy'
                             />
+                            <div className='absolute w-full h-full z-[100] bg-[#111010]/20 flex items-center justify-center'>
+                                <a target='_blank' href={movie?.watchlink}>
+                                    <button className=' bg-black/70 hover:bg-black/80 w-[50px] h-[50px] rounded-full flex items-center justify-center'>
+                                        <FaPlay size={24} />
+                                    </button>
+                                </a>
+                            </div>
                         </div>
                         <div className='w-full mt-[-4px]  '>
                             <div className='flex items-center justify-between w-full bg-[#14171b] p-[16px] pt-[25px] rounded-br-[8px] rounded-bl-[8px]'>
