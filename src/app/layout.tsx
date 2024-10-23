@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -43,6 +44,10 @@ export default async function RootLayout({
   ])
   return (
     <html lang="en">
+      <Head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name="theme-color" content="#111010" media="(prefers-color-scheme: dark)" />
+      </Head>
       <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <link rel="shortcut icon" href="/favicon.ico" />
