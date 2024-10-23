@@ -20,7 +20,6 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   const { MainSwiperMovies, categorySwiperMovies, pageData,
     totalData } = await HomeData(type, skip, swiper, filter)
 
-  console.log(totalData)
   const newLinkBySearchParams = (target: string, type: 'swiper' | 'type' | 'filter') => {
     let url = '/?'
     if (type === 'swiper') {
