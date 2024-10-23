@@ -3,10 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { AiFillSetting } from 'react-icons/ai'
-import { BsTwitter } from 'react-icons/bs'
+import { BsLinkedin, BsTwitter } from 'react-icons/bs'
 import { FaArrowDown, FaFacebook } from 'react-icons/fa'
 import { HiMiniBars3BottomLeft } from 'react-icons/hi2'
 import { IoLogoInstagram } from 'react-icons/io'
+import { LiaLinkedin } from 'react-icons/lia'
 import { RiTelegramLine } from 'react-icons/ri'
 export const metadata: Metadata = {
     title: 'Contact'
@@ -37,38 +38,34 @@ const Contact = () => {
                             <h3 className='font-semibold sm:text-[1.2rem] text-[1.1rem] mb-[35px]'>Full Stack Developer</h3>
                         </div>
                         <div className='flex justify-center gap-[1rem]'>
-                            <Link 
-                            className='hover:scale-110 hover:text-white'
-                            href={'www.fb.com'}>
+                            <Link
+                                className='hover:scale-110 hover:text-white'
+                                href={'https://www.instagram.com/mustafa.j.wardeh17/'}>
                                 <IoLogoInstagram className='text-[1.5rem] ' />
                             </Link>
                             <Link
-                            className='hover:scale-110 hover:text-white'
-                            href={'www.fb.com'}>
+                                className='hover:scale-110 hover:text-white'
+                                href={'https://www.facebook.com/mustafa.j.wardeh17/'}>
                                 <FaFacebook className='text-[1.5rem] ' />
                             </Link>
-                            <Link 
-                            className='hover:scale-110 hover:text-white'
-                            href={'www.fb.com'}>
+                            <Link
+                                className='hover:scale-110 hover:text-white'
+                                href={'https://t.me/KillSwitsh'}>
                                 <RiTelegramLine className='text-[1.5rem] ' />
-                            </Link>
-                            <Link 
-                            className='hover:scale-110 hover:text-white'
-                            href={'www.fb.com'}>
-                                <BsTwitter className='text-[1.5rem] ' />
                             </Link>
                         </div>
                     </div>
                     <div className='absolute w-full h-[180px] bottom-0 bg-white rounded-[30px] flex items-center flex-col justify-center text-center'>
                         <Link
-                            href={'/'}
-                            className='absolute duration-500 hover:bg-[#b43b3b] hover:text-white top-[-30px] left-1/2 transform bg-white -translate-x-1/2 shadow-red text-red-500 py-[1rem] px-[3.5rem] rounded-[30px] text-[1.3rem] font-semibold'
+                            href={'https://www.linkedin.com/in/mustafa-abu-wardeh1720/'}
+                            className='absolute flex items-center justify-center  duration-500 hover:bg-[#b43b3b] hover:text-white top-[-30px] left-1/2 transform bg-white -translate-x-1/2 shadow-red text-red-500 py-[1rem] px-[3.5rem] rounded-[30px] text-[1.3rem] font-semibold'
                         >
-                            Follow
+                            Linked<BsLinkedin />
                         </Link>
-                        <div className='text-[1.2rem] text-[#777] font-semibold flex flex-col items-center gap-[20px]'>
-                            <p className='text-[14px] sm:text-[16px]'>Learn More About My Profile</p>
+                        <div className='text-[1.2rem] text-[#777] font-semibold flex flex-col items-center'>
+                            <p className='text-[14px] sm:text-[16px]'>Call Me</p>
                             <FaArrowDown className='text-[1.2rem] mt-[1rem] text-[#e74444] animate-bounce' />
+                            <a href="tel:+972569470288" className=" hover:text-red-400 text-red-600 duration-300">+972 56 947 0288</a>
                         </div>
                     </div>
                 </div>
