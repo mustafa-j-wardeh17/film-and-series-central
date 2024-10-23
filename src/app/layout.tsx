@@ -45,7 +45,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
       </Head>
       <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
