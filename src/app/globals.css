@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 body {
-    @apply text-white bg-[#111010] transition-all duration-300;
+    color: white;
+    background-color: #111010;
+    transition: all 0.3s ease;
 }
 
 * {
