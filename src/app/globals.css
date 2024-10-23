@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  background-color: #111010; /* Your desired color */
+  padding-top: env(safe-area-inset-top); /* Handle the notch on iOS devices */
+}
+
+meta[name="viewport"] {
+  viewport-fit: cover;
+}
+
 body {
     color: white;
     background-color: #111010;
