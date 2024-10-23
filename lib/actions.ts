@@ -395,7 +395,6 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
                 : {}, // Count all if no filter
         })
         : 0
-
     // 6- Count based on type <serieCount>
     const serieCount = type === "series" || type === 'all' || type === 'rating'
         ? await prisma.serie.count({
@@ -443,7 +442,7 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
     // Sum the totals if type is 'all'
     const totalData = (type === 'all' || type === 'rating')
         ? movieCount + serieCount // Sum of both movies and series counts
-        : type === 'movie'
+        : type === 'movies'
             ? movieCount // Only movie count
             : serieCount; // Only series count
 
