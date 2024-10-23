@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   const skip = (currentPage - 1) * (type === 'all' ? 5 : 10);
 
   const { MainSwiperMovies, categorySwiperMovies, pageData,
-    totalData } = await HomeData(type, skip,swiper, filter)
+    totalData } = await HomeData(type, skip, swiper, filter)
 
 
   const newLinkBySearchParams = (target: string, type: 'swiper' | 'type' | 'filter') => {
@@ -64,7 +64,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
               href={newLinkBySearchParams('swiper=series', 'swiper')}
               className={`${swiper === 'series' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaStar size={14} /></i>
+              <i><FaClapperboard size={14} /></i>
               <p>Series</p>
             </Link>
 
@@ -122,11 +122,11 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
 
           <li>
             <Link
-              href={'/genre'}
-              className={`${false ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams('type=rating', 'type')}
+              className={`${type === 'rating' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaClapperboard size={14} /></i>
-              <p>Genre</p>
+              <i><FaStar size={14} /></i>
+              <p>Rating</p>
             </Link>
 
           </li>

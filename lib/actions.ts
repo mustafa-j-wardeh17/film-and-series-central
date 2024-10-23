@@ -326,7 +326,7 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
 
 
     // 3- Movie conditional query <movieData>
-    const moviesData = type === "movies" || type === 'all'
+    const moviesData = type === "movies" || type === 'all' || type === 'rating'
         ? await prisma.mediaContent.findMany({
             where: filter
                 ? {
@@ -346,12 +346,15 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
             },
 
             skip,
-            take: type === 'all' ? 5 : 10, // Take 5 if 'all', otherwise 10
+            take: type === 'all' || type === 'rating' ? 5 : 10, // Take 5 if 'all', otherwise 10
+            orderBy: type === 'rating'
+                ? { rating: 'desc' }
+                : {}
         })
         : []
 
     // 4- Serie conditional query <serieData>
-    const seriesData = type === "series" || type === 'all'
+    const seriesData = type === "series" || type === 'all' || type === 'rating'
         ? await prisma.serie.findMany({
             where: filter
                 ? {
@@ -372,12 +375,15 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
             },
 
             skip,
-            take: type === 'all' ? 5 : 10, // Take 5 if 'all', otherwise 10
+            take: (type === 'all' || type === 'rating') ? 5 : 10, // Take 5 if 'all', otherwise 10
+            orderBy: type === 'rating'
+                ? { rating: 'desc' }
+                : {}
         })
         : []
 
     // 5- Count based on type <movieCount>
-    const movieCount = type === "movies" || type === 'all'
+    const movieCount = type === "movies" || type === 'all' || type === 'rating'
         ? await prisma.mediaContent.count({
             where: filter
                 ? {
@@ -391,7 +397,7 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
         : 0
 
     // 6- Count based on type <serieCount>
-    const serieCount = type === "series" || type === 'all'
+    const serieCount = type === "series" || type === 'all' || type === 'rating'
         ? await prisma.serie.count({
             where: filter
                 ? {
@@ -415,9 +421,9 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
         year: number;
     }[] = []; // Define the type for pageData
 
-    if (type === 'all') {
+    if (type === 'all' || type === 'rating') {
         pageData = [
-            ...moviesData.map(movie => ({ ...movie, type: 'movie' })),
+            ...moviesData.map((movie) => ({ ...movie, type: 'movie' })),
             ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))]; // Ensure both are awaited
         pageData = RandomArray(pageData);
 
@@ -427,7 +433,7 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
         pageData = seriesData;
     }
     // Sum the totals if type is 'all'
-    const totalData = type === 'all'
+    const totalData = (type === 'all' || type === 'rating')
         ? movieCount + serieCount // Sum of both movies and series counts
         : type === 'movie'
             ? movieCount // Only movie count

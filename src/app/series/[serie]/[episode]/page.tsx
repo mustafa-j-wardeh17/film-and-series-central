@@ -68,7 +68,6 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
             }
         })
     ])
-    console.log(episodeData)
     return (
         <div className=''>
             <div className='slideimagebx'>
