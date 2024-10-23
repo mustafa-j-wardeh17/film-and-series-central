@@ -8,6 +8,7 @@ import { Metadata } from 'next'
 import prisma from '../../../../../lib/prisma'
 import { capitalize } from '../../../../../lib/util'
 import { notFound } from 'next/navigation'
+import ImageWithLoader from '@/components/ImageWithLoader'
 
 export async function generateMetadata({ params: { serie, episode } }: { params: { serie: string, episode: string } }): Promise<Metadata> {
     return {
@@ -75,11 +76,10 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
     return (
         <div className=''>
             <div className='slideimagebx'>
-                <Image
+
+                <ImageWithLoader
                     src={serieData?.wideposter || '/img/img.jpg'}
                     alt={`${serieData?.slug} `}
-                    fill
-                    className='object-fill'
                 />
 
             </div>

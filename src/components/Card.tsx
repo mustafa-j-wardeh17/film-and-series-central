@@ -1,7 +1,9 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { FaEye, FaHeart, FaStar } from 'react-icons/fa'
+import Loader from './Loader';
 
 export interface CatSwiperProps {
     id: number;
@@ -13,6 +15,7 @@ export interface CatSwiperProps {
     type?: 'serie' | 'movie'
 }
 const Card = ({ media, large = false, serie }: { media: CatSwiperProps, large?: boolean, serie?: boolean }) => {
+    const [loader, setloader] = useState(true)
     return (
         <div className={`${large ? 'lg:w-[260px]  min-w-[200px] lg:h-[400px] md:w-[200px] md:h-[300px] sm:w-[230px] sm:h-[340px] 2xs:w-[180px] 2xs:h-[320px] w-[85%] h-[450px]' : 'lg:w-[200px] lg:h-[300px] md:w-[187px] md:h-[280px]  sm:h-[230px] sm:w-[160px] 3xs:w-[150px] 4xs:w-[200px] 4xs:h-[270px] 300:w-[150px] 300:h-[240px]'}`}>
             <Link
@@ -23,12 +26,23 @@ const Card = ({ media, large = false, serie }: { media: CatSwiperProps, large?: 
                 }
             >
                 <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[80%] rounded-[8px] overflow-hidden'>
-                    <Image
+                    {
+                        loader
+                        && (
+                            <div className='absolute left-0 top-0 w-full h-full flex items-center justify-center'>
+                                <Loader /> {/* Show loader while loading */}
+                            </div>
+                        )
+                    }
+                    < Image
                         src={media?.bgposter}
                         alt={`${media?.id} poster`}
                         fill
                         className='aspect-[1/1.5]'
+                        onLoad={() => setloader(false)}
                     />
+
+
                     {media?.type === 'serie' && (
                         <div className='absolute z-[60] top-[20px] -left-[10px]  px-4 py-1 rounded-md  bg-black flex items-center justify-center '>
                             <h3 className='capitalize text-[14px]'>{media?.type}</h3>

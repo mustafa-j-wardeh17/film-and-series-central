@@ -8,6 +8,7 @@ import { FaBookmark, FaCheck, FaEye, FaHeart, FaImdb, FaPlay, FaStar, FaThumbsDo
 import prisma from '../../../../lib/prisma'
 import { notFound } from 'next/navigation'
 import { capitalize } from '../../../../lib/util'
+import ImageWithLoader from '@/components/ImageWithLoader'
 
 export async function generateMetadata(
     { params: { id } }: { params: { id: string } }
@@ -56,11 +57,9 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
     return (
         <div className=''>
             <div className='slideimagebx'>
-                <Image
+                <ImageWithLoader
                     src={movie?.wideposter}
                     alt={`${{ id }} `}
-                    fill
-                    className='object-fill'
                 />
             </div>
             <div className='relative lg:max-w-[1200px] mx-auto h-auto bg-[#111010] rounded-[20px] outline-none mt-[-100px] flex lg:flex-row flex-wrap z-[3] flex-col max-w-[720px]'>

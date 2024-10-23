@@ -8,6 +8,7 @@ import SerieCard from '@/components/SerieCard'
 import { Metadata } from 'next'
 import { capitalize } from '../../../../lib/util'
 import { notFound } from 'next/navigation'
+import ImageWithLoader from '@/components/ImageWithLoader'
 
 export async function generateMetadata({ params: { serie } }: { params: { serie: string } }): Promise<Metadata> {
   return {
@@ -51,12 +52,11 @@ const Serie = async ({ params: { serie }, searchParams }: { params: { serie: str
   return (
     <div className=''>
       <div className='slideimagebx'>
-        <Image
+        <ImageWithLoader
           src={serieData?.wideposter || '/img/img.jpg'}
           alt={`${serieData?.slug} `}
-          fill
-          className='object-fill'
         />
+      
       </div>
       <div className='relative lg:max-w-[1200px] mx-auto h-auto bg-[#111010] rounded-[20px] outline-none mt-[-100px] flex lg:flex-row flex-wrap z-[3] flex-col max-w-[720px]'>
         <div className='lg:w-[35%] w-[100%] h-full rounded-tl-[20px] rounded-bl-[20px] p-[30px]'>

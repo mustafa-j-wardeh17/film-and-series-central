@@ -8,6 +8,7 @@ import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa';
+import Loader from './Loader';
 
 interface MainSwiperProps {
     id: number;
@@ -48,11 +49,13 @@ const MainSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
             {!loading ? <HomeSwiper movies={movies} /> : <WelcomeAnimation onAnimationEnd={handleAnimationEnd} />}
         </div>
     );
+
 };
 
 export default MainSwiper;
 
 const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
+
     return (
         <div className="mt-[-58px] z-[-1]">
             <Swiper
@@ -72,52 +75,64 @@ const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
                 {/* 4 Slides, each containing a centered number */}
 
                 {
-                    movies.map((item: MainSwiperProps) => (
-                        <SwiperSlide
-                            key={item.id}
-                        >
-                            <div className="flex relative justify-center items-center z-[2] slideimagebx ">
-                                <Image
-                                    src={item.wideposter}
-                                    alt={`movie-${item.id}`}
-                                    loading='lazy'
-                                    fill
-                                    className='aspect-[1.5/1] absolute left-0 top-0 z-[-1]'
-                                />
-                                {/* content */}
-                                <div className='absolute lg:top-[60%]  sm:top-[55%] top-[50%]  left-[3%] h-auto z-[2]'>
-                                    <div className='flex items-center sm:gap-[20px] gap-[10px'>
-                                        <div className='md:w-[120px]  md:h-[170px] w-[100px] h-[120px] object-cover relative overflow-hidden rounded-[8px]'>
-                                            <Image
-                                                src={item.bgposter}
-                                                alt={`movie ${item.id} poster`}
-                                                fill
-                                                className='aspect-[1/1.5] '
-                                            />
-                                        </div>
-                                        <div className='p-2 text-white'>
-                                            <h1 className='md:text-[40px] 3xs:text-[24px] 4xs:text-[22px] text-[19px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>{item.title}</h1>
-                                            <h6 className=' text-[13px] md:mb-[10px]  '>Duration: <span className='text-white/70'>{Math.floor((item.duration / 60))}h {item.duration - (Math.floor(item.duration / 60) * 60)}m</span></h6>
-                                            <h3 className='flex md:gap-2 gap-1 items-center text-white sm:text-xs text-[12px] md:text-sm'>
-                                                <span className='text-yellow-500'>&#9733;</span>
-                                                {item.rating}
-                                                <span className='text-white/80 capitalize sm:text-xs text-[12px] md:text-sm '>{item.genre.name}</span>
-                                            </h3>
-                                            <div className='flex items-center mt-[8px] '>
-                                                <Link href={`/movies/${item.slug}`}>
-                                                    <button id='btn_download' className='flex items-center justify-center md:w-[180px] sm:w-[160px]  gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download md:py-2 py-1 rounded-lg md:px-3 px-2'>
-                                                        <FaDownload size={14} />
-                                                        <p className='font-bold md:text-[16px] sm:text-sm text-[13px]'>DOWNLOAD</p>
-                                                        <span className='bg-white font-extrabold md:text-[14px] sm:text-xs md:block hidden text-[12px] text-black  py-1 px-1 rounded-md'>FREE</span>
-                                                    </button>
-                                                </Link>
+                    movies.map((item: MainSwiperProps) => {
+                        const [loader, setloader] = useState(true)
+                        return (
+                            <SwiperSlide
+                                key={item.id}
+                            >
+                                <div className="flex relative justify-center items-center z-[2] slideimagebx ">
+                                    {
+                                        loader
+                                        && (
+                                            <div className='absolute left-0 top-0 w-full h-full flex items-center justify-center'>
+                                                <Loader /> {/* Show loader while loading */}
+                                            </div>
+                                        )
+                                    }
+                                    <Image
+                                        src={item.wideposter}
+                                        alt={`movie-${item.id}`}
+                                        loading='lazy'
+                                        fill
+                                        className='aspect-[1.5/1] absolute left-0 top-0 z-[-1]'
+                                        onLoad={() => setloader(false)}
+                                    />
+                                    {/* content */}
+                                    <div className='absolute lg:top-[60%]  sm:top-[55%] top-[50%]  left-[3%] h-auto z-[2]'>
+                                        <div className='flex items-center sm:gap-[20px] gap-[10px'>
+                                            <div className='md:w-[120px]  md:h-[170px] w-[100px] h-[120px] object-cover relative overflow-hidden rounded-[8px]'>
+                                                <Image
+                                                    src={item.bgposter}
+                                                    alt={`movie ${item.id} poster`}
+                                                    fill
+                                                    className='aspect-[1/1.5]'
+                                                />
+                                            </div>
+                                            <div className='p-2 text-white'>
+                                                <h1 className='md:text-[40px] 3xs:text-[24px] 4xs:text-[22px] text-[19px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>{item.title}</h1>
+                                                <h6 className=' text-[13px] md:mb-[10px]  '>Duration: <span className='text-white/70'>{Math.floor((item.duration / 60))}h {item.duration - (Math.floor(item.duration / 60) * 60)}m</span></h6>
+                                                <h3 className='flex md:gap-2 gap-1 items-center text-white sm:text-xs text-[12px] md:text-sm'>
+                                                    <span className='text-yellow-500'>&#9733;</span>
+                                                    {item.rating}
+                                                    <span className='text-white/80 capitalize sm:text-xs text-[12px] md:text-sm '>{item.genre.name}</span>
+                                                </h3>
+                                                <div className='flex items-center mt-[8px] '>
+                                                    <Link href={`/movies/${item.slug}`}>
+                                                        <button id='btn_download' className='flex items-center justify-center md:w-[180px] sm:w-[160px]  gap-[5px] shadow-red2 hover:bg-black hover:shadow-white  bg-red-500 btn_download md:py-2 py-1 rounded-lg md:px-3 px-2'>
+                                                            <FaDownload size={14} />
+                                                            <p className='font-bold md:text-[16px] sm:text-sm text-[13px]'>DOWNLOAD</p>
+                                                            <span className='bg-white font-extrabold md:text-[14px] sm:text-xs md:block hidden text-[12px] text-black  py-1 px-1 rounded-md'>FREE</span>
+                                                        </button>
+                                                    </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </SwiperSlide>
-                    ))
+                            </SwiperSlide>
+                        )
+                    })
                 }
             </Swiper>
         </div>
