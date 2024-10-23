@@ -12,7 +12,7 @@ const NotFound = () => {
             <div className="relative z-10 text-center">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4">Page Not Found</h1>
                 <p className="text-lg sm:text-xl mb-8">
-                    Sorry, the page you're looking for doesn't exist.
+                    Sorry, the page you&apos;re looking for doesn&apos;t exist.
                 </p>
                 <a
                     className="inline-block px-6 py-3 bg-red-600 text-base sm:text-lg font-semibold rounded-md hover:bg-red-700 transition duration-300"
