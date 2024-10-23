@@ -7,6 +7,7 @@ import SocialShare from '@/components/SocialShare'
 import SerieCard from '@/components/SerieCard'
 import { Metadata } from 'next'
 import { capitalize } from '../../../../lib/util'
+import { notFound } from 'next/navigation'
 
 export async function generateMetadata({ params: { serie } }: { params: { serie: string } }): Promise<Metadata> {
   return {
@@ -43,6 +44,10 @@ const Serie = async ({ params: { serie }, searchParams }: { params: { serie: str
       }
     })
   ])
+
+  if (!serieData) {
+    return notFound()
+  }
   return (
     <div className=''>
       <div className='slideimagebx'>
@@ -180,7 +185,7 @@ const Serie = async ({ params: { serie }, searchParams }: { params: { serie: str
           </div>
         </div>
       </div>
-      
+
       <section className='relative mx-auto md:max-w-[1200px] w-[95%]'>
         <h2 className='text-[#6a7c8f] uppercase'>{serieData?.title} <span className='font-bold'>Episeodes</span> :</h2>
         <div className="flex flex-row flex-wrap md:justify-start justify-center gap-6 mt-8">
