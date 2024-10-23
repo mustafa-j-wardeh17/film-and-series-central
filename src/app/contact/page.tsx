@@ -19,17 +19,14 @@ const Contact = () => {
             <div className='contactcard'>
                 <div className='w-full h-full relative'>
                     <div className='w-full h-full p-[2rem] bg-gradient-to-br from-[#ff0000ad] to-[#00000097]'>
-                        {/* <div className='flex items-center justify-between'>
-                            <HiMiniBars3BottomLeft className='text-[2.5rem]' />
-                            <AiFillSetting className='text-[2rem]' />
-                        </div> */}
+
                         <div className='flex items-center justify-center w-full  mb-[20px]'>
                             <div className='relative w-[150px] h-[150px] overflow-hidden rounded-full border-[7px] border-solid border-[#fff]'>
                                 <Image
-                                    src={'/img/img.jpg'}
+                                    src={'/img/me.jpg'}
                                     alt='profile page'
                                     fill
-                                    className='object-cover'
+                                    className='object-cover scale-[1.22]'
                                 />
                             </div>
                         </div>
