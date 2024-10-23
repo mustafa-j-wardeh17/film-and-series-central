@@ -6,7 +6,7 @@ import Pagination from "@/components/Pagination";
 import Link from "next/link";
 import { FaAngleDoubleUp, FaCheck, FaFilm, FaPhotoVideo, FaPlus, FaStar } from "react-icons/fa";
 import { FaClapperboard } from "react-icons/fa6";
-import { HomeData } from "../../lib/actions";
+import { HomeData } from "../../../lib/actions";
 
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
@@ -17,10 +17,9 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   const currentPage = Number(searchParams.page) || 1;
   const skip = (currentPage - 1) * ((type === 'all' || type === 'rating') ? 5 : 10);
 
-  const { MainSwiperMovies, categorySwiperMovies, pageData,
+  const {  categorySwiperMovies, pageData,
     totalData } = await HomeData(type, skip, swiper, filter)
-    
-  console.log(Math.ceil(totalData / 10))
+
   const newLinkBySearchParams = (target: string, type: 'swiper' | 'type' | 'filter') => {
     let url = '/?'
     if (type === 'swiper') {
@@ -35,8 +34,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
 
   }
   return (
-    <div className="max-w-screen relative ">
-      <MainSwiper movies={MainSwiperMovies} />
+    <>
       <div className="flex justify-center w-full">
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
@@ -142,6 +140,6 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
         totalPages={Math.ceil(totalData / 10)}
       />
 
-    </div>
+    </>
   );
 }

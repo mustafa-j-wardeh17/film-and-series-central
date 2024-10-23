@@ -247,18 +247,18 @@ export const CreateSerieAndEpisodes = async () => {
 
 export const HomeData = async (type: string, skip: number, swiper: string, filter: string) => {
     // 1- <MainSwiperMovies>
-    const MainSwiperMovies = await prisma.mediaContent.findMany({
-        include: {
-            genre: true,
-            category: true,
-            downloadLink: true,
-            language: true,
-        },
-        take: 4,
-        orderBy: {
-            rating: 'desc'
-        }
-    })
+    // const MainSwiperMovies = await prisma.mediaContent.findMany({
+    //     include: {
+    //         genre: true,
+    //         category: true,
+    //         downloadLink: true,
+    //         language: true,
+    //     },
+    //     take: 4,
+    //     orderBy: {
+    //         rating: 'desc'
+    //     }
+    // })
     // 2- <categorySwiperMovies>
     const categorySwiperMovies =
         swiper === 'movies'
@@ -447,7 +447,6 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
             : serieCount; // Only series count
 
     return {
-        MainSwiperMovies,
         categorySwiperMovies,
         pageData,
         totalData
