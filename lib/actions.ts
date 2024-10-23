@@ -378,7 +378,7 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
             take: (type === 'all' || type === 'rating') ? 5 : 10, // Take 5 if 'all', otherwise 10
             orderBy: type === 'rating'
                 ? { rating: 'desc' }
-                : {}
+                : undefined
         })
         : []
 
@@ -421,13 +421,21 @@ export const HomeData = async (type: string, skip: number, swiper: string, filte
         year: number;
     }[] = []; // Define the type for pageData
 
-    if (type === 'all' || type === 'rating') {
+    if (type === 'all') {
         pageData = [
             ...moviesData.map((movie) => ({ ...movie, type: 'movie' })),
             ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))]; // Ensure both are awaited
         pageData = RandomArray(pageData);
 
-    } else if (type === 'movies') {
+    }
+    else if (type === 'rating') {
+        pageData = [
+            ...moviesData.map((movie) => ({ ...movie, type: 'movie' })),
+            ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))
+        ].sort((a, b) => b.rating - a.rating); // Ensure both are awaited
+
+    }
+    else if (type === 'movies') {
         pageData = moviesData;
     } else if (type === 'series') {
         pageData = seriesData;

@@ -15,12 +15,12 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   const swiper = searchParams?.swiper?.toLocaleLowerCase() || "latest";
 
   const currentPage = Number(searchParams.page) || 1;
-  const skip = (currentPage - 1) * (type === 'all' ? 5 : 10);
+  const skip = (currentPage - 1) * ((type === 'all' || type === 'rating') ? 5 : 10);
 
   const { MainSwiperMovies, categorySwiperMovies, pageData,
     totalData } = await HomeData(type, skip, swiper, filter)
 
-
+  console.log(totalData)
   const newLinkBySearchParams = (target: string, type: 'swiper' | 'type' | 'filter') => {
     let url = '/?'
     if (type === 'swiper') {
