@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 import React from 'react'
-import prisma from '../../../../lib/prisma'
+import prisma from '../../../../../lib/prisma'
 import Card from '@/components/Card'
 import Pagination from '@/components/Pagination'
-import { capitalize, RandomArray } from '../../../../lib/util'
-import { genresWithDescriptions } from '../../../../lib/data'
+import { capitalize, RandomArray } from '../../../../../lib/util'
+import { genresWithDescriptions } from '../../../../../lib/data'
 
 export async function generateMetadata(
     { params: { genre } }: { params: { genre: string } }

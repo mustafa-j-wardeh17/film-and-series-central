@@ -1,19 +1,18 @@
 import { Metadata } from 'next';
 import React from 'react'
-import prisma from '../../../lib/prisma';
+import prisma from '../../../../lib/prisma';
 import Pagination from '@/components/Pagination';
 import Card from '@/components/Card';
 
 export const metadata: Metadata = {
-    title: 'Movies'
+    title: 'Series'
 };
-const Movies = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+const Series = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
     const [allData, count] = await prisma.$transaction([
-        prisma.mediaContent.findMany({
+        prisma.serie.findMany({
             include: {
                 genre: true,
                 category: true,
-                downloadLink: true,
                 language: true,
             },
             skip: ((Number(searchParams.page) || 1) - 1) * 10,
@@ -26,8 +25,8 @@ const Movies = async ({ searchParams }: { searchParams: { [key: string]: string 
         <>
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
-                    <h1 className='text-[48px] capitalize'>Movies</h1>
-                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explore a diverse collection of movies, spanning genres from action and drama to comedy and fantasy. Dive into captivating stories, breathtaking visuals, and unforgettable performances with the latest blockbusters, timeless classics, and critically acclaimed films from around the world.</p>
+                    <h1 className='text-[48px] capitalize'>Series</h1>
+                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Discover a wide range of TV series, from gripping dramas and thrilling mysteries to captivating comedies and epic adventures. Whether binge-worthy hits or classic favorites, our series collection offers something for every taste, genre, and mood.</p>
                 </div>
             </section>
 
@@ -41,11 +40,12 @@ const Movies = async ({ searchParams }: { searchParams: { [key: string]: string 
                                     key={movie.id}
                                     media={movie}
                                     large={true}
+                                    serie={true}
                                 />
                             ))
 
                             : (
-                                <h1 className='text-red-500 text-[35px]'>No Movies Found</h1>
+                                <h1 className='text-red-500 text-[35px]'>No Series Found</h1>
                             )
                     }
                     <Pagination
@@ -60,4 +60,4 @@ const Movies = async ({ searchParams }: { searchParams: { [key: string]: string 
     )
 }
 
-export default Movies
+export default Series

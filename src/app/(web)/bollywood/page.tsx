@@ -1,14 +1,14 @@
 import { Metadata } from 'next';
 import React from 'react'
-import prisma from '../../../lib/prisma';
+import prisma from '../../../../lib/prisma';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
-import { RandomArray } from '../../../lib/util';
-
+import { RandomArray } from '../../../../lib/util';
 export const metadata: Metadata = {
-    title: 'Hollywood'
+    title: 'Bollywood'
 };
-const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+
+const Bollywood = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
 
     const skip = ((Number(searchParams.page) || 1) - 1) * 5
     const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
@@ -25,7 +25,7 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
             take: 5,
             where: {
                 category: {
-                    name: 'hollywood'
+                    name: 'bollywood'
                 }
             }
         }),
@@ -42,21 +42,21 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
             take: 5,
             where: {
                 category: {
-                    name: 'hollywood'
+                    name: 'bollywood'
                 }
             }
         }),
         prisma.mediaContent.count({
             where: {
                 category: {
-                    name: 'hollywood'
+                    name: 'bollywood'
                 }
             }
         }),
         prisma.serie.count({
             where: {
                 category: {
-                    name: 'hollywood'
+                    name: 'bollywood'
                 }
             }
         })
@@ -71,8 +71,8 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
         <>
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
-                    <h1 className='text-[48px] capitalize'>Hollywood</h1>
-                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Discover the best of Hollywood with an extensive collection of blockbuster movies and acclaimed series. From action-packed adventures to gripping dramas, explore the iconic storytelling, star-studded performances, and cinematic masterpieces that define Hollywood entertainment.</p>
+                    <h1 className='text-[48px] capitalize'>Bollywood</h1>
+                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explore the vibrant world of Bollywood cinema, featuring a captivating selection of movies and series that showcase rich storytelling, dynamic performances, and colorful cinematography. Immerse yourself in the best of Bollywood entertainment, from timeless classics to modern hits. </p>
                 </div>
             </section>
 
@@ -81,7 +81,7 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                     {
                         allData.length > 0
                             ?
-                            allData.map(movie => (
+                            allData.map((movie) => (
                                 <Card
                                     key={movie.id}
                                     media={movie}
@@ -90,7 +90,7 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                             ))
 
                             : (
-                                <h1 className='text-red-500 text-[35px]'>No Movie Found</h1>
+                                <h1 className='text-red-500 text-[35px]'>No series Found</h1>
                             )
                     }
                     <Pagination
@@ -105,4 +105,4 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
     )
 }
 
-export default Hollywood
+export default Bollywood

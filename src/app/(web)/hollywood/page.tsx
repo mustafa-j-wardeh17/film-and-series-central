@@ -1,15 +1,14 @@
 import { Metadata } from 'next';
 import React from 'react'
-import prisma from '../../../lib/prisma';
+import prisma from '../../../../lib/prisma';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
-import { RandomArray } from '../../../lib/util';
+import { RandomArray } from '../../../../lib/util';
 
 export const metadata: Metadata = {
-    title: 'All Movies & Series'
+    title: 'Hollywood'
 };
-
-const All = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
 
     const skip = ((Number(searchParams.page) || 1) - 1) * 5
     const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
@@ -23,7 +22,12 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
                 rating: true
             },
             skip,
-            take: 5
+            take: 5,
+            where: {
+                category: {
+                    name: 'hollywood'
+                }
+            }
         }),
         prisma.serie.findMany({
             select: {
@@ -35,10 +39,27 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
                 rating: true
             },
             skip,
-            take: 5
+            take: 5,
+            where: {
+                category: {
+                    name: 'hollywood'
+                }
+            }
         }),
-        prisma.mediaContent.count(),
-        prisma.serie.count()
+        prisma.mediaContent.count({
+            where: {
+                category: {
+                    name: 'hollywood'
+                }
+            }
+        }),
+        prisma.serie.count({
+            where: {
+                category: {
+                    name: 'hollywood'
+                }
+            }
+        })
 
     ])
     const allData = RandomArray([
@@ -50,8 +71,8 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
         <>
             <section className='my-[60px] mx-[45px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
-                    <h1 className='text-[48px] capitalize'>All Movies & Series</h1>
-                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explore our extensive collection of movies and series, featuring diverse genres that cater to all tastes. From heart-pounding thrillers and laugh-out-loud comedies to thought-provoking dramas, find your next favorite watch and immerse yourself in captivating storytelling.</p>
+                    <h1 className='text-[48px] capitalize'>Hollywood</h1>
+                    <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Discover the best of Hollywood with an extensive collection of blockbuster movies and acclaimed series. From action-packed adventures to gripping dramas, explore the iconic storytelling, star-studded performances, and cinematic masterpieces that define Hollywood entertainment.</p>
                 </div>
             </section>
 
@@ -60,16 +81,16 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
                     {
                         allData.length > 0
                             ?
-                            allData.map((media, idx) => (
+                            allData.map(movie => (
                                 <Card
-                                    key={idx}
-                                    media={media}
+                                    key={movie.id}
+                                    media={movie}
                                     large={true}
                                 />
                             ))
 
                             : (
-                                <h1 className='text-red-500 text-[35px]'>Nothing Found</h1>
+                                <h1 className='text-red-500 text-[35px]'>No Movie Found</h1>
                             )
                     }
                     <Pagination
@@ -84,4 +105,4 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
     )
 }
 
-export default All
+export default Hollywood

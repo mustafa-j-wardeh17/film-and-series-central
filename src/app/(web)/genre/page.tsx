@@ -1,7 +1,7 @@
 import Genrecard from '@/components/Genrecard';
 import { Metadata } from 'next';
 import React from 'react'
-import { genresWithDescriptions } from '../../../lib/data';
+import { genresWithDescriptions } from '../../../../lib/data';
 
 export const metadata: Metadata = {
     title: 'Genre'

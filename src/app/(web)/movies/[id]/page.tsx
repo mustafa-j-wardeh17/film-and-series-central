@@ -5,9 +5,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { FaBookmark, FaCheck, FaEye, FaHeart, FaImdb, FaPlay, FaStar, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
-import prisma from '../../../../lib/prisma'
+import prisma from '../../../../../lib/prisma'
 import { notFound } from 'next/navigation'
-import { capitalize } from '../../../../lib/util'
+import { capitalize } from '../../../../../lib/util'
 import ImageWithLoader from '@/components/ImageWithLoader'
 
 export async function generateMetadata(
