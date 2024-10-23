@@ -92,7 +92,7 @@ const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
                                     {/* content */}
                                     <div className='absolute lg:top-[60%]  sm:top-[55%] top-[50%]  left-[3%] h-auto z-[2]'>
                                         <div className='flex items-center sm:gap-[20px] gap-[10px'>
-                                            <div className='md:w-[120px]  md:h-[170px] w-[100px] h-[120px] object-cover relative overflow-hidden rounded-[8px]'>
+                                            <div className='md:w-[120px]  md:h-[170px] w-[100px] h-[135px] object-cover relative overflow-hidden rounded-[8px]'>
                                                 <Image
                                                     src={item.bgposter}
                                                     alt={`movie ${item.id} poster`}
