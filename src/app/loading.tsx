@@ -2,12 +2,12 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
+        <div className="flex flex-col items-center justify-center min-h-screen  text-white">
             {/* Loading Spinner */}
             <div className="flex items-center justify-center space-x-2 mb-6">
-                <div className="w-6 h-6 bg-red-600 rounded-full transition duration-150 animate-bounce"></div>
-                <div className="w-6 h-6 bg-red-600 rounded-full transition duration-150 animate-bounce delay-500"></div>
-                <div className="w-6 h-6 bg-red-600 rounded-full transition duration-150 animate-bounce delay-1000"></div>
+                <div className="w-6 h-6 bg-red-600 rounded-full transition duration-150 animate-bounce" style={{ animationDelay: '0s' }}></div>
+                <div className="w-6 h-6 bg-red-600 rounded-full transition duration-150 animate-bounce " style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-6 h-6 bg-red-600 rounded-full transition duration-150 animate-bounce" style={{ animationDelay: '0.4s' }}></div>
             </div>
 
             {/* Loading Text */}
