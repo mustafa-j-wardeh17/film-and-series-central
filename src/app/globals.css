@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  background-color: #111010; /* Your desired color */
+  padding-top: env(safe-area-inset-top); /* Handle the notch on iOS devices */
+}
+
+meta[name="viewport"] {
+  viewport-fit: cover;
+}
+
 body {
-    @apply text-white bg-[#111010] transition-all duration-300;
+    color: white;
+    background-color: #111010;
+    transition: all 0.3s ease;
 }
 
 * {

@@ -92,7 +92,7 @@ const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
                                     {/* content */}
                                     <div className='absolute lg:top-[60%]  sm:top-[55%] top-[50%]  left-[3%] h-auto z-[2]'>
                                         <div className='flex items-center sm:gap-[20px] gap-[10px'>
-                                            <div className='md:w-[120px]  md:h-[170px] w-[100px] h-[120px] object-cover relative overflow-hidden rounded-[8px]'>
+                                            <div className='md:w-[120px]  md:h-[170px] w-[100px] h-[135px] object-cover relative overflow-hidden rounded-[8px]'>
                                                 <Image
                                                     src={item.bgposter}
                                                     alt={`movie ${item.id} poster`}
@@ -101,7 +101,7 @@ const HomeSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
                                                 />
                                             </div>
                                             <div className='p-2 text-white'>
-                                                <h1 className='md:text-[40px] 3xs:text-[24px] 4xs:text-[22px] text-[19px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>{item.title}</h1>
+                                                <h1 className='md:text-[40px] 3xs:text-[24px] 4xs:text-[22px] text-[19px] md:mt-[-12px] md:mb-[10px] mb-2 mt-3 transition ease-linear duration-1000  '>{item.title.length < 24 ? item.title : `${item.title.slice(0, 21)}...`}</h1>
                                                 <h6 className=' text-[13px] md:mb-[10px]  '>Duration: <span className='text-white/70'>{Math.floor((item.duration / 60))}h {item.duration - (Math.floor(item.duration / 60) * 60)}m</span></h6>
                                                 <h3 className='flex md:gap-2 gap-1 items-center text-white sm:text-xs text-[12px] md:text-sm'>
                                                     <span className='text-yellow-500'>&#9733;</span>
