@@ -2,19 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  background-color: #111010; /* Your desired color */
-  padding-top: env(safe-area-inset-top); /* Handle the notch on iOS devices */
+html,
+body {
+    background-color: #111010;
+    /* Your desired color */
+    padding-top: env(safe-area-inset-top);
+    /* Handle the notch on iOS devices */
 }
 
-meta[name="viewport"] {
-  viewport-fit: cover;
+@media (prefers-color-scheme: dark) {
+
+    html,
+    body {
+        background-color: #111010;
+    }
+}
+
+html,
+body {
+    background-color: #111010;
+    /* Your background color */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* Ensure background extends to the safe area */
+    background-clip: padding-box;
+    /* Ensure padding to account for the safe area */
+    padding-top: env(safe-area-inset-top);
 }
 
 body {
     color: white;
     background-color: #111010;
     transition: all 0.3s ease;
+    overscroll-behavior: none;
 }
 
 * {
