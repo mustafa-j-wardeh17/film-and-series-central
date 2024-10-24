@@ -54,9 +54,9 @@ export default async function RootLayout({
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/site.webmanifest" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-[#111010] min-h-screen pt-[env(safe-area-inset-top)] antialiased`}
       >
-        <div className="max-w-screen bg-[#111010] min-h-screen pt-[env(safe-area-inset-top)] overflow-hidden">
+        <div className="max-w-screen  overflow-hidden">
           <Header allData={allData} />
 
           {children}
