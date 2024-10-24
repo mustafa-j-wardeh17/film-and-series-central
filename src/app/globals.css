@@ -10,25 +10,19 @@ body {
     /* Handle the notch on iOS devices */
 }
 
-@media (prefers-color-scheme: dark) {
-
-    html,
-    body {
-        background-color: #111010;
-    }
-}
 
 html,
 body {
     background-color: #111010;
-    /* Your background color */
+    /* Use your desired background color */
+    min-height: 100vh;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    /* Ensure background extends to the safe area */
-    background-clip: padding-box;
-    /* Ensure padding to account for the safe area */
+    /* Safe area inset for iOS */
     padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
 }
 
 body {
@@ -36,6 +30,15 @@ body {
     background-color: #111010;
     transition: all 0.3s ease;
     overscroll-behavior: none;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    html,
+    body {
+        background-color: #111010;
+        /* Ensure background stays the same in dark mode */
+    }
 }
 
 * {
