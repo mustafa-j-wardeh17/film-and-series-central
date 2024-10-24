@@ -39,12 +39,12 @@ const SerieCard = ({ media, dataFromSerie, type }: { dataFromSerie?: dataFromSer
                     />
                     {type === 'episode' && (
                         <div className='absolute z-[60] top-[20px] -left-[10px]  px-5 py-1 rounded-md  bg-black flex items-center justify-center '>
-                            <h3 className='capitalize text-[14px]'>{(dataFromSerie?.episodeNum || 0) + 1}</h3>
+                            <h3 className='capitalize text-white text-[14px]'>{(dataFromSerie?.episodeNum || 0) + 1}</h3>
                         </div>
                     )}
                 </div>
                 <div className='w-full h-[15%] mt-[5px]'>
-                    <h5 className='overflow-ellipsis text-nowrap font-bold overflow-hidden text-[14px]'>{media.title}</h5>
+                    <h5 className='overflow-ellipsis text-nowrap font-bold overflow-hidden text-[14px] text-white'>{media.title}</h5>
                     <h6 className='flex items-center justify-between text-[13px] py-[2px]'>
                         <span className='text-[12px] text-neutral-400'>{
                             type === 'series'

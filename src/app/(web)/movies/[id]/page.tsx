@@ -134,7 +134,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
 
                 <div className='relative lg:w-[65%] w-full h-auto rounded-tl-[20px] rounded-bl-[20px] p-[30px]'>
                     <div className='w-full flex items-center  justify-between'>
-                        <h1 className='w-[90%] text-white font-semibold text-[25px]'>{movie.title}</h1>
+                        <h1 className='w-[90%] text-white font-semibold text-[25px] '>{movie.title}</h1>
 
                         <SocialShare />
 
@@ -255,7 +255,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                                 />
                                             </div>
                                             <div className='w-full h-[15%] mt-[5px]'>
-                                                <h5 className='overflow-ellipsis text-nowrap font-bold overflow-hidden text-[14px]'>{movie.title}</h5>
+                                                <h5 className='overflow-ellipsis text-nowrap font-bold text-white overflow-hidden text-[14px]'>{movie.title}</h5>
                                                 <h6 className='flex items-center justify-between text-[13px] py-[2px]'>
                                                     <span className='text-[12px] text-neutral-400'>{movie.year}</span>
                                                     <div className='flex items-center'>

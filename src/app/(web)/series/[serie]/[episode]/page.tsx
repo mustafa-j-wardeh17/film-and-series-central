@@ -96,7 +96,7 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                                 loading='lazy'
                             />
                             <div className='absolute z-[10] top-[20px] -left-[10px]  px-5 py-1 rounded-md  bg-black flex items-center justify-center '>
-                                <h3 className='capitalize text-[14px]'>{episodeData?.title}</h3>
+                                <h3 className='capitalize text-[14px] text-white'>{episodeData?.title}</h3>
                             </div>
                             <div className='absolute w-full h-full z-[100] bg-[#111010]/20 flex items-center justify-center'>
                                 <a target='_blank' href={episodeData?.watchlink}>

@@ -24,7 +24,7 @@ const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data:
                     <button
                         key={genre}
                         onClick={() => handleFilter(genre)}
-                        className={`${searchParams.filter === genre ? 'bg-red-500 border-[#fffefe]' : 'bg-black border-[#717171]'} py-[6px] px-[10px] md:text-[16px] text-[14px] lg:py-[10px] lg:px-[20px] hover:bg-red-500 font-semibold border hover:border-[#fffefe] rounded-[10px] scroll-snap-align-start`}
+                        className={`${searchParams.filter === genre ? ' bg-red-500 border-[#fffefe]' : 'bg-black border-[#717171]'} text-white py-[6px] px-[10px] md:text-[16px] text-[14px] lg:py-[10px] lg:px-[20px] hover:bg-red-500 font-semibold border hover:border-[#fffefe] rounded-[10px] scroll-snap-align-start`}
                     >
                         {genre}
                     </button>
@@ -33,7 +33,7 @@ const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data:
                     <button
                         key={category}
                         onClick={() => handleFilter(category)}
-                        className={`${searchParams.filter === category ? 'bg-red-500 border-[#fffefe]' : 'bg-black border-[#717171]'} py-[6px] px-[10px] md:text-[16px] text-[14px] lg:py-[10px] lg:px-[20px] hover:bg-red-500 font-semibold border hover:border-[#fffefe] rounded-[10px] scroll-snap-align-start`}
+                        className={`${searchParams.filter === category ? ' bg-red-500 border-[#fffefe]' : 'bg-black border-[#717171]'} text-white py-[6px] px-[10px] md:text-[16px] text-[14px] lg:py-[10px] lg:px-[20px] hover:bg-red-500 font-semibold border hover:border-[#fffefe] rounded-[10px] scroll-snap-align-start`}
                     >
                         {category}
                     </button>

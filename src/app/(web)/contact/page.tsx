@@ -33,17 +33,17 @@ const Contact = () => {
                         </div>
                         <div className='flex justify-center gap-[1rem]'>
                             <Link
-                                className='hover:scale-110 hover:text-white'
+                                className='hover:scale-110 text-white hover:text-white'
                                 href={'https://www.instagram.com/mustafa.j.wardeh17/'}>
                                 <IoLogoInstagram className='text-[1.5rem] ' />
                             </Link>
                             <Link
-                                className='hover:scale-110 hover:text-white'
+                                className='hover:scale-110 text-white hover:text-white'
                                 href={'https://www.facebook.com/mustafa.j.wardeh17/'}>
                                 <FaFacebook className='text-[1.5rem] ' />
                             </Link>
                             <Link
-                                className='hover:scale-110 hover:text-white'
+                                className='hover:scale-110 text-white hover:text-white'
                                 href={'https://t.me/KillSwitsh'}>
                                 <RiTelegramLine className='text-[1.5rem] ' />
                             </Link>

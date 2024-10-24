@@ -34,12 +34,12 @@ const Card = ({ media, large = false, serie }: { media: CatSwiperProps, large?: 
 
                     {media?.type === 'serie' && (
                         <div className='absolute z-[60] top-[20px] -left-[10px]  px-4 py-1 rounded-md  bg-black flex items-center justify-center '>
-                            <h3 className='capitalize text-[14px]'>{media?.type}</h3>
+                            <h3 className='capitalize text-white text-[14px]'>{media?.type}</h3>
                         </div>
                     )}
                 </div>
                 <div className='w-full h-[15%] mt-[5px]'>
-                    <h5 className='overflow-ellipsis text-nowrap font-bold overflow-hidden text-[14px]'>{media?.title}</h5>
+                    <h5 className='overflow-ellipsis text-nowrap font-bold text-white overflow-hidden text-[14px]'>{media?.title}</h5>
                     <h6 className='flex items-center justify-between text-[13px] py-[2px]'>
                         <span className='text-[12px] text-neutral-400'>{media?.year}</span>
                         <div className='flex items-center'>
