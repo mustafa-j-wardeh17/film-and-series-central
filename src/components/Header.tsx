@@ -92,7 +92,7 @@ export default function Header({ allData }: { allData: any[] }) {
     return <>
         <nav className="header pb-2 md:px-[30px] px-[2px]">
             <h1
-                className="logo "
+                className="logo 3xs:text-[28px] text-[24px]"
                 data-text="&nbsp;Cinema Center&nbsp;"
             >
                 <a
