@@ -3,6 +3,7 @@
 Welcome to Film & Series Central – your ultimate destination for discovering, watching, and reviewing movies and series from around the world. This web application leverages modern technologies to provide a seamless user experience while exploring the vast landscape of cinematic content.
 
 
+
 ## Features
 
 - **Browse Movies and Series**: Explore a diverse catalog of films and series across various genres, languages, and categories.
