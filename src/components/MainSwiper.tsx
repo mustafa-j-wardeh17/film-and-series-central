@@ -34,18 +34,20 @@ const MainSwiper = ({ movies }: { movies: MainSwiperProps[] }) => {
         } else {
             // Set localStorage after the welcome animation has played
             localStorage.setItem('welcomeShown', 'true');
-            document.body.style.overflow = 'hidden'; // Disable scrolling during animation
+            // document.body.style.overflow = 'hidden'; // Disable scrolling during animation
+  
         }
     }, []);
 
     // This will be passed to WelcomeAnimation to hide it when the video ends
     const handleAnimationEnd = () => {
         setLoading(false);
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
+        // document.body.style.overflow = 'auto'; // Re-enable scrolling
+ 
     };
 
     return (
-        <div className="w-full">
+        <div className="w-full relative z-[100]">
             {!loading ? <HomeSwiper movies={movies} /> : <WelcomeAnimation onAnimationEnd={handleAnimationEnd} />}
         </div>
     );
