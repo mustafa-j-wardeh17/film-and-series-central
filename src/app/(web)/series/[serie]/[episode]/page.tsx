@@ -101,7 +101,7 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                             <div className='absolute w-full h-full z-[100] bg-[#111010]/20 flex items-center justify-center'>
                                 <a target='_blank' href={episodeData?.watchlink}>
                                     <button className=' bg-black/70 hover:bg-black/80 w-[50px] h-[50px] rounded-full flex items-center justify-center'>
-                                        <FaPlay size={24} />
+                                        <FaPlay size={24} color='white'/>
                                     </button>
                                 </a>
                             </div>
