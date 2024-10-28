@@ -30,8 +30,9 @@ const WelcomeAnimation = ({ onAnimationEnd }: { onAnimationEnd: () => void }) =>
         >
             <video
                 autoPlay
-                muted
-                playsInline // autoplay on mobile
+                muted={true}
+                playsInline 
+                preload='auto'
                 id='video'
                 className="absolute top-0 left-0 w-full h-full object-cover"
             >

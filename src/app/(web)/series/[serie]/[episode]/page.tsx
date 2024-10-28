@@ -208,7 +208,7 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                                     .map((resolutions, idx) => (
                                         <a target='_blank'
                                             key={idx}
-                                            href={resolutions.link} className='bg-[#6a7c8f29] text-[#ffffffd2] p-[10px] text-center rounded-[10px] w-[80%] m-auto transition duration-200 hover:bg-[#6a7c8f] hover:shadow-red hover:text-white hover:font-semibold'>Download {resolutions.size}</a>
+                                            href={resolutions.link} className='bg-[#6a7c8f29] text-[#ffffffd2] p-[10px] text-center rounded-[10px] w-[80%] m-auto transition duration-200 hover:bg-[#6a7c8f] hover:shadow-red hover:text-white hover:font-semibold'>Download {resolutions.size}p</a>
                                     ))
                             }
 
