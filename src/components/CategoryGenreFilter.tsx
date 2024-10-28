@@ -44,7 +44,7 @@ const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data:
             <div className='my-[30px] md:w-[80%] w-[90%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
                 {data.length > 0
                     ? data.map((movie: CatSwiperProps, idx: number) => (
-                        <Card key={idx} media={movie} large={true} />
+                        <Card key={idx} media={movie} large={true} type={type} genreFilter={true}/>
                     ))
                     : (
                         <h1 className='text-red-500 text-[35px]'>{
