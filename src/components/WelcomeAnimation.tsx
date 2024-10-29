@@ -25,7 +25,7 @@ const WelcomeAnimation = ({ onAnimationEnd }: { onAnimationEnd: () => void }) =>
 
     return (
         <div
-            className={`absolute  left-0 top-0 flex items-center justify-center h-[102vh] w-full z-50 mt-[-58px] transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'
+            className={`flex items-center justify-center h-[102vh] w-full mt-[-58px] transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'
                 }`}
         >
             <video
