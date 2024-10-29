@@ -36,6 +36,7 @@ const SerieCard = ({ media, dataFromSerie, type }: { dataFromSerie?: dataFromSer
                         src={((type === 'episode' || type === 'episode-serie') ? dataFromSerie?.serieImg : media.bgposter) || '/img/img.jpg'}
                         alt={`${media} poster`}
                         fill
+                        className='aspect-[1/1.5]'
                     />
                     {type === 'episode' && (
                         <div className='absolute z-[60] top-[20px] -left-[10px]  px-5 py-1 rounded-md  bg-black flex items-center justify-center '>
