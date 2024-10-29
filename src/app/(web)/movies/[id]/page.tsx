@@ -252,6 +252,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                                                     src={movie.bgposter}
                                                     alt={`${movie} poster`}
                                                     fill
+                                                    className='aspect-[1/1.5]'
                                                 />
                                             </div>
                                             <div className='w-full h-[15%] mt-[5px]'>
