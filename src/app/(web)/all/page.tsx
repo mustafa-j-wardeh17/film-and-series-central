@@ -55,7 +55,7 @@ const All = async ({ searchParams }: { searchParams: { [key: string]: string | u
                 </div>
             </section>
 
-            <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] py-[60px]'>
+            <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] pt-[60px]'>
                 <div className='flex flex-wrap items-center justify-center gap-[20px]'>
                     {
                         allData.length > 0
