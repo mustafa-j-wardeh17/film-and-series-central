@@ -22,7 +22,7 @@ interface dataFromSerieProps {
 }
 const SerieCard = ({ media, dataFromSerie, type }: { dataFromSerie?: dataFromSerieProps, type: 'episode' | 'series' | 'episode-serie', media: CatSwiperProps }) => {
     return (
-        <div key={media.id} className={`${type === 'series'?'max-w-[200px] min-w-[200px] h-[340px]':'3xs:w-[200px] w-full 3xs:h-[340px] h-[400px]'} `}>
+        <div key={media.id} className={`${type === 'series'?'max-w-[200px] min-w-[200px] h-[340px]':'3xs:w-[200px] w-[300px] 3xs:h-[340px] h-[400px]'} `}>
 
             <Link
                 href={
