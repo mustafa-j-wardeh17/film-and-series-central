@@ -1,4 +1,5 @@
 export const categories = ["bollywood", "hollywood", "south", "gujarati", "marvel_studio", "tv_shows", "web_series"]
+
 export const genres = ['comedy','thriller','adventure','animation','drama','fantasy','horror','mystery','romantic','action','crime','science_fiction']
 export const genresWithDescriptions = [
     { genre: 'comedy', description: 'Designed to entertain and amuse with lighthearted, humorous content.' },
