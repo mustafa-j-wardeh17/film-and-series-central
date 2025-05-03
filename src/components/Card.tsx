@@ -14,7 +14,7 @@ export interface CatSwiperProps {
 }
 const Card = ({ media, large = false, serie, type, genreFilter }: { type?: string, genreFilter?: boolean, media: CatSwiperProps, large?: boolean, serie?: boolean }) => {
     return (
-        <div className={`${large ? 'lg:w-[260px]  min-w-[200px] lg:h-[400px] md:w-[200px] md:h-[300px] sm:w-[230px] sm:h-[340px] 2xs:w-[180px] 2xs:h-[320px] w-[85%] h-[450px] max-w-[240px]' : 'lg:w-[200px] lg:h-[300px] md:w-[187px] md:h-[280px]  sm:h-[230px] sm:w-[160px] 3xs:w-[150px] 4xs:w-[200px] 4xs:h-[270px] 300:w-[150px] 300:h-[240px]'}`}>
+        <div className={`${large ? 'lg:w-[260px]  min-w-[200px] lg:h-[400px] md:w-[200px] md:h-[300px] sm:w-[230px] sm:h-[340px] 2xs:w-[180px] 2xs:h-[320px] w-[45%] h-[250px] ' : 'lg:w-[200px] lg:h-[300px] md:w-[187px] md:h-[280px]  sm:h-[230px] sm:w-[160px] 3xs:w-[45%] 3xs:h-[220px]'}`}>
             <Link
                 href={
                     (media.type === 'serie' || serie || (genreFilter && type === 'series'))
