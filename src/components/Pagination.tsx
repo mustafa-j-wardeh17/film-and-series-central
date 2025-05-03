@@ -1,24 +1,26 @@
 'use client'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-const Pagination = ({ searchParams, totalPages }: { searchParams: { [key: string]: string | undefined }, totalPages: number }) => {
-    const page = parseInt(searchParams.page as string) || 1
+const Pagination = ({ totalPages }: {  totalPages: number }) => {
     const router = useRouter()
     const pathname = usePathname()
+    const searchParams = useSearchParams();
+    const page = Number(searchParams.get('page')) || 1
+
     const handlePagination = (type: "next" | "previous") => {
-        const urlParam = new URLSearchParams(window.location.search)
-        let currentPage = page
-        console.log(totalPages)
+        const urlParam = new URLSearchParams(searchParams.toString());
+        let currentPage = page;
+
         if (type === 'next' && currentPage < totalPages) {
-            currentPage = page + 1
-            urlParam.set('page', String(currentPage))
-            router.replace(`${pathname}?${urlParam}`)
+            currentPage = page + 1;
+            urlParam.set('page', String(currentPage));
+            router.push(`${pathname}?${urlParam.toString()}`);
         } else if (type === 'previous' && page > 1) {
-            currentPage = page - 1
-            urlParam.set('page', String(currentPage))
-            router.replace(`${pathname}?${urlParam}`)
+            currentPage = page - 1;
+            urlParam.set('page', String(currentPage));
+            router.push(`${pathname}?${urlParam.toString()}`);
         }
     }
 

@@ -171,12 +171,7 @@ export default async function Home({
         type={type}
       />
       <Pagination
-        searchParams={Object.fromEntries(
-          Object.entries(resolvedSearchParams).map(([key, value]) => [
-            key,
-            Array.isArray(value) ? value[0] : value,
-          ])
-        )} totalPages={Math.ceil(totalData / 10)}
+         totalPages={Math.ceil(totalData / 10)}
       />
     </>
   );
