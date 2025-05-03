@@ -4,13 +4,14 @@ import prisma from '../../../../lib/prisma';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
 import { RandomArray } from '../../../../lib/util';
+import { tSearchParams } from '@/app/(home)/page';
 
 export const metadata: Metadata = {
     title: 'Hollywood'
 };
-const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
-
-    const skip = ((Number(searchParams.page) || 1) - 1) * 5
+const Hollywood = async ({ searchParams }: { searchParams: tSearchParams }) => {
+    const resolvedSearchParams = await (searchParams)
+    const skip = ((Number(resolvedSearchParams.page) || 1) - 1) * 5
     const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
         prisma.mediaContent.findMany({
             select: {
@@ -94,7 +95,7 @@ const Hollywood = async ({ searchParams }: { searchParams: { [key: string]: stri
                             )
                     }
                     <Pagination
-                        searchParams={searchParams}
+                        searchParams={resolvedSearchParams}
                         totalPages={Math.ceil(count / 10)}
                     />
                 </div>

@@ -3,11 +3,13 @@ import React from 'react'
 import prisma from '../../../../lib/prisma';
 import Pagination from '@/components/Pagination';
 import Card from '@/components/Card';
+import { tSearchParams } from '@/app/(home)/page';
 
 export const metadata: Metadata = {
     title: 'Series'
 };
-const Series = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+const Series = async ({ searchParams }: { searchParams: tSearchParams }) => {
+    const resolvedSearchParams = await (searchParams)
     const [allData, count] = await prisma.$transaction([
         prisma.serie.findMany({
             include: {
@@ -15,7 +17,7 @@ const Series = async ({ searchParams }: { searchParams: { [key: string]: string 
                 category: true,
                 language: true,
             },
-            skip: ((Number(searchParams.page) || 1) - 1) * 10,
+            skip: ((Number(resolvedSearchParams.page) || 1) - 1) * 10,
             take: 10
         }),
         prisma.mediaContent.count()
@@ -49,7 +51,7 @@ const Series = async ({ searchParams }: { searchParams: { [key: string]: string 
                             )
                     }
                     <Pagination
-                        searchParams={searchParams}
+                        searchParams={resolvedSearchParams}
                         totalPages={Math.ceil(count / 10)}
                     />
                 </div>

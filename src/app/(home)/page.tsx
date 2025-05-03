@@ -8,75 +8,97 @@ import { FaAngleDoubleUp, FaCheck, FaFilm, FaPhotoVideo, FaPlus, FaStar } from "
 import { FaClapperboard } from "react-icons/fa6";
 import { HomeData } from "../../../lib/actions";
 
+export type tSearchParams = Promise<{ [key: string]: string | undefined }>
 
-export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
-  const filter = searchParams?.filter?.toLocaleLowerCase() || "";
-  const type = searchParams?.type?.toLocaleLowerCase() || "movies";
-  const swiper = searchParams?.swiper?.toLocaleLowerCase() || "latest";
 
-  const currentPage = Number(searchParams.page) || 1;
-  const skip = (currentPage - 1) * ((type === 'all' || type === 'rating') ? 5 : 10);
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: tSearchParams
 
-  const {  categorySwiperMovies, pageData,
-    totalData } = await HomeData(type, skip, swiper, filter)
+}) {
+  const resolvedSearchParams = await searchParams;
 
-  const newLinkBySearchParams = (target: string, type: 'swiper' | 'type' | 'filter') => {
-    let url = '/?'
-    if (type === 'swiper') {
-      if (searchParams.type) url += `type=${searchParams.type}&`
-      if (searchParams.filter) url += `filter=${searchParams.filter}&`
+  const filter = typeof resolvedSearchParams?.filter === "string"
+    ? resolvedSearchParams.filter.toLocaleLowerCase()
+    : "";
+  const type = typeof resolvedSearchParams?.type === "string"
+    ? resolvedSearchParams.type.toLocaleLowerCase()
+    : "movies";
+  const swiper = typeof resolvedSearchParams?.swiper === "string"
+    ? resolvedSearchParams.swiper.toLocaleLowerCase()
+    : "latest";
+
+  const currentPage = Number(resolvedSearchParams.page) || 1;
+  const skip = (currentPage - 1) * ((type === "all" || type === "rating") ? 5 : 10);
+
+  const { categorySwiperMovies, pageData, totalData } = await HomeData(type, skip, swiper, filter);
+
+  const newLinkBySearchParams = (target: string, type: "swiper" | "type" | "filter") => {
+    let url = "/?";
+    if (type === "swiper") {
+      if (resolvedSearchParams.type) url += `type=${resolvedSearchParams.type}&`;
+      if (resolvedSearchParams.filter) url += `filter=${resolvedSearchParams.filter}&`;
     }
-    if (type === 'type') {
-      if (searchParams.swiper) url += `swiper=${searchParams.swiper}&`
+    if (type === "type") {
+      if (resolvedSearchParams.swiper) url += `swiper=${resolvedSearchParams.swiper}&`;
     }
-    url += `${target}`
-    return url
+    url += `${target}`;
+    return url;
+  };
 
-  }
   return (
     <>
       <div className="flex justify-center w-full">
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
             <Link
-              href={newLinkBySearchParams('swiper=latest', 'swiper')}
-              className={`${swiper === 'latest' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams("swiper=latest", "swiper")}
+              className={`${swiper === "latest" ? "text-white" : "text-[#ffffffb3]"
+                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaAngleDoubleUp size={14} /></i>
+              <i>
+                <FaAngleDoubleUp size={14} />
+              </i>
               <p>Latest</p>
             </Link>
-
           </li>
           <li>
             <Link
-              href={newLinkBySearchParams('swiper=movies', 'swiper')}
-              className={`${swiper === 'movies' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams("swiper=movies", "swiper")}
+              className={`${swiper === "movies" ? "text-white" : "text-[#ffffffb3]"
+                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaFilm size={14} /></i>
+              <i>
+                <FaFilm size={14} />
+              </i>
               <p>Movies</p>
             </Link>
-
           </li>
           <li>
             <Link
-              href={newLinkBySearchParams('swiper=series', 'swiper')}
-              className={`${swiper === 'series' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams("swiper=series", "swiper")}
+              className={`${swiper === "series" ? "text-white" : "text-[#ffffffb3]"
+                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaClapperboard size={14} /></i>
+              <i>
+                <FaClapperboard size={14} />
+              </i>
               <p>Series</p>
             </Link>
-
           </li>
 
           <li>
             <Link
-              href={newLinkBySearchParams('swiper=recently', 'swiper')}
-              className={`${swiper === 'recently' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams("swiper=recently", "swiper")}
+              className={`${swiper === "recently" ? "text-white" : "text-[#ffffffb3]"
+                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaPlus size={14} /></i>
+              <i>
+                <FaPlus size={14} />
+              </i>
               <p>Recently Added</p>
             </Link>
-
           </li>
         </ul>
       </div>
@@ -89,57 +111,73 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
         <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
           <li>
             <Link
-              href={newLinkBySearchParams('type=movies', 'type')}
-              className={`${type === 'movies' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams("type=movies", "type")}
+              className={`${type === "movies" ? "text-white" : "text-[#ffffffb3]"
+                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaPhotoVideo size={14} /></i>
+              <i>
+                <FaPhotoVideo size={14} />
+              </i>
               <p>Movies</p>
             </Link>
-
           </li>
           <li>
             <Link
-              href={newLinkBySearchParams('type=series', 'type')}
-              className={`${type === 'series' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams("type=series", "type")}
+              className={`${type === "series" ? "text-white" : "text-[#ffffffb3]"
+                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaFilm size={14} /></i>
+              <i>
+                <FaFilm size={14} />
+              </i>
               <p>Series</p>
             </Link>
-
           </li>
           <li>
             <Link
-              href={newLinkBySearchParams('type=all', 'type')}
-              className={`${type === 'all' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams("type=all", "type")}
+              className={`${type === "all" ? "text-white" : "text-[#ffffffb3]"
+                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaCheck size={14} /></i>
+              <i>
+                <FaCheck size={14} />
+              </i>
               <p>Series & Movies</p>
             </Link>
-
           </li>
 
           <li>
             <Link
-              href={newLinkBySearchParams('type=rating', 'type')}
-              className={`${type === 'rating' ? 'text-white' : 'text-[#ffffffb3]'} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+              href={newLinkBySearchParams("type=rating", "type")}
+              className={`${type === "rating" ? "text-white" : "text-[#ffffffb3]"
+                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
             >
-              <i><FaStar size={14} /></i>
+              <i>
+                <FaStar size={14} />
+              </i>
               <p>Rating</p>
             </Link>
-
           </li>
         </ul>
       </div>
       <CategoryGenreFilter
-        searchParams={searchParams}
+        searchParams={Object.fromEntries(
+          Object.entries(resolvedSearchParams).map(([key, value]) => [
+            key,
+            Array.isArray(value) ? value[0] : value,
+          ])
+        )}
         data={pageData}
         type={type}
       />
       <Pagination
-        searchParams={searchParams}
-        totalPages={Math.ceil(totalData / 10)}
+        searchParams={Object.fromEntries(
+          Object.entries(resolvedSearchParams).map(([key, value]) => [
+            key,
+            Array.isArray(value) ? value[0] : value,
+          ])
+        )} totalPages={Math.ceil(totalData / 10)}
       />
-
     </>
   );
 }

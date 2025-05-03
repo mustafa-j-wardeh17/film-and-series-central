@@ -10,13 +10,16 @@ import { capitalize } from '../../../../../lib/util'
 import { notFound } from 'next/navigation'
 import ImageWithLoader from '@/components/ImageWithLoader'
 
-export async function generateMetadata({ params: { serie } }: { params: { serie: string } }): Promise<Metadata> {
+type tSerie = Promise<{ serie: string }>
+export async function generateMetadata({ params }: { params: tSerie }): Promise<Metadata> {
+  const { serie } = await (params)
   return {
     title: capitalize(serie)
   }
 }
 
-const Serie = async ({ params: { serie }, searchParams }: { params: { serie: string }, searchParams: { [key: string]: string | undefined } }) => {
+const Serie = async ({ params }: { params: tSerie}) => {
+  const { serie } = await (params)
   const [serieData, latestSeries] = await prisma.$transaction([
     prisma.serie.findUnique({
       where: {
@@ -56,7 +59,7 @@ const Serie = async ({ params: { serie }, searchParams }: { params: { serie: str
           src={serieData?.wideposter || '/img/img.jpg'}
           alt={`${serieData?.slug} `}
         />
-      
+
       </div>
       <div className='relative lg:max-w-[1200px] mx-auto h-auto bg-[#111010] rounded-[20px] outline-none mt-[-100px] flex lg:flex-row flex-wrap z-[3] flex-col max-w-[720px]'>
         <div className='lg:w-[35%] w-[100%] h-full rounded-tl-[20px] rounded-bl-[20px] p-[30px]'>

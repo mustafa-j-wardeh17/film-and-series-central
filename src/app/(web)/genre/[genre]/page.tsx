@@ -5,20 +5,24 @@ import Card from '@/components/Card'
 import Pagination from '@/components/Pagination'
 import { capitalize, RandomArray } from '../../../../../lib/util'
 import { genresWithDescriptions } from '../../../../../lib/data'
+import { tSearchParams } from '@/app/(home)/page'
+
+type tGenre = Promise<{ genre: string }>
 
 export async function generateMetadata(
-    { params: { genre } }: { params: { genre: string } }
+    { params}: { params: tGenre }
 ): Promise<Metadata> {
-
+    const { genre } = await (params)
     return {
         title: `${capitalize(genre)} - Genre`,
         description: genresWithDescriptions.find(g => g.genre === genre)?.description
     }
 }
 
-const page = async ({ params: { genre }, searchParams }: { params: { genre: string }, searchParams: { [key: string]: string | undefined } }) => {
-
-    const skip = ((Number(searchParams.page) || 1) - 1) * 5
+const page = async ({ params, searchParams }: { params:tGenre, searchParams: tSearchParams }) => {
+    const { genre } = await (params)
+    const resolvedSearchParams = await (searchParams)
+    const skip = ((Number(resolvedSearchParams.page) || 1) - 1) * 5
     const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
         prisma.mediaContent.findMany({
             select: {
@@ -101,7 +105,7 @@ const page = async ({ params: { genre }, searchParams }: { params: { genre: stri
                             )
                     }
                     <Pagination
-                        searchParams={searchParams}
+                        searchParams={resolvedSearchParams}
                         totalPages={Math.ceil(count / 10)}
                     />
                 </div>

@@ -14,14 +14,12 @@ const Pagination = ({ searchParams, totalPages }: { searchParams: { [key: string
         if (type === 'next' && currentPage < totalPages) {
             currentPage = page + 1
             urlParam.set('page', String(currentPage))
-            router.push(`${pathname}?${urlParam}`)
+            router.replace(`${pathname}?${urlParam}`)
         } else if (type === 'previous' && page > 1) {
             currentPage = page - 1
             urlParam.set('page', String(currentPage))
-            router.push(`${pathname}?${urlParam}`)
+            router.replace(`${pathname}?${urlParam}`)
         }
-
-
     }
 
     return (

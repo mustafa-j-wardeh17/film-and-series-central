@@ -10,16 +10,20 @@ import { notFound } from 'next/navigation'
 import { capitalize } from '../../../../../lib/util'
 import ImageWithLoader from '@/components/ImageWithLoader'
 
+type tParams = Promise<{ id: string }>
+
 export async function generateMetadata(
-    { params: { id } }: { params: { id: string } }
+    { params }: { params: tParams }
 ): Promise<Metadata> {
+    const { id } = await (params)
     return {
         title: capitalize(id)
     }
 
 }
 
-const page = async ({ params: { id } }: { params: { id: string } }) => {
+const page = async ({ params }: { params: tParams }) => {
+    const { id } = await (params)
     const [movie, latestMovies] = await prisma.$transaction([
         prisma.mediaContent.findUnique({
             where: {

@@ -10,12 +10,17 @@ import { capitalize } from '../../../../../../lib/util'
 import { notFound } from 'next/navigation'
 import ImageWithLoader from '@/components/ImageWithLoader'
 
-export async function generateMetadata({ params: { serie, episode } }: { params: { serie: string, episode: string } }): Promise<Metadata> {
+type tSerieEpisode = Promise<{ serie: string, episode: string }>
+
+export async function generateMetadata({ params }: { params: tSerieEpisode }): Promise<Metadata> {
+    const { serie, episode } = await (params)
     return {
         title: capitalize(episode) + " - " + capitalize(serie)
     }
 }
-const Episode = async ({ params: { serie, episode }, searchParams }: { params: { serie: string, episode: string }, searchParams: { [key: string]: string | undefined } }) => {
+const Episode = async ({ params }: { params: tSerieEpisode}) => {
+    const { serie, episode } = await (params)
+
     const [serieData, episodeData, otherEpisodes, latestSeries] = await prisma.$transaction([
         prisma.serie.findUnique({
             where: {
@@ -101,7 +106,7 @@ const Episode = async ({ params: { serie, episode }, searchParams }: { params: {
                             <div className='absolute w-full h-full z-[100] bg-[#111010]/20 flex items-center justify-center'>
                                 <a target='_blank' href={episodeData?.watchlink}>
                                     <button className=' bg-black/70 hover:bg-black/80 w-[50px] h-[50px] rounded-full flex items-center justify-center'>
-                                        <FaPlay size={24} color='white'/>
+                                        <FaPlay size={24} color='white' />
                                     </button>
                                 </a>
                             </div>

@@ -13,7 +13,6 @@ const ScrollButtons = ({ type }: { type: string }) => {
         const scrollContainer = document.querySelector(`.${type}`) as HTMLElement | null;
         if (scrollContainer && scrollContainer.scrollLeft !== undefined) {
             scrollContainer.scrollLeft += 300
-
         }
     }
     return (
