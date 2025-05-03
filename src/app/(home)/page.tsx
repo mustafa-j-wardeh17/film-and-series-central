@@ -1,12 +1,11 @@
 import CatSwiper from "@/components/CatSwiper";
 import CategoryGenreFilter from "@/components/CategoryGenreFilter";
-
-import MainSwiper from "@/components/MainSwiper";
 import Pagination from "@/components/Pagination";
 import Link from "next/link";
 import { FaAngleDoubleUp, FaCheck, FaFilm, FaPhotoVideo, FaPlus, FaStar } from "react-icons/fa";
 import { FaClapperboard } from "react-icons/fa6";
 import { HomeData } from "../../../lib/actions";
+import { redirect } from "next/navigation";
 
 export type tSearchParams = Promise<{ [key: string]: string | undefined }>
 
@@ -33,6 +32,16 @@ export default async function Home({
   const skip = (currentPage - 1) * ((type === "all" || type === "rating") ? 5 : 10);
 
   const { categorySwiperMovies, pageData, totalData } = await HomeData(type, skip, swiper, filter);
+
+  if (pageData.length === 0 && Number(resolvedSearchParams.page) > 1) {
+    
+    resolvedSearchParams.page = "1";
+    const filteredSearchParams = Object.fromEntries(
+      Object.entries(resolvedSearchParams).filter(([_, value]) => value !== undefined)
+    );
+    const newSearchParams = new URLSearchParams(filteredSearchParams as Record<string, string>);
+    redirect(`?${newSearchParams}`)
+  }
 
   const newLinkBySearchParams = (target: string, type: "swiper" | "type" | "filter") => {
     let url = "/?";
@@ -171,7 +180,7 @@ export default async function Home({
         type={type}
       />
       <Pagination
-         totalPages={Math.ceil(totalData / 10)}
+        totalPages={Math.ceil(totalData / 10)}
       />
     </>
   );
