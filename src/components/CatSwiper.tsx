@@ -74,7 +74,7 @@ const CatSwiper = ({ movies }: { movies: CatSwiperProps[] }) => {
             }}
         >
 
-            <div className='flex overflow-x-scroll scroll-smooth gap-[20px] duration-500'>
+            <div className='flex overflow-x-scroll scroll-smooth gap-[20px] duration-500 pb-[20px]'>
                 {
                     movies.map((movie: CatSwiperProps,idx:number) => (
                         <SwiperSlide

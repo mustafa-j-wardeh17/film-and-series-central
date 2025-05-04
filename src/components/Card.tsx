@@ -14,7 +14,7 @@ export interface CatSwiperProps {
 }
 const Card = ({ media, large = false, serie, type, genreFilter }: { type?: string, genreFilter?: boolean, media: CatSwiperProps, large?: boolean, serie?: boolean }) => {
     return (
-        <div className={`${large ? 'lg:w-[260px]  min-w-[200px] lg:h-[400px] md:w-[200px] md:h-[300px] sm:w-[230px] sm:h-[340px] 2xs:w-[180px] 2xs:h-[320px] w-[45%] h-[250px] ' : 'lg:w-[200px] lg:h-[300px] md:w-[187px] md:h-[280px]  sm:h-[230px] sm:w-[160px] 3xs:w-[45%] 3xs:h-[220px]'}`}>
+        <div className={`${large ? 'lg:w-[280px]  md:w-[220px] sm:w-[240px] 2xs:w-[220px] 3xs:w-[190px] 4xs:w-[160px] 5xs:w-[140px] w-[75%] aspect-[2/3]' : 'lg:w-[180px] md:w-[187px] sm:w-[160px] 2xs:[w-170px] 3xs:w-[150px] 4xs:w-[200px] 5xs:w-[180px] w-[150px]  w-full aspect-[2/3]'}`}> 
             <Link
                 href={
                     (media.type === 'serie' || serie || (genreFilter && type === 'series'))
@@ -22,7 +22,7 @@ const Card = ({ media, large = false, serie, type, genreFilter }: { type?: strin
                         : `/movies/${media?.slug}`
                 }
             >
-                <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[80%] rounded-[8px] overflow-hidden'>
+                <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[75%] rounded-[8px] overflow-hidden'>
 
                     < Image
                         src={media?.bgposter}
@@ -39,7 +39,7 @@ const Card = ({ media, large = false, serie, type, genreFilter }: { type?: strin
                     )}
                 </div>
                 <div className='w-full h-[15%] mt-[5px]'>
-                    <h5 className='overflow-ellipsis text-nowrap font-bold text-white overflow-hidden text-[14px]'>{media?.title}</h5>
+                    <h5 className='overflow-ellipsis text-nowrap font-bold text-white overflow-hidden text-[14px]'>{media?.title.slice(0,15)}</h5>
                     <h6 className='flex items-center justify-between text-[13px] py-[2px]'>
                         <span className='text-[12px] text-neutral-400'>{media?.year}</span>
                         <div className='flex items-center'>

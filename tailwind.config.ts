@@ -12,6 +12,7 @@ const config: Config = {
         '2xs': '510px',
         '3xs': '450px',
         '4xs': '410px',
+        '5xs': '360px',
         '300': '300px',
 
       },

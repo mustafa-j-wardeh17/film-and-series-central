@@ -41,7 +41,8 @@ const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data:
             </div>
 
             {/* Movies Section */}
-            <div className='my-[30px] md:w-[80%] w-[90%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
+            <div className='my-[30px] md:w-[80%] sm:w-[90%] w-[95%]  mt-[50px] flex flex-wrap  gap-[20px] items-center justify-center'>
+
                 {data.length > 0
                     ? data.map((movie: CatSwiperProps, idx: number) => (
                         <Card key={idx} media={movie} large={true} type={type} genreFilter={true}/>
