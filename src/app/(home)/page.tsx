@@ -1,9 +1,3 @@
-// import CatSwiper from "@/components/CatSwiper";
-// import CategoryGenreFilter from "@/components/CategoryGenreFilter";
-// import Pagination from "@/components/Pagination";
-import Link from "next/link";
-import { FaAngleDoubleUp, FaCheck, FaFilm, FaPhotoVideo, FaPlus, FaStar } from "react-icons/fa";
-import { FaClapperboard } from "react-icons/fa6";
 import { HomeData } from "../../../lib/actions";
 import { redirect } from "next/navigation";
 import { cache } from "react";
@@ -56,83 +50,17 @@ export default async function Home({
     redirect(`?${newSearchParams}`)
   }
 
-  const newLinkBySearchParams = (target: string, type: "swiper" | "type" | "filter") => {
-    let url = "/?";
-    if (type === "swiper") {
-      if (resolvedSearchParams.type) url += `type=${resolvedSearchParams.type}&`;
-      if (resolvedSearchParams.filter) url += `filter=${resolvedSearchParams.filter}&`;
-    }
-    if (type === "type") {
-      if (resolvedSearchParams.swiper) url += `swiper=${resolvedSearchParams.swiper}&`;
-    }
-    url += `${target}`;
-    return url;
-  };
 
   return (
     <>
-      <div className="flex justify-center w-full">
-        <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
-          <li>
-            <Link
-              href={newLinkBySearchParams("swiper=latest", "swiper")}
-              className={`${swiper === "latest" ? "text-white" : "text-[#ffffffb3]"
-                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
-              prefetch={true}
-            >
-              <i>
-                <FaAngleDoubleUp size={14} />
-              </i>
-              <p>Latest</p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={newLinkBySearchParams("swiper=movies", "swiper")}
-              className={`${swiper === "movies" ? "text-white" : "text-[#ffffffb3]"
-                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
-              prefetch={true}
-            >
-              <i>
-                <FaFilm size={14} />
-              </i>
-              <p>Movies</p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={newLinkBySearchParams("swiper=series", "swiper")}
-              className={`${swiper === "series" ? "text-white" : "text-[#ffffffb3]"
-                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
-              prefetch={true}
-            >
-              <i>
-                <FaClapperboard size={14} />
-              </i>
-              <p>Series</p>
-            </Link>
-          </li>
 
-          <li>
-            <Link
-              href={newLinkBySearchParams("swiper=recently", "swiper")}
-              className={`${swiper === "recently" ? "text-white" : "text-[#ffffffb3]"
-                } hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
-              prefetch={true}
-            >
-              <i>
-                <FaPlus size={14} />
-              </i>
-              <p>Recently Added</p>
-            </Link>
-          </li>
-        </ul>
-      </div>
 
       {/* Todo ==> Taking All Categories From db To make filtering by them */}
-      <div className=" mt-[20px] w-full">
-        <CatSwiper movies={categorySwiperMovies} />
-      </div>
+      <CatSwiper
+        movies={categorySwiperMovies}
+        resolvedSearchParams={resolvedSearchParams}
+        swiper={swiper}
+      />
 
       <CategoryGenreFilter
         searchParams={Object.fromEntries(

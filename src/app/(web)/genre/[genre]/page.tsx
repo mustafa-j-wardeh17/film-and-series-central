@@ -105,7 +105,6 @@ const page = async ({ params, searchParams }: { params:tGenre, searchParams: tSe
                             )
                     }
                     <Pagination
-                        searchParams={resolvedSearchParams}
                         totalPages={Math.ceil(count / 10)}
                     />
                 </div>

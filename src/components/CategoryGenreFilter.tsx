@@ -6,15 +6,13 @@ import Card, { CatSwiperProps } from './Card'
 import { FaCheck, FaFilm, FaPhotoVideo, FaStar } from "react-icons/fa"
 import Link from 'next/link'
 import Pagination from './Pagination'
+import { SkeletonLoader } from './SkeletonLoader'
 
 const CategoryGenreFilter = ({ searchParams, type, data, totalData }: { totalData: number, type: string, data: CatSwiperProps[], searchParams: { [key: string]: string | undefined } }) => {
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
     const pathname = usePathname()
     const currentSearchParams = useSearchParams()
-
-    // Track the previous page to detect page changes
-    const [prevPage, setPrevPage] = useState(searchParams.page || '1')
 
 
     // Handle filter changes
@@ -36,27 +34,9 @@ const CategoryGenreFilter = ({ searchParams, type, data, totalData }: { totalDat
     // Reset loading state when searchParams change
     useEffect(() => {
         setIsLoading(false)
-        setPrevPage(searchParams.page || '1')
     }, [searchParams])
 
 
-    // Skeleton loader component
-    const SkeletonLoader = () => (
-        <div className="my-[30px] md:w-[80%] sm:w-[90%] w-[95%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center">
-            {[...Array(10)].map((_, idx) => (
-                <div key={idx} className={`animate-pulse ${true ? 'lg:w-[280px]  md:w-[220px] sm:w-[240px] 2xs:w-[220px] 3xs:w-[190px] 4xs:w-[160px] 5xs:w-[140px] w-[75%] aspect-[2/3]' : 'lg:w-[180px] md:w-[187px] sm:w-[160px] 2xs:[w-170px] 3xs:w-[150px] 4xs:w-[200px] 5xs:w-[180px]   w-full aspect-[2/3]'}`}>
-                    <div className="w-full h-[70%] bg-gray-700 rounded-t-lg"></div>
-                    <div className="py-3">
-                        <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
-                        <div className=" w-full flex justify-between">
-                            <div className="h-3 bg-gray-700 rounded w-1/4"></div>
-                            <div className="h-3 bg-gray-700 rounded w-1/4"></div>
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
-    )
 
     const newLinkBySearchParams = (target: string, paramType: "swiper" | "type" | "filter") => {
         let url = "/?";
@@ -153,7 +133,7 @@ const CategoryGenreFilter = ({ searchParams, type, data, totalData }: { totalDat
 
             {/* Content Area with Loading State */}
             {isLoading ? (
-                <SkeletonLoader />
+                <SkeletonLoader large={true} />
             ) : (
                 <div className='my-[30px] md:w-[80%] sm:w-[90%] w-[95%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
                     {data && data.length > 0 ? (
