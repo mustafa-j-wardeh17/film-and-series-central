@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import React from 'react'
+import React, { cache } from 'react'
 import prisma from '../../../../lib/prisma';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
@@ -9,11 +9,8 @@ import { tSearchParams } from '@/app/(home)/page';
 export const metadata: Metadata = {
     title: 'All Movies & Series'
 };
-
-const All = async ({ searchParams }: { searchParams: tSearchParams }) => {
-    const resolvedSearchParams = await (searchParams)
-    const skip = ((Number(resolvedSearchParams.page) || 1) - 1) * 5
-    const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
+const fetchAllData = cache(async (skip: number) => {
+    return await prisma.$transaction([
         prisma.mediaContent.findMany({
             select: {
                 id: true,
@@ -42,7 +39,13 @@ const All = async ({ searchParams }: { searchParams: tSearchParams }) => {
         prisma.serie.count()
 
     ])
-    const allData = RandomArray([
+})
+const All = async ({ searchParams }: { searchParams: tSearchParams }) => {
+    const resolvedSearchParams = await (searchParams)
+    const skip = ((Number(resolvedSearchParams.page) || 1) - 1) * 5
+    const [moviesData, seriesData, movieCount, serieCount] = await fetchAllData(skip)
+
+    const allMediaData = RandomArray([
         ...moviesData.map((serie) => ({ ...serie, type: 'movie' })),
         ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))
     ])
@@ -59,9 +62,9 @@ const All = async ({ searchParams }: { searchParams: tSearchParams }) => {
             <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] pt-[60px]'>
                 <div className='flex flex-wrap items-center justify-center gap-[20px]'>
                     {
-                        allData.length > 0
+                        allMediaData.length > 0
                             ?
-                            allData.map((media, idx) => (
+                            allMediaData.map((media, idx) => (
                                 <Card
                                     key={idx}
                                     media={media}

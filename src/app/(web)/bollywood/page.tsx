@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import React from 'react'
+import React, { cache } from 'react'
 import prisma from '../../../../lib/prisma';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
@@ -9,11 +9,8 @@ export const metadata: Metadata = {
     title: 'Bollywood'
 };
 
-const Bollywood = async ({ searchParams }: { searchParams: tSearchParams }) => {
-
-    const resolvedSearchParams = await (searchParams)
-    const skip = ((Number(resolvedSearchParams.page) || 1) - 1) * 5
-    const [moviesData, seriesData, movieCount, serieCount] = await prisma.$transaction([
+const bollywoodData = cache(async (skip: number) => {
+    return await prisma.$transaction([
         prisma.mediaContent.findMany({
             select: {
                 id: true,
@@ -64,6 +61,12 @@ const Bollywood = async ({ searchParams }: { searchParams: tSearchParams }) => {
         })
 
     ])
+})
+const Bollywood = async ({ searchParams }: { searchParams: tSearchParams }) => {
+
+    const resolvedSearchParams = await (searchParams)
+    const skip = ((Number(resolvedSearchParams.page) || 1) - 1) * 5
+    const [moviesData, seriesData, movieCount, serieCount] = await bollywoodData(skip)
     const allData = RandomArray([
         ...moviesData.map((serie) => ({ ...serie, type: 'movie' })),
         ...seriesData.map((serie) => ({ ...serie, type: 'serie' }))

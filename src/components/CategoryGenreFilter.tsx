@@ -20,6 +20,7 @@ const CategoryGenreFilter = ({ searchParams, type, data, totalData }: { totalDat
         setIsLoading(true)
         const newSearchParams = new URLSearchParams(currentSearchParams.toString())
         newSearchParams.set('filter', item)
+        newSearchParams.delete('page')
         router.push(`${pathname}?${newSearchParams}`, { scroll: false })
     }
 

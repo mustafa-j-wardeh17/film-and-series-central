@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { cache } from 'react'
 import prisma from '../../../../../lib/prisma'
 import ScrollButtons from '@/components/ScrollButtons'
 import { FaBookmark, FaCheck, FaImdb, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
@@ -18,9 +18,8 @@ export async function generateMetadata({ params }: { params: tSerie }): Promise<
   }
 }
 
-const Serie = async ({ params }: { params: tSerie}) => {
-  const { serie } = await (params)
-  const [serieData, latestSeries] = await prisma.$transaction([
+const seriePageData = cache(async (serie: string) => {
+  return await prisma.$transaction([
     prisma.serie.findUnique({
       where: {
         slug: serie
@@ -48,6 +47,10 @@ const Serie = async ({ params }: { params: tSerie}) => {
       }
     })
   ])
+})
+const Serie = async ({ params }: { params: tSerie }) => {
+  const { serie } = await (params)
+  const [serieData, latestSeries] = await seriePageData(serie)
 
   if (!serieData) {
     return notFound()

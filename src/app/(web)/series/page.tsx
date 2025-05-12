@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import React from 'react'
+import React, { cache } from 'react'
 import prisma from '../../../../lib/prisma';
 import Pagination from '@/components/Pagination';
 import Card from '@/components/Card';
@@ -8,21 +8,26 @@ import { tSearchParams } from '@/app/(home)/page';
 export const metadata: Metadata = {
     title: 'Series'
 };
-const Series = async ({ searchParams }: { searchParams: tSearchParams }) => {
-    const resolvedSearchParams = await (searchParams)
-    const [allData, count] = await prisma.$transaction([
+
+const seriesData = cache(async (skip: number) => {
+    return await prisma.$transaction([
         prisma.serie.findMany({
             include: {
                 genre: true,
                 category: true,
                 language: true,
             },
-            skip: ((Number(resolvedSearchParams.page) || 1) - 1) * 10,
+            skip,
             take: 10
         }),
         prisma.mediaContent.count()
 
     ])
+})
+const Series = async ({ searchParams }: { searchParams: tSearchParams }) => {
+    const resolvedSearchParams = await (searchParams)
+    const skip = ((Number(resolvedSearchParams.page) || 1) - 1) * 10
+    const [allData, count] = await seriesData(skip)
     return (
         <>
             <section className='my-[60px] mx-[45px] text-white'>

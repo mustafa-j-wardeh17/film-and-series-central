@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { cache } from 'react'
 import ScrollButtons from '@/components/ScrollButtons'
 import { FaBookmark, FaCheck, FaImdb, FaPlay, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
 import Image from 'next/image'
@@ -18,10 +18,9 @@ export async function generateMetadata({ params }: { params: tSerieEpisode }): P
         title: capitalize(episode) + " - " + capitalize(serie)
     }
 }
-const Episode = async ({ params }: { params: tSerieEpisode}) => {
-    const { serie, episode } = await (params)
 
-    const [serieData, episodeData, otherEpisodes, latestSeries] = await prisma.$transaction([
+const episodePageData = cache(async (episode: string, serie: string) => {
+    return await await prisma.$transaction([
         prisma.serie.findUnique({
             where: {
                 slug: serie
@@ -75,6 +74,11 @@ const Episode = async ({ params }: { params: tSerieEpisode}) => {
             }
         })
     ])
+})
+const Episode = async ({ params }: { params: tSerieEpisode }) => {
+    const { serie, episode } = await (params)
+
+    const [serieData, episodeData, otherEpisodes, latestSeries] = await episodePageData(episode, serie)
     if (!episodeData) {
         return notFound()
     }

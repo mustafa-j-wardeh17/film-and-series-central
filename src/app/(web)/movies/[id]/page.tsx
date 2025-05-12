@@ -3,7 +3,7 @@ import SocialShare from '@/components/SocialShare'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { cache } from 'react'
 import { FaBookmark, FaCheck, FaEye, FaHeart, FaImdb, FaPlay, FaStar, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
 import prisma from '../../../../../lib/prisma'
 import { notFound } from 'next/navigation'
@@ -22,9 +22,8 @@ export async function generateMetadata(
 
 }
 
-const page = async ({ params }: { params: tParams }) => {
-    const { id } = await (params)
-    const [movie, latestMovies] = await prisma.$transaction([
+const movieData = cache(async (id: string) => {
+    return await prisma.$transaction([
         prisma.mediaContent.findUnique({
             where: {
                 slug: id
@@ -57,6 +56,11 @@ const page = async ({ params }: { params: tParams }) => {
 
         })
     ])
+})
+
+const page = async ({ params }: { params: tParams }) => {
+    const { id } = await (params)
+    const [movie, latestMovies] = await movieData(id)
     if (!movie) notFound()
     return (
         <div className=''>
