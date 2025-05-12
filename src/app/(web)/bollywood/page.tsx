@@ -74,14 +74,14 @@ const Bollywood = async ({ searchParams }: { searchParams: tSearchParams }) => {
     const count = movieCount + serieCount
     return (
         <>
-            <section className='my-[60px] mx-[45px] text-white'>
+            <section className='my-[60px] md:mx-[45px] mx-[20px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
                     <h1 className='text-[48px] capitalize'>Bollywood</h1>
                     <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explore the vibrant world of Bollywood cinema, featuring a captivating selection of movies and series that showcase rich storytelling, dynamic performances, and colorful cinematography. Immerse yourself in the best of Bollywood entertainment, from timeless classics to modern hits. </p>
                 </div>
             </section>
 
-            <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] pt-[60px]'>
+            <section className='border-t-[1px] border-solid border-[#444] my-[20px] md:mx-[45px] mx-[20px] pt-[60px]'>
                 <div className='flex flex-wrap items-center justify-center gap-[20px]'>
                     {
                         allData.length > 0

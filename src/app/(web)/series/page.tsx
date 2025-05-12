@@ -30,14 +30,14 @@ const Series = async ({ searchParams }: { searchParams: tSearchParams }) => {
     const [allData, count] = await seriesData(skip)
     return (
         <>
-            <section className='my-[60px] mx-[45px] text-white'>
+            <section className='my-[60px] md:mx-[45px] mx-[20px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
                     <h1 className='text-[48px] capitalize'>Series</h1>
                     <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Discover a wide range of TV series, from gripping dramas and thrilling mysteries to captivating comedies and epic adventures. Whether binge-worthy hits or classic favorites, our series collection offers something for every taste, genre, and mood.</p>
                 </div>
             </section>
 
-            <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] pt-[60px]'>
+            <section className='border-t-[1px] border-solid border-[#444] my-[20px] md:mx-[45px] mx-[20px] pt-[60px]'>
                 <div className='flex flex-wrap items-center justify-center gap-[20px]'>
                     {
                         allData.length > 0

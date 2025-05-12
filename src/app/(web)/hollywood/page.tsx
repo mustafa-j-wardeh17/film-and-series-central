@@ -75,14 +75,14 @@ const Hollywood = async ({ searchParams }: { searchParams: tSearchParams }) => {
     const count = movieCount + serieCount
     return (
         <>
-            <section className='my-[60px] mx-[45px] text-white'>
+            <section className='my-[60px] md:mx-[45px] mx-[20px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
                     <h1 className='text-[48px] capitalize'>Hollywood</h1>
                     <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Discover the best of Hollywood with an extensive collection of blockbuster movies and acclaimed series. From action-packed adventures to gripping dramas, explore the iconic storytelling, star-studded performances, and cinematic masterpieces that define Hollywood entertainment.</p>
                 </div>
             </section>
 
-            <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] pt-[60px]'>
+            <section className='border-t-[1px] border-solid border-[#444] my-[20px] md:mx-[45px] mx-[20px] pt-[60px]'>
                 <div className='flex flex-wrap items-center justify-center gap-[20px]'>
                     {
                         allData.length > 0

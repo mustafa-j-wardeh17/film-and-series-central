@@ -23,18 +23,17 @@ const Card = ({ media, large = false, serie, type, genreFilter }: { type?: strin
             : router.push(`/movies/${media?.slug}`)
     }
     return (
-        <div className={`${large ? 'lg:w-[280px]  md:w-[220px] sm:w-[240px] 2xs:w-[220px] 3xs:w-[190px] 4xs:w-[160px] 5xs:w-[140px] w-[75%] aspect-[2/3]' : 'lg:w-[180px] md:w-[187px] sm:w-[160px] 2xs:[w-170px] 3xs:w-[150px] 4xs:w-[200px] 5xs:w-[180px] w-[150px]   aspect-[2/3]'}`}>
+        <div className={`${large ? 'lg:w-[280px]  md:w-[220px] sm:w-[240px] 2xs:w-[220px] 3xs:w-[190px] 4xs:w-[160px] 5xs:w-[140px] w-[75%] ' : 'lg:w-[180px] md:w-[187px] sm:w-[160px] 2xs:[w-170px] 3xs:w-[150px] 4xs:w-[200px] 5xs:w-[180px] w-[150px]'}`}>
             <button
                 onClick={handleCardPage}
-                className='w-full h-full flex flex-col justify-start'
+                className='w-full flex flex-col justify-start'
             >
-                <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative h-[75%] rounded-[8px] overflow-hidden'>
+                <div className='w-full hover:scale-[0.99]  hover:shadow-white hover:border-2 hover:border-red-500 relative aspect-[3/4] rounded-[8px] overflow-hidden'>
 
                     < Image
                         src={media?.bgposter}
                         alt={`${media?.id} poster`}
                         fill
-                        className='aspect-[1/1.5]'
                     />
 
 

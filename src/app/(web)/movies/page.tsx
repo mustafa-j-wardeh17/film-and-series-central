@@ -26,14 +26,14 @@ const Movies = async ({ searchParams }: { searchParams: tSearchParams }) => {
     ])
     return (
         <>
-            <section className='my-[60px] mx-[45px] text-white'>
+            <section className='my-[60px] md:mx-[45px] mx-[20px] text-white'>
                 <div className='flex flex-col gap-[20px]'>
                     <h1 className='text-[48px] capitalize'>Movies</h1>
                     <p className='text-[18px] text-[#999] w-full md:w-[60%]'>Explore a diverse collection of movies, spanning genres from action and drama to comedy and fantasy. Dive into captivating stories, breathtaking visuals, and unforgettable performances with the latest blockbusters, timeless classics, and critically acclaimed films from around the world.</p>
                 </div>
             </section>
 
-            <section className='border-t-[1px] border-solid border-[#444] my-[20px] mx-[45px] pt-[60px]'>
+            <section className='border-t-[1px] border-solid border-[#444] my-[20px] md:mx-[45px] mx-[20px] pt-[60px]'>
                 <div className='flex flex-wrap items-center justify-center gap-[20px]'>
                     {
                         allData.length > 0
