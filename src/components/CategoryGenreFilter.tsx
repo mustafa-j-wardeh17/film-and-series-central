@@ -25,9 +25,10 @@ const CategoryGenreFilter = ({ searchParams, type, data, totalData }: { totalDat
     }
 
     // Handle type changes through Link clicks
-    const handleTypeChange = () => {
+    const handleTypeChange = (type: string) => {
         setIsLoading(true)
         const newSearchParams = new URLSearchParams(currentSearchParams.toString())
+        newSearchParams.set('type', type)
         newSearchParams.delete('filter')
         router.push(`${pathname}?${newSearchParams}`, { scroll: false })
     }
@@ -39,18 +40,7 @@ const CategoryGenreFilter = ({ searchParams, type, data, totalData }: { totalDat
 
 
 
-    const newLinkBySearchParams = (target: string, paramType: "swiper" | "type" | "filter") => {
-        let url = "/?";
-        if (paramType === "type") {
-            if (searchParams.swiper) url += `swiper=${searchParams.swiper}&`;
-        }
-        else if (paramType === "filter") {
-            if (searchParams.swiper) url += `swiper=${searchParams.swiper}&`;
-            if (searchParams.filter) url += `filter=${searchParams.filter}&`;
-        }
-        url += `${target}`;
-        return url;
-    };
+
 
     return (
         <div className='flex flex-col items-center my-[20px] gap-5'>
@@ -58,48 +48,40 @@ const CategoryGenreFilter = ({ searchParams, type, data, totalData }: { totalDat
             <div className="flex justify-center w-full mt-[40px]">
                 <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
                     <li>
-                        <Link
-                            href={newLinkBySearchParams("type=movies", "type")}
-                            onClick={handleTypeChange}
+                        <button
+                            onClick={()=>handleTypeChange("movies")}
                             className={`${type === "movies" ? "text-white" : "text-[#ffffffb3]"} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
-                            prefetch={true}
                         >
                             <i><FaPhotoVideo size={14} /></i>
                             <p>Movies</p>
-                        </Link>
+                        </button>
                     </li>
                     <li>
-                        <Link
-                            href={newLinkBySearchParams("type=series", "type")}
-                            onClick={handleTypeChange}
+                        <button
+                            onClick={()=>handleTypeChange("series")}
                             className={`${type === "series" ? "text-white" : "text-[#ffffffb3]"} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
-                            prefetch={true}
                         >
                             <i><FaFilm size={14} /></i>
                             <p>Series</p>
-                        </Link>
+                        </button>
                     </li>
                     <li>
-                        <Link
-                            href={newLinkBySearchParams("type=all", "type")}
-                            onClick={handleTypeChange}
+                        <button
+                            onClick={()=>handleTypeChange("all")}
                             className={`${type === "all" ? "text-white" : "text-[#ffffffb3]"} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
-                            prefetch={true}
                         >
                             <i><FaCheck size={14} /></i>
                             <p>Series & Movies</p>
-                        </Link>
+                        </button>
                     </li>
                     <li>
-                        <Link
-                            href={newLinkBySearchParams("type=rating", "type")}
-                            onClick={handleTypeChange}
+                        <button
+                            onClick={()=>handleTypeChange("rating")}
                             className={`${type === "rating" ? "text-white" : "text-[#ffffffb3]"} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
-                            prefetch={true}
                         >
                             <i><FaStar size={14} /></i>
                             <p>Rating</p>
-                        </Link>
+                        </button>
                     </li>
                 </ul>
             </div>
