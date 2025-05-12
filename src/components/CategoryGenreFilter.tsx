@@ -1,30 +1,138 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { categories, genres } from '../../lib/data'
-import { useRouter } from 'next/navigation'
-
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Card, { CatSwiperProps } from './Card'
+import { FaCheck, FaFilm, FaPhotoVideo, FaStar } from "react-icons/fa"
+import Link from 'next/link'
+import Pagination from './Pagination'
 
-
-
-const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data: CatSwiperProps[], searchParams: { [key: string]: string | undefined } }) => {
-    // we will pass search params from home page to access filter by genres
+const CategoryGenreFilter = ({ searchParams, type, data, totalData }: { totalData: number, type: string, data: CatSwiperProps[], searchParams: { [key: string]: string | undefined } }) => {
+    const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
+    const pathname = usePathname()
+    const currentSearchParams = useSearchParams()
+
+    // Track the previous page to detect page changes
+    const [prevPage, setPrevPage] = useState(searchParams.page || '1')
+
+
+    // Handle filter changes
     const handleFilter = (item: string) => {
-        const urlParam = new URLSearchParams(window.location.search)
-        urlParam.set('filter', item)
-        router.push(`/?${urlParam}`)
+        setIsLoading(true)
+        const newSearchParams = new URLSearchParams(currentSearchParams.toString())
+        newSearchParams.set('filter', item)
+        router.push(`${pathname}?${newSearchParams}`, { scroll: false })
     }
 
+    // Handle type changes through Link clicks
+    const handleTypeChange = () => {
+        setIsLoading(true)
+        const newSearchParams = new URLSearchParams(currentSearchParams.toString())
+        newSearchParams.delete('filter')
+        router.push(`${pathname}?${newSearchParams}`, { scroll: false })
+    }
+
+    // Reset loading state when searchParams change
+    useEffect(() => {
+        setIsLoading(false)
+        setPrevPage(searchParams.page || '1')
+    }, [searchParams])
+
+
+    // Skeleton loader component
+    const SkeletonLoader = () => (
+        <div className="my-[30px] md:w-[80%] sm:w-[90%] w-[95%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center">
+            {[...Array(10)].map((_, idx) => (
+                <div key={idx} className={`animate-pulse ${true ? 'lg:w-[280px]  md:w-[220px] sm:w-[240px] 2xs:w-[220px] 3xs:w-[190px] 4xs:w-[160px] 5xs:w-[140px] w-[75%] aspect-[2/3]' : 'lg:w-[180px] md:w-[187px] sm:w-[160px] 2xs:[w-170px] 3xs:w-[150px] 4xs:w-[200px] 5xs:w-[180px]   w-full aspect-[2/3]'}`}>
+                    <div className="w-full h-[70%] bg-gray-700 rounded-t-lg"></div>
+                    <div className="py-3">
+                        <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
+                        <div className=" w-full flex justify-between">
+                            <div className="h-3 bg-gray-700 rounded w-1/4"></div>
+                            <div className="h-3 bg-gray-700 rounded w-1/4"></div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+
+    const newLinkBySearchParams = (target: string, paramType: "swiper" | "type" | "filter") => {
+        let url = "/?";
+        if (paramType === "type") {
+            if (searchParams.swiper) url += `swiper=${searchParams.swiper}&`;
+        }
+        else if (paramType === "filter") {
+            if (searchParams.swiper) url += `swiper=${searchParams.swiper}&`;
+            if (searchParams.filter) url += `filter=${searchParams.filter}&`;
+        }
+        url += `${target}`;
+        return url;
+    };
+
     return (
-        <div className='flex flex-col items-center my-[20px]'>
-            {/* Genres and Categories Section */}
+        <div className='flex flex-col items-center my-[20px] gap-5'>
+            {/* Type Selection Links */}
+            <div className="flex justify-center w-full mt-[40px]">
+                <ul className="list-none flex items-center justify-between sm:w-[90%] w-[96%] py-[20px] border-b-[2px] border-[#b8b8b81a]">
+                    <li>
+                        <Link
+                            href={newLinkBySearchParams("type=movies", "type")}
+                            onClick={handleTypeChange}
+                            className={`${type === "movies" ? "text-white" : "text-[#ffffffb3]"} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+                            prefetch={true}
+                        >
+                            <i><FaPhotoVideo size={14} /></i>
+                            <p>Movies</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={newLinkBySearchParams("type=series", "type")}
+                            onClick={handleTypeChange}
+                            className={`${type === "series" ? "text-white" : "text-[#ffffffb3]"} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+                            prefetch={true}
+                        >
+                            <i><FaFilm size={14} /></i>
+                            <p>Series</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={newLinkBySearchParams("type=all", "type")}
+                            onClick={handleTypeChange}
+                            className={`${type === "all" ? "text-white" : "text-[#ffffffb3]"} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+                            prefetch={true}
+                        >
+                            <i><FaCheck size={14} /></i>
+                            <p>Series & Movies</p>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={newLinkBySearchParams("type=rating", "type")}
+                            onClick={handleTypeChange}
+                            className={`${type === "rating" ? "text-white" : "text-[#ffffffb3]"} hover:text-white flex items-center gap-1 sm:gap-2 text-sm`}
+                            prefetch={true}
+                        >
+                            <i><FaStar size={14} /></i>
+                            <p>Rating</p>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+
+            {/* Genres and Categories Filter Buttons */}
             <div className='md:w-[80%] w-[90%] relative flex items-center overflow-x-auto hide-scrollbar lg:justify-center justify-start gap-[1rem] lg:flex-wrap flex-nowrap flex-row scroll-snap-type-x-mandatory'>
                 {genres.map((genre) => (
                     <button
                         key={genre}
                         onClick={() => handleFilter(genre)}
-                        className={`${searchParams.filter === genre ? ' bg-red-500 border-[#fffefe]' : 'bg-black border-[#717171]'} text-white py-[6px] px-[10px] md:text-[16px] text-[14px] lg:py-[10px] lg:px-[20px] hover:bg-red-500 font-semibold border hover:border-[#fffefe] rounded-[10px] scroll-snap-align-start`}
+                        disabled={isLoading}
+                        className={`${searchParams.filter === genre ? 'bg-red-500 border-[#fffefe]' : 'bg-black border-[#717171]'} 
+                        ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}
+                        text-white py-[6px] px-[10px] md:text-[16px] text-[14px] lg:py-[10px] lg:px-[20px] hover:bg-red-500 font-semibold border hover:border-[#fffefe] rounded-[10px] scroll-snap-align-start transition-opacity`}
                     >
                         {genre}
                     </button>
@@ -33,33 +141,39 @@ const CategoryGenreFilter = ({ searchParams, type, data }: { type: string, data:
                     <button
                         key={category}
                         onClick={() => handleFilter(category)}
-                        className={`${searchParams.filter === category ? ' bg-red-500 border-[#fffefe]' : 'bg-black border-[#717171]'} text-white py-[6px] px-[10px] md:text-[16px] text-[14px] lg:py-[10px] lg:px-[20px] hover:bg-red-500 font-semibold border hover:border-[#fffefe] rounded-[10px] scroll-snap-align-start`}
+                        disabled={isLoading}
+                        className={`${searchParams.filter === category ? 'bg-red-500 border-[#fffefe]' : 'bg-black border-[#717171]'} 
+                        ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}
+                        text-white py-[6px] px-[10px] md:text-[16px] text-[14px] lg:py-[10px] lg:px-[20px] hover:bg-red-500 font-semibold border hover:border-[#fffefe] rounded-[10px] scroll-snap-align-start transition-opacity`}
                     >
                         {category}
                     </button>
                 ))}
             </div>
 
-            {/* Movies Section */}
-            <div className='my-[30px] md:w-[80%] sm:w-[90%] w-[95%]  mt-[50px] flex flex-wrap  gap-[20px] items-center justify-center'>
-
-                {data.length > 0
-                    ? data.map((movie: CatSwiperProps, idx: number) => (
-                        <Card key={idx} media={movie} large={true} type={type} genreFilter={true}/>
-                    ))
-                    : (
-                        <h1 className='text-red-500 text-[35px]'>{
-                            type === 'movies' ?
-                                'No Movies Found'
-                                : type === 'series'
-                                    ? 'No Series Found'
-                                    : 'No Data Found'
-                        }</h1>
-                    )
-                }
-            </div>
+            {/* Content Area with Loading State */}
+            {isLoading ? (
+                <SkeletonLoader />
+            ) : (
+                <div className='my-[30px] md:w-[80%] sm:w-[90%] w-[95%] mt-[50px] flex flex-wrap gap-[20px] items-center justify-center'>
+                    {data && data.length > 0 ? (
+                        data.map((movie: CatSwiperProps, idx: number) => (
+                            <Card key={idx} media={movie} large={true} type={type} genreFilter={true} />
+                        ))
+                    ) : (
+                        <h1 className='text-red-500 text-[35px]'>
+                            {type === 'movies' ? 'No Movies Found' :
+                                type === 'series' ? 'No Series Found' :
+                                    'No Data Found'}
+                        </h1>
+                    )}
+                </div>
+            )}
+            <Pagination
+                totalPages={Math.ceil(totalData / 10)}
+                setIsLoading={setIsLoading}
+            />
         </div>
-
     )
 }
 

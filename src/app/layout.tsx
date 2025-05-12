@@ -63,7 +63,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-[#111010] min-h-screen pt-[env(safe-area-inset-top)] antialiased`}
       >
-        <div className="max-w-screen  overflow-hidden">
+        <div className="max-w-screen h-full min-h-screen relative overflow-hidden">
           <Header allData={allData} />
 
           {children}

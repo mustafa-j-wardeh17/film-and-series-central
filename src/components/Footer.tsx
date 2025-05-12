@@ -6,8 +6,8 @@ const Footer = () => {
     const pathname = usePathname()
     return (
         <>
-            <footer className='w-full bg-[#0f0d0dd2] h-auto mt-[50px]'>
-                <section className="m-auto max-w-[1300px] h-full flex flex-col items-center justify-center text-white bg-[#0f0d0dd2]">
+            <footer className='w-full  sticky bottom-0 bg-[#0f0d0dd2]  h-auto mt-[50px]'>
+                <section className="m-auto max-w-[1300px] h-full flex flex-col items-center justify-center text-white ">
                     <div className="flex items-center justify-center flex-col p-[20px]">
                         <div className="flogo" >
                             <h1 >
@@ -83,7 +83,7 @@ const Footer = () => {
                             </Link>
                         </p>
                     </div>
-                    <div className="mt-[20px] bg-[#0f0d0dd2] p-[20px] text-center">
+                    <div className="mt-[20px]  p-[20px] text-center">
                         <p className="text-[#555]">
                             Disclaimer: We do not host any files on it&apos;s servers. All files or contents hosted on third party websites. We do not accept responsibility for contents hosted on third party websites. We just index those links which are already available on the internet.
                         </p>
